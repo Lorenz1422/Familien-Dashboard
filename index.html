@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -17,7 +16,7 @@
 }
 
 body {
-  margin:0; padding:22px; font-family:-apple-system,BlinkMacSystemFont,
+  margin:0; padding:22px 22px 115px; font-family:-apple-system,BlinkMacSystemFont,
   "Helvetica Neue",Arial,sans-serif; background:var(--sand);
   color:var(--text); min-height:100vh;
 }
@@ -25,6 +24,14 @@ body {
 header {
   display:flex; justify-content:space-between; align-items:center;
   margin-bottom:22px; gap:20px;
+  position:sticky; top:0; z-index:20;
+  background:var(--sand); padding:10px 0;
+}
+.header-right { display:flex; align-items:center; gap:14px; }
+.home-button {
+  flex-shrink:0; width:44px; height:44px; border:0; border-radius:15px;
+  background:#F7F0E6; color:var(--text); font-size:21px; cursor:pointer;
+  box-shadow:0 3px 10px #76644F12;
 }
 .brand { display:flex; align-items:center; gap:14px; }
 .brand-icon {
@@ -117,14 +124,17 @@ p { line-height:1.45; margin:8px 0; font-size:14px; }
 .car-description { font-size:14px; line-height:1.5; }
 
 nav {
-  display:flex; justify-content:space-around; gap:9px; margin-top:20px;
-  padding:9px; background:#E4D8C7; border-radius:20px;
-  box-shadow:0 4px 12px #76644F10; flex-wrap:wrap;
+  display:flex; justify-content:space-around; gap:7px;
+  position:fixed; left:12px; right:12px; bottom:10px; z-index:30;
+  margin:0 auto; max-width:1100px;
+  padding:8px; background:#E4D8C7F2; border:1px solid #D6C8B6;
+  border-radius:20px; box-shadow:0 5px 20px #51483F25; flex-wrap:nowrap;
+  backdrop-filter:blur(8px);
 }
 nav button {
-  flex:1; border:0; background:transparent; color:var(--text);
-  font-family:inherit; font-size:14px; font-weight:600;
-  padding:14px 8px; border-radius:14px; cursor:pointer;
+  flex:1; min-width:0; border:0; background:transparent; color:var(--text);
+  font-family:inherit; font-size:13px; font-weight:600;
+  padding:12px 5px; border-radius:14px; cursor:pointer;
 }
 nav button.active { background:#F8F2E9; box-shadow:0 2px 8px #76644F15; }
 nav button:active { transform:scale(.97); }
@@ -210,6 +220,17 @@ label { display:block; font-size:13px; font-weight:700; margin-top:8px; }
 .recipe-actions .external-recipe {
   background:#DCE9F5;
 }
+.recipe-actions .edit-recipe { background:#F7E5C9; }
+.recipe-search { margin:10px 0 12px; }
+.recipe-filters { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 12px; }
+.recipe-filter {
+  border:0; border-radius:20px; padding:9px 14px; cursor:pointer;
+  background:#FFFFFF90; color:var(--text); font:inherit; font-size:12px; font-weight:700;
+}
+.recipe-filter.active { background:#F8F2E9; outline:2px solid #C49C64; }
+.recipe-count { color:#75695D; font-size:12px; margin:0 0 10px; }
+.recipe-form-actions { display:flex; gap:8px; flex-wrap:wrap; }
+.recipe-form-actions button { flex:0 0 auto; }
 
 /* REZEPT-DETAILANSICHT */
 .recipe-detail {
@@ -274,10 +295,14 @@ a { color:#655B50; overflow-wrap:anywhere; }
   h1 { font-size:23px; } .clock { font-size:32px; }
 }
 @media(max-width:600px) {
+  body { padding:12px 12px 105px; }
   header { align-items:flex-start; }
+  .header-right { gap:7px; }
+  .home-button { width:38px; height:38px; border-radius:13px; font-size:18px; }
+
   .brand-icon { width:42px; height:42px; font-size:22px; }
   h1 { font-size:19px; } .subtitle { font-size:12px; }
-  .clock { font-size:27px; } .weather { font-size:12px; }
+  .clock { font-size:25px; } .weather { font-size:11px; }
   .dashboard { grid-template-columns:1fr; }
   .meal-card { grid-column:span 1; }
   .meal-week { gap:4px; }
@@ -285,7 +310,8 @@ a { color:#655B50; overflow-wrap:anywhere; }
   .meal-day small { font-size:9px; }
   .week-label { font-size:11px; }
   .week-nav-button { min-width:34px; height:34px; }
-  nav button { min-width:28%; font-size:12px; padding:11px 4px; }
+  nav { left:6px; right:6px; bottom:6px; gap:2px; padding:5px; }
+  nav button { min-width:0; font-size:10px; padding:10px 2px; }
 
   .recipe-grid { grid-template-columns:1fr; }
   .recipe-item { padding:14px; }
@@ -306,9 +332,12 @@ a { color:#655B50; overflow-wrap:anywhere; }
       <div class="subtitle" id="date">Willkommen bei uns zu Hause</div>
     </div>
   </div>
-  <div class="clock-area">
-    <div class="clock" id="clock">--:--</div>
-    <div class="weather" id="weather">🌤️ Wetter wird geladen …</div>
+  <div class="header-right">
+    <div class="clock-area">
+      <div class="clock" id="clock">--:--</div>
+      <div class="weather" id="weather">🌤️ Wetter wird geladen …</div>
+    </div>
+    <button class="home-button" type="button" onclick="showPage('start',document.getElementById('navStart'))" aria-label="Zur Startseite">🏠</button>
   </div>
 </header>
 
@@ -453,12 +482,15 @@ a { color:#655B50; overflow-wrap:anywhere; }
         <label for="recipeUrl">Rezept-Link (optional)</label>
         <input id="recipeUrl" type="url" placeholder="https://...">
 
-        <button class="action-btn primary" id="addRecipeButton" type="submit">Rezept speichern</button>
+        <div class="recipe-form-actions">
+          <button class="action-btn primary" id="addRecipeButton" type="submit">Rezept speichern</button>
+          <button class="action-btn hidden" id="cancelRecipeEditButton" type="button">Abbrechen</button>
+        </div>
       </form>
       <div id="recipeStatus" class="status" aria-live="polite"></div>
     </div>
 
-    <!-- NEUE REZEPT-DETAILANSICHT -->
+    <!-- REZEPT-DETAILANSICHT -->
     <div id="recipeDetail" class="recipe-detail hidden" aria-live="polite">
       <div class="recipe-detail-header">
         <div>
@@ -487,6 +519,12 @@ a { color:#655B50; overflow-wrap:anywhere; }
     <div class="card purple" style="margin-top:16px">
       <div class="card-label">Gespeichert für die ganze Familie</div>
       <h2>⭐ Unsere Rezepte</h2>
+      <input class="recipe-search" id="recipeSearch" type="search" placeholder="🔎 Rezept oder Zutat suchen …" aria-label="Rezepte durchsuchen">
+      <div class="recipe-filters">
+        <button class="recipe-filter active" id="filterAllRecipes" type="button">Alle Rezepte</button>
+        <button class="recipe-filter" id="filterFavoriteRecipes" type="button">⭐ Favoriten</button>
+      </div>
+      <div class="recipe-count" id="recipeCount"></div>
       <div id="recipeList">Rezepte werden geladen …</div>
     </div>
   </section>
@@ -538,7 +576,7 @@ a { color:#655B50; overflow-wrap:anywhere; }
 </main>
 
 <nav id="mainNav" class="hidden">
-  <button class="active" onclick="showPage('start',this)">🏠 Start</button>
+  <button id="navStart" class="active" onclick="showPage('start',this)">🏠 Start</button>
   <button id="navEssen" onclick="showPage('essen',this)">🥣 Essen</button>
   <button onclick="showPage('kalender',this)">📅 Kalender</button>
   <button onclick="showPage('einkaufen',this)">🛒 Einkauf</button>
@@ -556,6 +594,8 @@ var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 var currentUser = null;
 var recipes = [];
 var meals = [];
+var editingRecipeId = null;
+var recipeFilter = "all";
 var realtimeChannel = null;
 var displayedWeekStart = mondayOfWeek(new Date());
 
@@ -614,7 +654,13 @@ function showPage(id,button) {
     item.classList.remove("active");
   });
   document.getElementById(id).classList.add("active");
-  if (button) button.classList.add("active");
+  var navButton = button;
+  if (!navButton) {
+    var navIds = {start:"navStart",essen:"navEssen"};
+    navButton = navIds[id] ? document.getElementById(navIds[id]) :
+      document.querySelector("nav button[onclick*=\"" + id + "\"]");
+  }
+  if (navButton) navButton.classList.add("active");
   if (id === "essen") renderRecipes();
 }
 
@@ -811,7 +857,6 @@ function renderMealWeek() {
     var name = meal ? getRecipeName(meal.rezept_id) : "";
     if (meal && !name && meal.notiz) name = meal.notiz;
     if (!name) name = "Noch offen";
-
     if (key === today) todayMeal = name;
 
     var day = document.createElement("div");
@@ -948,7 +993,7 @@ document.getElementById("clearMealButton").addEventListener("click",async functi
   }
 });
 
-/* REZEPT HINZUFÜGEN */
+/* REZEPT HINZUFÜGEN UND BEARBEITEN */
 document.getElementById("recipeForm").addEventListener("submit",async function(event) {
   event.preventDefault();
 
@@ -960,26 +1005,62 @@ document.getElementById("recipeForm").addEventListener("submit",async function(e
     return;
   }
 
-  var button = document.getElementById("addRecipeButton");
-  button.disabled = true;
-  setStatus("recipeStatus","Speichere Rezept …");
-
-  var result = await supabaseClient.from("Rezepte").insert({
+  var payload = {
     name:name,
     zutaten:document.getElementById("recipeIngredients").value.trim(),
     zubereitung:document.getElementById("recipeInstructions").value.trim(),
-    quelle_url:url || null,
-    favorit:false
-  });
+    quelle_url:url || null
+  };
+
+  var button = document.getElementById("addRecipeButton");
+  button.disabled = true;
+  setStatus("recipeStatus",editingRecipeId ? "Speichere Änderungen …" : "Speichere Rezept …");
+
+  var result;
+  if (editingRecipeId !== null) {
+    result = await supabaseClient.from("Rezepte")
+      .update(payload).eq("id",editingRecipeId);
+  } else {
+    payload.favorit = false;
+    result = await supabaseClient.from("Rezepte").insert(payload);
+  }
 
   button.disabled = false;
   if (result.error) {
     setStatus("recipeStatus","Rezept konnte nicht gespeichert werden: " + result.error.message,"error");
   } else {
-    this.reset();
-    setStatus("recipeStatus","Rezept wurde für die Familie gespeichert.","success");
+    var wasEditing = editingRecipeId !== null;
+    resetRecipeForm();
+    setStatus("recipeStatus",wasEditing ?
+      "Änderungen wurden gespeichert." :
+      "Rezept wurde für die Familie gespeichert.","success");
     await loadRecipes();
   }
+});
+
+function startRecipeEdit(recipe) {
+  editingRecipeId = recipe.id;
+  document.getElementById("recipeName").value = recipe.name || "";
+  document.getElementById("recipeIngredients").value = recipe.zutaten || "";
+  document.getElementById("recipeInstructions").value = recipe.zubereitung || "";
+  document.getElementById("recipeUrl").value = recipe.quelle_url || "";
+  document.getElementById("addRecipeButton").textContent = "Änderungen speichern";
+  document.getElementById("cancelRecipeEditButton").classList.remove("hidden");
+  setStatus("recipeStatus","Ihr bearbeitet gerade: " + recipe.name);
+  document.getElementById("recipeForm").scrollIntoView({behavior:"smooth",block:"start"});
+  document.getElementById("recipeName").focus();
+}
+
+function resetRecipeForm() {
+  editingRecipeId = null;
+  document.getElementById("recipeForm").reset();
+  document.getElementById("addRecipeButton").textContent = "Rezept speichern";
+  document.getElementById("cancelRecipeEditButton").classList.add("hidden");
+}
+
+document.getElementById("cancelRecipeEditButton").addEventListener("click",function() {
+  resetRecipeForm();
+  setStatus("recipeStatus","Bearbeitung abgebrochen.");
 });
 
 /* REZEPT-DETAILANSICHT ÖFFNEN */
@@ -1018,21 +1099,39 @@ document.getElementById("closeRecipeDetailButton").addEventListener("click",func
   document.getElementById("recipeDetail").classList.add("hidden");
 });
 
-/* REZEPTE ANZEIGEN */
+/* REZEPTE ANZEIGEN, SUCHEN UND FILTERN */
 function renderRecipes() {
   var list = document.getElementById("recipeList");
   if (!list) return;
   list.innerHTML = "";
 
+  var search = (document.getElementById("recipeSearch").value || "").trim().toLocaleLowerCase("de-DE");
+  var filtered = recipes.filter(function(recipe) {
+    var matchesSearch = !search ||
+      (recipe.name || "").toLocaleLowerCase("de-DE").includes(search) ||
+      (recipe.zutaten || "").toLocaleLowerCase("de-DE").includes(search) ||
+      (recipe.zubereitung || "").toLocaleLowerCase("de-DE").includes(search);
+    var matchesFilter = recipeFilter !== "favorites" || recipe.favorit;
+    return matchesSearch && matchesFilter;
+  });
+
+  document.getElementById("recipeCount").textContent =
+    filtered.length + (filtered.length === 1 ? " Rezept angezeigt" : " Rezepte angezeigt") +
+    (filtered.length !== recipes.length ? " (von " + recipes.length + ")" : "");
+
   if (!recipes.length) {
     list.textContent = "Noch keine Rezepte gespeichert. Fügt oben euer erstes Lieblingsrezept hinzu.";
+    return;
+  }
+  if (!filtered.length) {
+    list.textContent = "Keine passenden Rezepte gefunden.";
     return;
   }
 
   var grid = document.createElement("div");
   grid.className = "recipe-grid";
 
-  recipes.forEach(function(recipe) {
+  filtered.forEach(function(recipe) {
     var item = document.createElement("div");
     item.className = "recipe-item";
 
@@ -1049,29 +1148,20 @@ function renderRecipes() {
       : "Noch keine Zutaten hinterlegt";
     info.appendChild(detail);
 
-    if (recipe.quelle_url) {
-      var sourceInfo = document.createElement("small");
-      sourceInfo.textContent = "🔗 Externer Rezeptlink vorhanden";
-      info.appendChild(sourceInfo);
-    } else {
-      var manualInfo = document.createElement("small");
-      manualInfo.textContent = "📝 Eigenes Familienrezept";
-      info.appendChild(manualInfo);
-    }
+    var sourceInfo = document.createElement("small");
+    sourceInfo.textContent = recipe.quelle_url ? "🔗 Externer Rezeptlink vorhanden" : "📝 Eigenes Familienrezept";
+    info.appendChild(sourceInfo);
 
     var actions = document.createElement("div");
     actions.className = "recipe-actions";
 
-    /* REZEPT ANSEHEN – FUNKTIONIERT IMMER */
     var view = document.createElement("button");
     view.className = "action-btn view-recipe";
     view.type = "button";
     view.textContent = "📖 Rezept ansehen";
-    view.addEventListener("click",function() {
-      openRecipeDetail(recipe);
-    });
+    view.addEventListener("click",function() { openRecipeDetail(recipe); });
+    actions.appendChild(view);
 
-    /* EXTERNEN LINK DIREKT ÖFFNEN – NUR WENN VORHANDEN */
     if (recipe.quelle_url) {
       var external = document.createElement("a");
       external.className = "action-btn external-recipe";
@@ -1080,22 +1170,23 @@ function renderRecipes() {
       external.rel = "noopener noreferrer";
       external.textContent = "↗ Link öffnen";
       external.style.textDecoration = "none";
-      actions.appendChild(view);
       actions.appendChild(external);
-    } else {
-      actions.appendChild(view);
     }
 
-    /* FAVORIT */
+    var edit = document.createElement("button");
+    edit.className = "action-btn edit-recipe";
+    edit.type = "button";
+    edit.textContent = "✏️ Bearbeiten";
+    edit.addEventListener("click",function() { startRecipeEdit(recipe); });
+    actions.appendChild(edit);
+
     var favorite = document.createElement("button");
     favorite.className = "action-btn";
     favorite.type = "button";
     favorite.textContent = recipe.favorit ? "⭐ Favorit" : "☆ Merken";
-    favorite.addEventListener("click",function() {
-      toggleFavorite(recipe);
-    });
+    favorite.addEventListener("click",function() { toggleFavorite(recipe); });
+    actions.appendChild(favorite);
 
-    /* EINPLANEN */
     var choose = document.createElement("button");
     choose.className = "action-btn";
     choose.type = "button";
@@ -1107,8 +1198,6 @@ function renderRecipes() {
       document.getElementById("mealDate").focus();
       window.scrollTo(0,0);
     });
-
-    actions.appendChild(favorite);
     actions.appendChild(choose);
 
     item.appendChild(info);
@@ -1118,6 +1207,20 @@ function renderRecipes() {
 
   list.appendChild(grid);
 }
+
+document.getElementById("recipeSearch").addEventListener("input",renderRecipes);
+document.getElementById("filterAllRecipes").addEventListener("click",function() {
+  recipeFilter = "all";
+  this.classList.add("active");
+  document.getElementById("filterFavoriteRecipes").classList.remove("active");
+  renderRecipes();
+});
+document.getElementById("filterFavoriteRecipes").addEventListener("click",function() {
+  recipeFilter = "favorites";
+  this.classList.add("active");
+  document.getElementById("filterAllRecipes").classList.remove("active");
+  renderRecipes();
+});
 
 /* FAVORIT ÄNDERN */
 async function toggleFavorite(recipe) {
