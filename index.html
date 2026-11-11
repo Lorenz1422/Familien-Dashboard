@@ -5,17 +5,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#EDE3D3">
+
 <title>Unsere Familienzentrale</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --sand: #EDE3D3;
+  --text: #51483F;
+  --muted: #887B6C;
+  --blue: #DCE9F5;
+  --green: #DDE9D8;
+  --pink: #F3DDE5;
+  --yellow: #F7E5C9;
+  --purple: #E8DFF1;
+  --petrol: #D2E5E2;
+}
 
 body {
   margin: 0;
   padding: 22px;
-  font-family: Arial, sans-serif;
-  background: #EDE3D3;
-  color: #51483F;
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Helvetica Neue", Arial, sans-serif;
+  background: var(--sand);
+  color: var(--text);
+  min-height: 100vh;
 }
 
 header {
@@ -23,11 +40,39 @@ header {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 22px;
-  gap: 15px;
+  gap: 20px;
 }
 
-h1 { margin: 0; font-size: 30px; }
-.subtitle { margin-top: 7px; color: #817365; }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  background: #F7F0E6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 4px 12px #76644F12;
+}
+
+h1 {
+  margin: 0;
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+}
+
+.subtitle {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 14px;
+}
 
 .clock-area {
   text-align: right;
@@ -35,81 +80,362 @@ h1 { margin: 0; font-size: 30px; }
 }
 
 .clock {
-  font-size: 34px;
-  font-weight: bold;
+  font-size: 39px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  font-variant-numeric: tabular-nums;
 }
 
 .weather {
-  margin-top: 5px;
-  font-size: 16px;
+  margin-top: 3px;
+  font-size: 15px;
   color: #655B50;
 }
 
+/* DASHBOARD */
+
 .dashboard {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 
 .card {
-  border-radius: 20px;
+  border-radius: 23px;
   padding: 20px;
-  min-height: 155px;
+  min-width: 0;
+  min-height: 185px;
+  box-shadow: 0 5px 16px rgba(80, 65, 45, 0.045);
+  position: relative;
+  overflow: hidden;
 }
 
-.blue { background: #DCE9F5; }
-.green { background: #DDE9D8; }
-.pink { background: #F3DDE5; }
-.yellow { background: #F7E5C9; }
-.purple { background: #E8DFF1; }
+.blue { background: var(--blue); }
+.green { background: var(--green); }
+.pink { background: var(--pink); }
+.yellow { background: var(--yellow); }
+.purple { background: var(--purple); }
 
-/* Neue persönliche Farben */
 .child-one { background: #F4D5E1; }
 .child-two { background: #D5E8F8; }
-.car-card { background: #D2E5E2; }
+.car-card { background: var(--petrol); }
 
-h2 { margin-top: 0; font-size: 21px; }
+h2 {
+  margin: 0 0 13px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
 
-p { line-height: 1.5; }
+p {
+  line-height: 1.45;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.card-label {
+  color: #75695D;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.card-footer {
+  color: #75695D;
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.calendar-event {
+  background: #FFFFFF65;
+  border-radius: 11px;
+  padding: 9px 11px;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.task-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 1px solid #FFFFFF80;
+  font-size: 14px;
+}
+
+.task-count {
+  background: #FFFFFF90;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* KINDER */
+
+.children-preview {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.child-mini {
+  flex: 1;
+  padding: 12px 8px;
+  background: #FFFFFF75;
+  border-radius: 15px;
+  text-align: center;
+  min-width: 0;
+}
+
+.child-mini .emoji {
+  font-size: 25px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.child-mini strong {
+  font-size: 13px;
+}
+
+.child-mini small {
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+  color: #75695D;
+}
+
+/* ESSENSPLAN */
+
+.meal-card {
+  grid-column: span 2;
+  background: var(--yellow);
+}
+
+.meal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 10px;
+}
+
+.meal-badge {
+  background: #FFFFFF90;
+  border-radius: 20px;
+  padding: 6px 11px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #80643D;
+}
+
+.meal-week {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.meal-day {
+  background: #FFFFFF75;
+  border-radius: 13px;
+  padding: 10px 5px;
+  text-align: center;
+  min-width: 0;
+}
+
+.meal-day.today {
+  background: #FFFFFF;
+  outline: 2px solid #C49C64;
+}
+
+.meal-day strong {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.meal-day .meal-icon {
+  display: block;
+  font-size: 21px;
+  margin-bottom: 6px;
+}
+
+.meal-day small {
+  display: block;
+  font-size: 10px;
+  line-height: 1.3;
+  color: #75695D;
+  overflow-wrap: break-word;
+}
+
+.today-label {
+  font-size: 10px;
+  color: #8A6940;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.car-info {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-top: 18px;
+}
+
+.car-icon {
+  font-size: 37px;
+}
+
+.car-description {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* NAVIGATION */
 
 nav {
   display: flex;
   justify-content: space-around;
-  gap: 8px;
+  gap: 9px;
   margin-top: 20px;
-  padding: 12px;
+  padding: 9px;
   background: #E4D8C7;
-  border-radius: 18px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px #76644F10;
 }
 
-button {
+nav button {
+  flex: 1;
   border: 0;
   background: transparent;
-  color: #51483F;
-  font-size: 15px;
-  padding: 12px 8px;
-  border-radius: 12px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 14px 8px;
+  border-radius: 14px;
   cursor: pointer;
 }
 
-button.active { background: #F7F0E6; }
-
-.page { display: none; }
-.page.active { display: block; }
-
-.task {
-  padding: 9px 0;
-  border-bottom: 1px solid #ffffff80;
+nav button.active {
+  background: #F8F2E9;
+  box-shadow: 0 2px 8px #76644F15;
 }
 
-@media (max-width: 650px) {
-  body { padding: 14px; }
-  header { align-items: flex-start; }
-  h1 { font-size: 23px; }
-  .clock { font-size: 28px; }
-  .weather { font-size: 14px; }
-  .dashboard { grid-template-columns: 1fr; }
-  nav { flex-wrap: wrap; }
+nav button:active {
+  transform: scale(0.97);
+}
+
+/* UNTERSEITEN */
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+.page-placeholder {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.page-placeholder .large-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.page-placeholder p {
+  color: #75695D;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+  body {
+    padding: 15px;
+  }
+
+  .dashboard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .meal-card {
+    grid-column: span 2;
+  }
+
+  h1 {
+    font-size: 23px;
+  }
+
+  .clock {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    align-items: flex-start;
+  }
+
+  .brand-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 22px;
+  }
+
+  h1 {
+    font-size: 19px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .clock {
+    font-size: 27px;
+  }
+
+  .weather {
+    font-size: 12px;
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .meal-card {
+    grid-column: span 1;
+  }
+
+  .meal-week {
+    gap: 4px;
+  }
+
+  .meal-day {
+    padding: 8px 2px;
+  }
+
+  .meal-day small {
+    font-size: 9px;
+  }
+
+  nav {
+    flex-wrap: wrap;
+  }
+
+  nav button {
+    min-width: 28%;
+    font-size: 12px;
+    padding: 11px 4px;
+  }
 }
 </style>
 </head>
@@ -117,81 +443,236 @@ button.active { background: #F7F0E6; }
 <body>
 
 <header>
-  <div>
-    <h1>❤️ Unsere Familienzentrale</h1>
-    <div class="subtitle" id="date"></div>
+  <div class="brand">
+    <div class="brand-icon">❤️</div>
+    <div>
+      <h1>Unsere Familienzentrale</h1>
+      <div class="subtitle" id="date">
+        Willkommen bei uns zu Hause
+      </div>
+    </div>
   </div>
 
   <div class="clock-area">
     <div class="clock" id="clock">--:--</div>
-    <div class="weather" id="weather">🌤️ Wetter wird geladen …</div>
+    <div class="weather" id="weather">
+      🌤️ Wetter wird geladen …
+    </div>
   </div>
 </header>
 
 <main>
+
+  <!-- STARTSEITE -->
+
   <section id="start" class="page active">
+
     <div class="dashboard">
 
+      <!-- KALENDER -->
+
       <div class="card blue">
+        <div class="card-label">Unser Alltag</div>
         <h2>📅 Familienkalender</h2>
-        <p>Heute in unserer Familie</p>
-        <p>🏫 Kindergarten</p>
-        <p>👨‍👩‍👧 Gemeinsame Familienzeit</p>
+
+        <div class="calendar-event">
+          🏫 Kindergarten
+        </div>
+
+        <div class="calendar-event">
+          👨‍👩‍👧 Gemeinsame Familienzeit
+        </div>
+
+        <div class="card-footer">
+          Unsere Termine auf einen Blick
+        </div>
       </div>
+
+      <!-- AUFGABEN -->
 
       <div class="card green">
+        <div class="card-label">Gemeinsam schaffen wir das</div>
         <h2>✅ Unsere Aufgaben</h2>
-        <p>👨 Papa – 2 Aufgaben</p>
-        <p>👩 Mama – 3 Aufgaben</p>
-        <p>👨‍👩‍👧 Gemeinsam – 1 Aufgabe</p>
+
+        <div class="task-line">
+          <span>👨 Papa</span>
+          <span class="task-count">2 offen</span>
+        </div>
+
+        <div class="task-line">
+          <span>👩 Mama</span>
+          <span class="task-count">3 offen</span>
+        </div>
+
+        <div class="task-line">
+          <span>👨‍👩‍👧 Gemeinsam</span>
+          <span class="task-count">1 offen</span>
+        </div>
       </div>
 
-      <div class="card child-one">
-        <h2>🌸 Kind 1</h2>
-        <p>⭐⭐⭐ 3 von 5 Aufgaben geschafft</p>
-        <p>Hier kommt das eigene Kinderprofil.</p>
+      <!-- KINDER -->
+
+      <div class="card pink">
+        <div class="card-label">Unsere kleinen Helden</div>
+        <h2>⭐ Kinderfortschritt</h2>
+
+        <div class="children-preview">
+
+          <div class="child-mini">
+            <span class="emoji">🌸</span>
+            <strong>Kind 1</strong>
+            <small>⭐⭐⭐</small>
+            <small>3 von 5</small>
+          </div>
+
+          <div class="child-mini">
+            <span class="emoji">🩵</span>
+            <strong>Kind 2</strong>
+            <small>✨</small>
+            <small>Bald dabei</small>
+          </div>
+
+        </div>
       </div>
+
+      <!-- ESSENSPLAN -->
+
+      <div class="card meal-card">
+
+        <div class="meal-header">
+          <div>
+            <div class="card-label">Was gibt es heute?</div>
+            <h2>🍽️ Unser Wochen-Essensplan</h2>
+          </div>
+
+          <span class="meal-badge">ABENDESSEN</span>
+        </div>
+
+        <div class="meal-week" id="mealWeek">
+
+          <div class="meal-day" data-day="0">
+            <strong>MO</strong>
+            <span class="meal-icon">🍝</span>
+            <small>Spaghetti</small>
+          </div>
+
+          <div class="meal-day" data-day="1">
+            <strong>DI</strong>
+            <span class="meal-icon">🥔</span>
+            <small>Kartoffeln</small>
+          </div>
+
+          <div class="meal-day" data-day="2">
+            <strong>MI</strong>
+            <span class="meal-icon">🍕</span>
+            <small>Pizza</small>
+          </div>
+
+          <div class="meal-day" data-day="3">
+            <strong>DO</strong>
+            <span class="meal-icon">🍗</span>
+            <small>Hähnchen</small>
+          </div>
+
+          <div class="meal-day" data-day="4">
+            <strong>FR</strong>
+            <span class="meal-icon">🐟</span>
+            <small>Fisch</small>
+          </div>
+
+          <div class="meal-day" data-day="5">
+            <strong>SA</strong>
+            <span class="meal-icon">🍔</span>
+            <small>Burger</small>
+          </div>
+
+          <div class="meal-day" data-day="6">
+            <strong>SO</strong>
+            <span class="meal-icon">🍲</span>
+            <small>Auflauf</small>
+          </div>
+
+        </div>
+
+        <div class="card-footer" id="mealToday">
+          Euer Abendessen für heute
+        </div>
+
+      </div>
+
+      <!-- AUTO -->
 
       <div class="card car-card">
-        <h2>🚗 Unser Škoda Elroq</h2>
-        <p>85x Sportline</p>
-        <p>Fahrzeugdaten folgen später.</p>
+        <div class="card-label">Unser Familienauto</div>
+        <h2>🚗 Škoda Elroq</h2>
+
+        <div class="car-info">
+          <div class="car-icon">🚙</div>
+          <div class="car-description">
+            <strong>85x Sportline</strong>
+            <br>
+            Fahrzeugdaten folgen später.
+          </div>
+        </div>
+
       </div>
 
     </div>
   </section>
 
+  <!-- KALENDER -->
+
   <section id="kalender" class="page">
-    <div class="card blue">
-      <h2>📅 Familienkalender</h2>
-      <p>Hier entsteht unsere Wochenansicht von Montag bis Sonntag.</p>
+    <div class="card blue page-placeholder">
+      <div class="large-icon">📅</div>
+      <h2>Unser Familienkalender</h2>
+      <p>
+        Hier entsteht unsere Wochenansicht
+        von Montag bis Sonntag.
+      </p>
     </div>
   </section>
+
+  <!-- EINKAUF -->
 
   <section id="einkaufen" class="page">
-    <div class="card pink">
-      <h2>🛒 Einkaufsliste</h2>
-      <p>Hier erscheinen später unsere gemeinsamen Einkaufsartikel.</p>
+    <div class="card pink page-placeholder">
+      <div class="large-icon">🛒</div>
+      <h2>Unsere Einkaufsliste</h2>
+      <p>
+        Hier erscheinen später unsere gemeinsamen
+        Einkaufsartikel.
+      </p>
     </div>
   </section>
+
+  <!-- AUFGABEN -->
 
   <section id="aufgaben" class="page">
-    <div class="card green">
-      <h2>✅ Unsere Aufgaben</h2>
-      <div class="task">👨 Papa</div>
-      <div class="task">👩 Mama</div>
-      <div class="task">👨‍👩‍👧 Gemeinsam</div>
+    <div class="card green page-placeholder">
+      <div class="large-icon">✅</div>
+      <h2>Unsere Aufgaben</h2>
+      <p>
+        Aufgaben für Mama, Papa und die ganze Familie.
+      </p>
     </div>
   </section>
 
+  <!-- KINDER -->
+
   <section id="kinder" class="page">
+
     <h2>⭐ Unsere Kinder</h2>
 
     <div class="dashboard">
+
       <div class="card child-one">
         <h2>🌸 Kind 1</h2>
         <p>⭐⭐⭐ 3 von 5 Aufgaben geschafft</p>
-        <p>Hier entstehen die Morgen- und Abendroutinen.</p>
+        <p>
+          Hier entstehen die Morgen- und
+          Abendroutinen.
+        </p>
       </div>
 
       <div class="card child-two">
@@ -199,20 +680,43 @@ button.active { background: #F7F0E6; }
         <p>Das Profil kann später ergänzt werden.</p>
         <p>Eigene Routinen und Aufgaben folgen.</p>
       </div>
+
     </div>
   </section>
+
 </main>
 
+<!-- NAVIGATION -->
+
 <nav>
-  <button class="active" onclick="showPage('start',this)">🏠 Start</button>
-  <button onclick="showPage('kalender',this)">📅 Kalender</button>
-  <button onclick="showPage('einkaufen',this)">🛒 Einkauf</button>
-  <button onclick="showPage('aufgaben',this)">✅ Aufgaben</button>
-  <button onclick="showPage('kinder',this)">⭐ Kinder</button>
+  <button class="active"
+    onclick="showPage('start',this)">
+    🏠 Start
+  </button>
+
+  <button onclick="showPage('kalender',this)">
+    📅 Kalender
+  </button>
+
+  <button onclick="showPage('einkaufen',this)">
+    🛒 Einkauf
+  </button>
+
+  <button onclick="showPage('aufgaben',this)">
+    ✅ Aufgaben
+  </button>
+
+  <button onclick="showPage('kinder',this)">
+    ⭐ Kinder
+  </button>
 </nav>
 
 <script>
+
+/* UHRZEIT UND DATUM */
+
 function updateClock() {
+
   var now = new Date();
 
   document.getElementById("clock").textContent =
@@ -230,7 +734,11 @@ function updateClock() {
     });
 }
 
+
+/* NAVIGATION */
+
 function showPage(id, button) {
+
   var pages = document.querySelectorAll(".page");
   var buttons = document.querySelectorAll("nav button");
 
@@ -246,49 +754,118 @@ function showPage(id, button) {
   button.classList.add("active");
 }
 
-function loadWeather() {
-  var weatherElement = document.getElementById("weather");
 
-  var url = "https://api.open-meteo.com/v1/forecast" +
+/* WOCHEN-ESSENSPLAN */
+
+function updateMealPlan() {
+
+  var now = new Date();
+
+  // JavaScript: Sonntag = 0, Montag = 1
+  // Unser Plan: Montag = 0, Sonntag = 6
+
+  var today = (now.getDay() + 6) % 7;
+
+  var days = document.querySelectorAll(".meal-day");
+
+  var dayNames = [
+    "Montag",
+    "Dienstag",
+    "Mittwoch",
+    "Donnerstag",
+    "Freitag",
+    "Samstag",
+    "Sonntag"
+  ];
+
+  var todayMeal = "";
+
+  days.forEach(function(day) {
+
+    day.classList.remove("today");
+
+    var dayIndex = parseInt(day.getAttribute("data-day"), 10);
+
+    if (dayIndex === today) {
+
+      day.classList.add("today");
+
+      var meal = day.querySelector("small");
+
+      todayMeal = meal.textContent;
+    }
+  });
+
+  document.getElementById("mealToday").textContent =
+    "Heute (" + dayNames[today] + "): " + todayMeal;
+}
+
+
+/* WETTER */
+
+function loadWeather() {
+
+  var weatherElement =
+    document.getElementById("weather");
+
+  var url =
+    "https://api.open-meteo.com/v1/forecast" +
     "?latitude=48.137&longitude=11.575" +
     "&current=temperature_2m,weather_code" +
     "&timezone=Europe%2FBerlin";
 
   fetch(url)
+
     .then(function(response) {
-      if (!response.ok) throw new Error("Wetter nicht erreichbar");
+
+      if (!response.ok) {
+        throw new Error("Wetter nicht erreichbar");
+      }
+
       return response.json();
+
     })
+
     .then(function(data) {
+
       var current = data.current;
       var code = current.weather_code;
+
       var icon = "🌤️";
       var description = "Wolkig";
 
       if (code === 0) {
         icon = "☀️";
         description = "Sonnig";
+
       } else if (code === 1 || code === 2) {
         icon = "🌤️";
         description = "Heiter";
+
       } else if (code === 3) {
         icon = "☁️";
         description = "Bewölkt";
+
       } else if (code === 45 || code === 48) {
         icon = "🌫️";
         description = "Neblig";
+
       } else if (code >= 51 && code <= 67) {
         icon = "🌧️";
         description = "Nieselregen";
+
       } else if (code >= 71 && code <= 77) {
         icon = "❄️";
         description = "Schnee";
+
       } else if (code >= 80 && code <= 82) {
         icon = "🌧️";
         description = "Regenschauer";
+
       } else if (code >= 85 && code <= 86) {
         icon = "🌨️";
         description = "Schneeschauer";
+
       } else if (code >= 95) {
         icon = "⛈️";
         description = "Gewitter";
@@ -296,19 +873,34 @@ function loadWeather() {
 
       weatherElement.textContent =
         icon + " " +
-        Math.round(current.temperature_2m) + " °C · " +
-        description;
+        Math.round(current.temperature_2m) +
+        " °C · " + description;
+
     })
+
     .catch(function() {
-      weatherElement.textContent = "🌤️ Wetter gerade nicht verfügbar";
+
+      weatherElement.textContent =
+        "🌤️ Wetter gerade nicht verfügbar";
+
     });
 }
 
+
+/* START */
+
 updateClock();
+updateMealPlan();
+
 setInterval(updateClock, 1000);
 
+// Wetter alle 30 Minuten aktualisieren
 loadWeather();
 setInterval(loadWeather, 30 * 60 * 1000);
+
+// Tageswechsel berücksichtigen
+setInterval(updateMealPlan, 60 * 1000);
+
 </script>
 
 </body>
