@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#EDE3D3">
+<title>Unsere Familienzentrale</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 22px;
+  font-family: Arial, sans-serif;
+  background: #EDE3D3;
+  color: #51483F;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+h1 { margin: 0; font-size: 30px; }
+.subtitle { margin-top: 7px; color: #817365; }
+.clock { font-size: 34px; font-weight: bold; }
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.card {
+  border-radius: 20px;
+  padding: 20px;
+  min-height: 155px;
+}
+
+.blue { background: #DCE9F5; }
+.green { background: #DDE9D8; }
+.pink { background: #F3DDE5; }
+.yellow { background: #F7E5C9; }
+.purple { background: #E8DFF1; }
+
+h2 { margin-top: 0; font-size: 21px; }
+
+p { line-height: 1.5; }
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 12px;
+  background: #E4D8C7;
+  border-radius: 18px;
+}
+
+button {
+  border: 0;
+  background: transparent;
+  color: #51483F;
+  font-size: 15px;
+  padding: 12px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+button.active { background: #F7F0E6; }
+
+.page { display: none; }
+.page.active { display: block; }
+
+.task {
+  padding: 9px 0;
+  border-bottom: 1px solid #ffffff80;
+}
+
+@media (max-width: 650px) {
+  .dashboard { grid-template-columns: 1fr; }
+  nav { flex-wrap: wrap; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <h1>❤️ Unsere Familienzentrale</h1>
+    <div class="subtitle" id="date"></div>
+  </div>
+  <div class="clock" id="clock">--:--</div>
+</header>
+
+<main>
+  <section id="start" class="page active">
+    <div class="dashboard">
+
+      <div class="card blue">
+        <h2>📅 Familienkalender</h2>
+        <p>Heute in unserer Familie</p>
+        <p>🏫 Kindergarten</p>
+        <p>👨‍👩‍👧 Gemeinsame Familienzeit</p>
+      </div>
+
+      <div class="card green">
+        <h2>✅ Unsere Aufgaben</h2>
+        <p>👨 Papa – 2 Aufgaben</p>
+        <p>👩 Mama – 3 Aufgaben</p>
+        <p>👨‍👩‍👧 Gemeinsam – 1 Aufgabe</p>
+      </div>
+
+      <div class="card yellow">
+        <h2>⭐ Unsere Kinder</h2>
+        <p>🦊 Kind 1</p>
+        <p>⭐⭐⭐ 3 von 5 Aufgaben geschafft</p>
+      </div>
+
+      <div class="card purple">
+        <h2>🚗 Unser Škoda Elroq</h2>
+        <p>85x Sportline</p>
+        <p>Fahrzeugdaten folgen später.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="kalender" class="page">
+    <div class="card blue">
+      <h2>📅 Familienkalender</h2>
+      <p>Hier entsteht unsere Wochenansicht von Montag bis Sonntag.</p>
+    </div>
+  </section>
+
+  <section id="einkaufen" class="page">
+    <div class="card pink">
+      <h2>🛒 Einkaufsliste</h2>
+      <p>Hier erscheinen später unsere gemeinsamen Einkaufsartikel.</p>
+    </div>
+  </section>
+
+  <section id="aufgaben" class="page">
+    <div class="card green">
+      <h2>✅ Unsere Aufgaben</h2>
+      <div class="task">👨 Papa</div>
+      <div class="task">👩 Mama</div>
+      <div class="task">👨‍👩‍👧 Gemeinsam</div>
+    </div>
+  </section>
+
+  <section id="kinder" class="page">
+    <div class="card yellow">
+      <h2>⭐ Unsere Kinder</h2>
+      <p>🦊 Kind 1</p>
+      <p>🐻 Kind 2 – später ergänzbar</p>
+      <p>Hier entstehen unsere Kinderroutinen.</p>
+    </div>
+  </section>
+</main>
+
+<nav>
+  <button class="active" onclick="showPage('start',this)">🏠 Start</button>
+  <button onclick="showPage('kalender',this)">📅 Kalender</button>
+  <button onclick="showPage('einkaufen',this)">🛒 Einkauf</button>
+  <button onclick="showPage('aufgaben',this)">✅ Aufgaben</button>
+  <button onclick="showPage('kinder',this)">⭐ Kinder</button>
+</nav>
+
+<script>
+function updateClock() {
+  var now = new Date();
+
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString("de-DE", {
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+
+  document.getElementById("date").textContent =
+    now.toLocaleDateString("de-DE", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+}
+
+function showPage(id, button) {
+  var pages = document.querySelectorAll(".page");
+  var buttons = document.querySelectorAll("nav button");
+
+  pages.forEach(function(page) {
+    page.classList.remove("active");
+  });
+
+  buttons.forEach(function(item) {
+    item.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+  button.classList.add("active");
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+
+</body>
+</html>
