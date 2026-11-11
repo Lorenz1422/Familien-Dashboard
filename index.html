@@ -79,11 +79,25 @@ p { line-height:1.45; margin:8px 0; font-size:14px; }
 .meal-card { grid-column:span 2; background:var(--yellow); }
 .meal-header {
   display:flex; justify-content:space-between; align-items:center;
-  margin-bottom:12px; gap:10px;
+  margin-bottom:12px; gap:10px; flex-wrap:wrap;
 }
 .meal-badge {
   background:#FFFFFF90; border-radius:20px; padding:6px 11px;
   font-size:11px; font-weight:700; color:#80643D;
+}
+.meal-week-navigation {
+  display:flex; align-items:center; justify-content:space-between;
+  gap:8px; margin:5px 0 12px;
+}
+.week-nav-button {
+  border:0; background:#FFFFFF90; color:var(--text);
+  border-radius:11px; min-width:38px; height:36px;
+  font:inherit; font-size:19px; font-weight:700; cursor:pointer;
+}
+.week-nav-button:active { transform:scale(.95); }
+.week-nav-button:disabled { opacity:.4; }
+.week-label {
+  font-size:13px; font-weight:700; text-align:center; color:#75695D;
 }
 .meal-week { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:7px; }
 .meal-day {
@@ -182,6 +196,8 @@ a { color:#655B50; overflow-wrap:anywhere; }
   .meal-week { gap:4px; }
   .meal-day { padding:8px 2px; }
   .meal-day small { font-size:9px; }
+  .week-label { font-size:11px; }
+  .week-nav-button { min-width:34px; height:34px; }
   nav button { min-width:28%; font-size:12px; padding:11px 4px; }
   .recipe-item { align-items:flex-start; flex-direction:column; }
 }
@@ -267,10 +283,17 @@ a { color:#655B50; overflow-wrap:anywhere; }
         <div class="meal-header">
           <div>
             <div class="card-label">Was gibt es heute?</div>
-            <h2>🍽️ Unser Wochen-Essensplan</h2>
+            <h2>🥣 Unser Wochen-Essensplan</h2>
           </div>
           <span class="meal-badge">ABENDESSEN</span>
         </div>
+
+        <div class="meal-week-navigation">
+          <button class="week-nav-button" id="previousWeekButton" type="button" aria-label="Vorherige Woche">‹</button>
+          <div class="week-label" id="mealWeekLabel">Diese Woche</div>
+          <button class="week-nav-button" id="nextWeekButton" type="button" aria-label="Nächste Woche">›</button>
+        </div>
+
         <div class="meal-week" id="mealWeek"></div>
         <div class="card-footer" id="mealToday">Euer Abendessen für heute</div>
         <div style="margin-top:12px">
@@ -298,7 +321,7 @@ a { color:#655B50; overflow-wrap:anywhere; }
   <section id="essen" class="page">
     <div class="card meal-editor">
       <div class="card-label">Gemeinsam planen</div>
-      <h2>🍽️ Unser Abendessen</h2>
+      <h2>🥣 Unser Abendessen</h2>
       <p>Wählt einen Tag und legt fest, was es abends geben soll. Änderungen werden mit den anderen Familiengeräten synchronisiert.</p>
 
       <label for="mealDate">Welcher Tag?</label>
@@ -398,7 +421,7 @@ a { color:#655B50; overflow-wrap:anywhere; }
 
 <nav id="mainNav" class="hidden">
   <button class="active" onclick="showPage('start',this)">🏠 Start</button>
-  <button id="navEssen" onclick="showPage('essen',this)">🍽️ Essen</button>
+  <button id="navEssen" onclick="showPage('essen',this)">🥣 Essen</button>
   <button onclick="showPage('kalender',this)">📅 Kalender</button>
   <button onclick="showPage('einkaufen',this)">🛒 Einkauf</button>
   <button onclick="showPage('aufgaben',this)">✅ Aufgaben</button>
@@ -416,6 +439,7 @@ var currentUser = null;
 var recipes = [];
 var meals = [];
 var realtimeChannel = null;
+var displayedWeekStart = mondayOfWeek(new Date());
 
 var dayNames = ["Mo","Di","Mi","Do","Fr","Sa","So"];
 
@@ -437,6 +461,20 @@ function mondayOfWeek(date) {
   var weekday = (d.getDay()+6)%7;
   d.setDate(d.getDate()-weekday);
   return d;
+}
+
+function formatWeekRange(start) {
+  var end = new Date(start);
+  end.setDate(end.getDate()+6);
+
+  var startText = start.toLocaleDateString("de-DE",{
+    day:"numeric",month:"short"
+  });
+  var endText = end.toLocaleDateString("de-DE",{
+    day:"numeric",month:"short",year:"numeric"
+  });
+
+  return startText + " – " + endText;
 }
 
 function updateClock() {
@@ -572,7 +610,9 @@ document.getElementById("logoutButton").addEventListener("click",async function(
 
 supabaseClient.auth.onAuthStateChange(function(event,session) {
   if (event === "SIGNED_OUT" || event === "INITIAL_SESSION" || event === "SIGNED_IN" || event === "TOKEN_REFRESHED") {
-    handleSession(session);
+    setTimeout(function() {
+      handleSession(session);
+    },0);
   }
 });
 
@@ -589,17 +629,14 @@ async function loadRecipes() {
   renderRecipes();
 }
 
-/* ESSENSPLAN LADEN */
+/* ESSENSPLAN LADEN
+   Alle Einträge werden geladen, damit auch zukünftige Wochen
+   in der Wochenübersicht angezeigt werden können. */
 async function loadMeals() {
-  var start = mondayOfWeek(new Date());
-  var end = new Date(start);
-  end.setDate(end.getDate()+6);
-
   var result = await supabaseClient
     .from("essensplan")
     .select("id,datum,rezept_id,notiz")
-    .gte("datum",localDateString(start))
-    .lte("datum",localDateString(end));
+    .order("datum",{ascending:true});
 
   if (result.error) throw result.error;
   meals = result.data || [];
@@ -616,6 +653,20 @@ async function loadAllData() {
   }
 }
 
+/* WOCHEN-NAVIGATION */
+function changeDisplayedWeek(direction) {
+  displayedWeekStart.setDate(displayedWeekStart.getDate() + direction * 7);
+  renderMealWeek();
+}
+
+document.getElementById("previousWeekButton").addEventListener("click",function() {
+  changeDisplayedWeek(-1);
+});
+
+document.getElementById("nextWeekButton").addEventListener("click",function() {
+  changeDisplayedWeek(1);
+});
+
 /* WOCHENANSICHT */
 function getRecipeName(id) {
   var recipe = recipes.find(function(item) {
@@ -628,9 +679,13 @@ function renderMealWeek() {
   var container = document.getElementById("mealWeek");
   container.innerHTML = "";
 
-  var start = mondayOfWeek(new Date());
+  var start = new Date(displayedWeekStart);
   var today = localDateString(new Date());
   var todayMeal = "";
+  var isCurrentWeek = localDateString(start) === localDateString(mondayOfWeek(new Date()));
+
+  document.getElementById("mealWeekLabel").textContent =
+    isCurrentWeek ? "Diese Woche" : formatWeekRange(start);
 
   for (var i=0;i<7;i++) {
     var date = new Date(start);
@@ -652,7 +707,7 @@ function renderMealWeek() {
 
     var icon = document.createElement("span");
     icon.className = "meal-icon";
-    icon.textContent = name === "Noch offen" ? "➕" : "🍽️";
+    icon.textContent = name === "Noch offen" ? "➕" : "🥣";
 
     var small = document.createElement("small");
     small.textContent = name;
@@ -668,9 +723,14 @@ function renderMealWeek() {
     container.appendChild(day);
   }
 
-  var weekday = new Date().toLocaleDateString("de-DE",{weekday:"long"});
-  document.getElementById("mealToday").textContent =
-    "Heute (" + weekday + "): " + (todayMeal || "Noch nichts geplant");
+  if (isCurrentWeek) {
+    var weekday = new Date().toLocaleDateString("de-DE",{weekday:"long"});
+    document.getElementById("mealToday").textContent =
+      "Heute (" + weekday + "): " + (todayMeal || "Noch nichts geplant");
+  } else {
+    document.getElementById("mealToday").textContent =
+      "Wochenplanung für " + formatWeekRange(start);
+  }
 }
 
 /* REZEPT-AUSWAHL */
