@@ -5,437 +5,185 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#EDE3D3">
-
 <title>Unsere Familienzentrale</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 :root {
-  --sand: #EDE3D3;
-  --text: #51483F;
-  --muted: #887B6C;
-  --blue: #DCE9F5;
-  --green: #DDE9D8;
-  --pink: #F3DDE5;
-  --yellow: #F7E5C9;
-  --purple: #E8DFF1;
-  --petrol: #D2E5E2;
+  --sand:#EDE3D3; --text:#51483F; --muted:#887B6C;
+  --blue:#DCE9F5; --green:#DDE9D8; --pink:#F3DDE5;
+  --yellow:#F7E5C9; --purple:#E8DFF1; --petrol:#D2E5E2;
 }
 
 body {
-  margin: 0;
-  padding: 22px;
-  font-family: -apple-system, BlinkMacSystemFont,
-    "Helvetica Neue", Arial, sans-serif;
-  background: var(--sand);
-  color: var(--text);
-  min-height: 100vh;
+  margin:0; padding:22px; font-family:-apple-system,BlinkMacSystemFont,
+  "Helvetica Neue",Arial,sans-serif; background:var(--sand);
+  color:var(--text); min-height:100vh;
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 22px;
-  gap: 20px;
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:22px; gap:20px;
 }
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
+.brand { display:flex; align-items:center; gap:14px; }
 .brand-icon {
-  width: 54px;
-  height: 54px;
-  border-radius: 18px;
-  background: #F7F0E6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  box-shadow: 0 4px 12px #76644F12;
+  width:54px; height:54px; border-radius:18px; background:#F7F0E6;
+  display:flex; align-items:center; justify-content:center; font-size:28px;
+  box-shadow:0 4px 12px #76644F12;
 }
-
-h1 {
-  margin: 0;
-  font-size: 27px;
-  font-weight: 700;
-  letter-spacing: -0.6px;
-}
-
-.subtitle {
-  margin-top: 5px;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.clock-area {
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.clock {
-  font-size: 39px;
-  font-weight: 700;
-  letter-spacing: -1px;
-  font-variant-numeric: tabular-nums;
-}
-
-.weather {
-  margin-top: 3px;
-  font-size: 15px;
-  color: #655B50;
-}
-
-/* DASHBOARD */
+h1 { margin:0; font-size:27px; font-weight:700; letter-spacing:-.6px; }
+.subtitle { margin-top:5px; color:var(--muted); font-size:14px; }
+.clock-area { text-align:right; flex-shrink:0; }
+.clock { font-size:39px; font-weight:700; letter-spacing:-1px; font-variant-numeric:tabular-nums; }
+.weather { margin-top:3px; font-size:15px; color:#655B50; }
 
 .dashboard {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px;
 }
-
 .card {
-  border-radius: 23px;
-  padding: 20px;
-  min-width: 0;
-  min-height: 185px;
-  box-shadow: 0 5px 16px rgba(80, 65, 45, 0.045);
-  position: relative;
-  overflow: hidden;
+  border-radius:23px; padding:20px; min-width:0; min-height:185px;
+  box-shadow:0 5px 16px rgba(80,65,45,.045); position:relative; overflow:hidden;
 }
-
-.blue { background: var(--blue); }
-.green { background: var(--green); }
-.pink { background: var(--pink); }
-.yellow { background: var(--yellow); }
-.purple { background: var(--purple); }
-
-.child-one { background: #F4D5E1; }
-.child-two { background: #D5E8F8; }
-.car-card { background: var(--petrol); }
-
-h2 {
-  margin: 0 0 13px;
-  font-size: 19px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-}
-
-p {
-  line-height: 1.45;
-  margin: 8px 0;
-  font-size: 14px;
-}
-
+.blue{background:var(--blue)} .green{background:var(--green)}
+.pink{background:var(--pink)} .yellow{background:var(--yellow)}
+.purple{background:var(--purple)}
+.child-one{background:#F4D5E1} .child-two{background:#D5E8F8}
+.car-card{background:var(--petrol)}
+h2 { margin:0 0 13px; font-size:19px; font-weight:700; letter-spacing:-.3px; }
+p { line-height:1.45; margin:8px 0; font-size:14px; }
 .card-label {
-  color: #75695D;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 700;
-  margin-bottom: 10px;
+  color:#75695D; font-size:12px; text-transform:uppercase;
+  letter-spacing:1px; font-weight:700; margin-bottom:10px;
 }
-
-.card-footer {
-  color: #75695D;
-  font-size: 12px;
-  margin-top: 12px;
-}
-
+.card-footer { color:#75695D; font-size:12px; margin-top:12px; }
 .calendar-event {
-  background: #FFFFFF65;
-  border-radius: 11px;
-  padding: 9px 11px;
-  margin-top: 8px;
-  font-size: 14px;
+  background:#FFFFFF65; border-radius:11px; padding:9px 11px;
+  margin-top:8px; font-size:14px;
 }
-
 .task-line {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 9px 0;
-  border-bottom: 1px solid #FFFFFF80;
-  font-size: 14px;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:9px 0; border-bottom:1px solid #FFFFFF80; font-size:14px;
 }
+.task-count { background:#FFFFFF90; padding:4px 10px; border-radius:20px; font-size:12px; font-weight:700; }
 
-.task-count {
-  background: #FFFFFF90;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-/* KINDER */
-
-.children-preview {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
-}
-
+.children-preview { display:flex; gap:10px; margin-top:15px; }
 .child-mini {
-  flex: 1;
-  padding: 12px 8px;
-  background: #FFFFFF75;
-  border-radius: 15px;
-  text-align: center;
-  min-width: 0;
+  flex:1; padding:12px 8px; background:#FFFFFF75; border-radius:15px;
+  text-align:center; min-width:0;
 }
+.child-mini .emoji { font-size:25px; display:block; margin-bottom:6px; }
+.child-mini strong { font-size:13px; }
+.child-mini small { display:block; margin-top:5px; font-size:11px; color:#75695D; }
 
-.child-mini .emoji {
-  font-size: 25px;
-  display: block;
-  margin-bottom: 6px;
-}
-
-.child-mini strong {
-  font-size: 13px;
-}
-
-.child-mini small {
-  display: block;
-  margin-top: 5px;
-  font-size: 11px;
-  color: #75695D;
-}
-
-/* ESSENSPLAN */
-
-.meal-card {
-  grid-column: span 2;
-  background: var(--yellow);
-}
-
+.meal-card { grid-column:span 2; background:var(--yellow); }
 .meal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-  gap: 10px;
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:12px; gap:10px;
 }
-
 .meal-badge {
-  background: #FFFFFF90;
-  border-radius: 20px;
-  padding: 6px 11px;
-  font-size: 11px;
-  font-weight: 700;
-  color: #80643D;
+  background:#FFFFFF90; border-radius:20px; padding:6px 11px;
+  font-size:11px; font-weight:700; color:#80643D;
 }
-
-.meal-week {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 7px;
-}
-
+.meal-week { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:7px; }
 .meal-day {
-  background: #FFFFFF75;
-  border-radius: 13px;
-  padding: 10px 5px;
-  text-align: center;
-  min-width: 0;
+  background:#FFFFFF75; border-radius:13px; padding:10px 5px;
+  text-align:center; min-width:0; cursor:pointer;
 }
-
-.meal-day.today {
-  background: #FFFFFF;
-  outline: 2px solid #C49C64;
-}
-
-.meal-day strong {
-  display: block;
-  font-size: 12px;
-  margin-bottom: 8px;
-}
-
-.meal-day .meal-icon {
-  display: block;
-  font-size: 21px;
-  margin-bottom: 6px;
-}
-
+.meal-day.today { background:#FFFFFF; outline:2px solid #C49C64; }
+.meal-day strong { display:block; font-size:12px; margin-bottom:8px; }
+.meal-day .meal-icon { display:block; font-size:21px; margin-bottom:6px; }
 .meal-day small {
-  display: block;
-  font-size: 10px;
-  line-height: 1.3;
-  color: #75695D;
-  overflow-wrap: break-word;
+  display:block; font-size:10px; line-height:1.3; color:#75695D;
+  overflow-wrap:break-word;
 }
-
-.today-label {
-  font-size: 10px;
-  color: #8A6940;
-  font-weight: 700;
-  margin-top: 5px;
-}
-
-.car-info {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  margin-top: 18px;
-}
-
-.car-icon {
-  font-size: 37px;
-}
-
-.car-description {
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-/* NAVIGATION */
+.today-label { font-size:10px; color:#8A6940; font-weight:700; margin-top:5px; }
+.car-info { display:flex; align-items:center; gap:13px; margin-top:18px; }
+.car-icon { font-size:37px; }
+.car-description { font-size:14px; line-height:1.5; }
 
 nav {
-  display: flex;
-  justify-content: space-around;
-  gap: 9px;
-  margin-top: 20px;
-  padding: 9px;
-  background: #E4D8C7;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px #76644F10;
+  display:flex; justify-content:space-around; gap:9px; margin-top:20px;
+  padding:9px; background:#E4D8C7; border-radius:20px;
+  box-shadow:0 4px 12px #76644F10; flex-wrap:wrap;
 }
-
 nav button {
-  flex: 1;
-  border: 0;
-  background: transparent;
-  color: var(--text);
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 14px 8px;
-  border-radius: 14px;
-  cursor: pointer;
+  flex:1; border:0; background:transparent; color:var(--text);
+  font-family:inherit; font-size:14px; font-weight:600;
+  padding:14px 8px; border-radius:14px; cursor:pointer;
 }
+nav button.active { background:#F8F2E9; box-shadow:0 2px 8px #76644F15; }
+nav button:active { transform:scale(.97); }
 
-nav button.active {
-  background: #F8F2E9;
-  box-shadow: 0 2px 8px #76644F15;
-}
-
-nav button:active {
-  transform: scale(0.97);
-}
-
-/* UNTERSEITEN */
-
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
-}
-
+.page { display:none; }
+.page.active { display:block; }
 .page-placeholder {
-  min-height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  min-height:300px; display:flex; flex-direction:column;
+  justify-content:center; align-items:center; text-align:center;
 }
+.page-placeholder .large-icon { font-size:48px; margin-bottom:15px; }
+.page-placeholder p { color:#75695D; }
 
-.page-placeholder .large-icon {
-  font-size: 48px;
-  margin-bottom: 15px;
+.login-wrap { max-width:440px; margin:35px auto; }
+.login-card {
+  background:#F7F0E6; border-radius:24px; padding:25px;
+  box-shadow:0 5px 16px rgba(80,65,45,.06);
 }
-
-.page-placeholder p {
-  color: #75695D;
+input, textarea, select {
+  width:100%; padding:12px 13px; border:1px solid #D8CBB9;
+  border-radius:12px; background:#FFFCF7; color:var(--text);
+  font:inherit; margin:6px 0 13px; min-width:0;
 }
-
-/* RESPONSIVE */
-
-@media (max-width: 850px) {
-  body {
-    padding: 15px;
-  }
-
-  .dashboard {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .meal-card {
-    grid-column: span 2;
-  }
-
-  h1 {
-    font-size: 23px;
-  }
-
-  .clock {
-    font-size: 32px;
-  }
+textarea { min-height:85px; resize:vertical; }
+label { display:block; font-size:13px; font-weight:700; margin-top:8px; }
+.action-btn {
+  border:0; border-radius:13px; padding:12px 17px; cursor:pointer;
+  font:inherit; font-weight:700; color:#51483F; background:#E4D8C7;
 }
+.action-btn.primary { background:#D2E5E2; }
+.action-btn.danger { background:#F3DDE5; }
+.action-btn:disabled { opacity:.5; cursor:wait; }
+.form-row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.form-row > * { flex:1; }
+.status { font-size:13px; margin:10px 0; min-height:18px; color:#75695D; }
+.status.error { color:#A33F46; }
+.status.success { color:#36734A; }
+.meal-editor { background:var(--yellow); }
+.recipe-panel { background:var(--purple); margin-top:16px; }
+.recipe-item {
+  background:#FFFFFF90; border-radius:14px; padding:13px;
+  margin:9px 0; display:flex; justify-content:space-between;
+  align-items:center; gap:12px;
+}
+.recipe-item small { display:block; color:#75695D; margin-top:4px; }
+.recipe-actions { display:flex; gap:6px; flex-wrap:wrap; }
+.recipe-actions button { padding:8px 10px; }
+.meal-selection { font-size:13px; color:#75695D; margin-top:8px; }
+.hidden { display:none !important; }
+.account-line {
+  display:flex; justify-content:space-between; align-items:center;
+  gap:10px; margin:0 0 15px; font-size:13px; color:#75695D;
+}
+a { color:#655B50; overflow-wrap:anywhere; }
 
-@media (max-width: 600px) {
-  header {
-    align-items: flex-start;
-  }
-
-  .brand-icon {
-    width: 42px;
-    height: 42px;
-    font-size: 22px;
-  }
-
-  h1 {
-    font-size: 19px;
-  }
-
-  .subtitle {
-    font-size: 12px;
-  }
-
-  .clock {
-    font-size: 27px;
-  }
-
-  .weather {
-    font-size: 12px;
-  }
-
-  .dashboard {
-    grid-template-columns: 1fr;
-  }
-
-  .meal-card {
-    grid-column: span 1;
-  }
-
-  .meal-week {
-    gap: 4px;
-  }
-
-  .meal-day {
-    padding: 8px 2px;
-  }
-
-  .meal-day small {
-    font-size: 9px;
-  }
-
-  nav {
-    flex-wrap: wrap;
-  }
-
-  nav button {
-    min-width: 28%;
-    font-size: 12px;
-    padding: 11px 4px;
-  }
+@media(max-width:850px) {
+  body { padding:15px; }
+  .dashboard { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .meal-card { grid-column:span 2; }
+  h1 { font-size:23px; } .clock { font-size:32px; }
+}
+@media(max-width:600px) {
+  header { align-items:flex-start; }
+  .brand-icon { width:42px; height:42px; font-size:22px; }
+  h1 { font-size:19px; } .subtitle { font-size:12px; }
+  .clock { font-size:27px; } .weather { font-size:12px; }
+  .dashboard { grid-template-columns:1fr; }
+  .meal-card { grid-column:span 1; }
+  .meal-week { gap:4px; }
+  .meal-day { padding:8px 2px; }
+  .meal-day small { font-size:9px; }
+  nav button { min-width:28%; font-size:12px; padding:11px 4px; }
+  .recipe-item { align-items:flex-start; flex-direction:column; }
 }
 </style>
 </head>
@@ -447,460 +195,723 @@ nav button:active {
     <div class="brand-icon">❤️</div>
     <div>
       <h1>Unsere Familienzentrale</h1>
-      <div class="subtitle" id="date">
-        Willkommen bei uns zu Hause
-      </div>
+      <div class="subtitle" id="date">Willkommen bei uns zu Hause</div>
     </div>
   </div>
-
   <div class="clock-area">
     <div class="clock" id="clock">--:--</div>
-    <div class="weather" id="weather">
-      🌤️ Wetter wird geladen …
-    </div>
+    <div class="weather" id="weather">🌤️ Wetter wird geladen …</div>
   </div>
 </header>
 
-<main>
+<!-- ANMELDUNG -->
+<section id="loginView" class="login-wrap hidden">
+  <div class="login-card">
+    <div class="brand-icon">🔐</div>
+    <h2 style="margin-top:15px">Willkommen zurück!</h2>
+    <p>Bitte meldet euch mit eurem Familienkonto an.</p>
+    <form id="loginForm">
+      <label for="email">E-Mail-Adresse</label>
+      <input id="email" type="email" autocomplete="username" required>
+      <label for="password">Passwort</label>
+      <input id="password" type="password" autocomplete="current-password" required>
+      <button class="action-btn primary" id="loginButton" type="submit">Anmelden</button>
+    </form>
+    <div id="loginStatus" class="status" aria-live="polite"></div>
+  </div>
+</section>
+
+<main id="appView" class="hidden">
+
+  <div class="account-line">
+    <span id="accountEmail">Angemeldet</span>
+    <button class="action-btn" id="logoutButton" type="button">Abmelden</button>
+  </div>
 
   <!-- STARTSEITE -->
-
   <section id="start" class="page active">
-
     <div class="dashboard">
-
-      <!-- KALENDER -->
 
       <div class="card blue">
         <div class="card-label">Unser Alltag</div>
         <h2>📅 Familienkalender</h2>
-
-        <div class="calendar-event">
-          🏫 Kindergarten
-        </div>
-
-        <div class="calendar-event">
-          👨‍👩‍👧 Gemeinsame Familienzeit
-        </div>
-
-        <div class="card-footer">
-          Unsere Termine auf einen Blick
-        </div>
+        <div class="calendar-event">🏫 Kindergarten</div>
+        <div class="calendar-event">👨‍👩‍👧 Gemeinsame Familienzeit</div>
+        <div class="card-footer">Unsere Termine auf einen Blick</div>
       </div>
-
-      <!-- AUFGABEN -->
 
       <div class="card green">
         <div class="card-label">Gemeinsam schaffen wir das</div>
         <h2>✅ Unsere Aufgaben</h2>
-
-        <div class="task-line">
-          <span>👨 Papa</span>
-          <span class="task-count">2 offen</span>
-        </div>
-
-        <div class="task-line">
-          <span>👩 Mama</span>
-          <span class="task-count">3 offen</span>
-        </div>
-
-        <div class="task-line">
-          <span>👨‍👩‍👧 Gemeinsam</span>
-          <span class="task-count">1 offen</span>
-        </div>
+        <div class="task-line"><span>👨 Papa</span><span class="task-count">2 offen</span></div>
+        <div class="task-line"><span>👩 Mama</span><span class="task-count">3 offen</span></div>
+        <div class="task-line"><span>👨‍👩‍👧 Gemeinsam</span><span class="task-count">1 offen</span></div>
       </div>
-
-      <!-- KINDER -->
 
       <div class="card pink">
         <div class="card-label">Unsere kleinen Helden</div>
         <h2>⭐ Kinderfortschritt</h2>
-
         <div class="children-preview">
-
           <div class="child-mini">
-            <span class="emoji">🌸</span>
-            <strong>Kind 1</strong>
-            <small>⭐⭐⭐</small>
-            <small>3 von 5</small>
+            <span class="emoji">🌸</span><strong>Kind 1</strong>
+            <small>⭐⭐⭐</small><small>3 von 5</small>
           </div>
-
           <div class="child-mini">
-            <span class="emoji">🩵</span>
-            <strong>Kind 2</strong>
-            <small>✨</small>
-            <small>Bald dabei</small>
+            <span class="emoji">🩵</span><strong>Kind 2</strong>
+            <small>✨</small><small>Bald dabei</small>
           </div>
-
         </div>
       </div>
 
-      <!-- ESSENSPLAN -->
-
       <div class="card meal-card">
-
         <div class="meal-header">
           <div>
             <div class="card-label">Was gibt es heute?</div>
             <h2>🍽️ Unser Wochen-Essensplan</h2>
           </div>
-
           <span class="meal-badge">ABENDESSEN</span>
         </div>
-
-        <div class="meal-week" id="mealWeek">
-
-          <div class="meal-day" data-day="0">
-            <strong>MO</strong>
-            <span class="meal-icon">🍝</span>
-            <small>Spaghetti</small>
-          </div>
-
-          <div class="meal-day" data-day="1">
-            <strong>DI</strong>
-            <span class="meal-icon">🥔</span>
-            <small>Kartoffeln</small>
-          </div>
-
-          <div class="meal-day" data-day="2">
-            <strong>MI</strong>
-            <span class="meal-icon">🍕</span>
-            <small>Pizza</small>
-          </div>
-
-          <div class="meal-day" data-day="3">
-            <strong>DO</strong>
-            <span class="meal-icon">🍗</span>
-            <small>Hähnchen</small>
-          </div>
-
-          <div class="meal-day" data-day="4">
-            <strong>FR</strong>
-            <span class="meal-icon">🐟</span>
-            <small>Fisch</small>
-          </div>
-
-          <div class="meal-day" data-day="5">
-            <strong>SA</strong>
-            <span class="meal-icon">🍔</span>
-            <small>Burger</small>
-          </div>
-
-          <div class="meal-day" data-day="6">
-            <strong>SO</strong>
-            <span class="meal-icon">🍲</span>
-            <small>Auflauf</small>
-          </div>
-
+        <div class="meal-week" id="mealWeek"></div>
+        <div class="card-footer" id="mealToday">Euer Abendessen für heute</div>
+        <div style="margin-top:12px">
+          <button class="action-btn" type="button" onclick="showPage('essen',document.getElementById('navEssen'))">
+            Essensplan bearbeiten →
+          </button>
         </div>
-
-        <div class="card-footer" id="mealToday">
-          Euer Abendessen für heute
-        </div>
-
       </div>
-
-      <!-- AUTO -->
 
       <div class="card car-card">
         <div class="card-label">Unser Familienauto</div>
         <h2>🚗 Škoda Elroq</h2>
-
         <div class="car-info">
           <div class="car-icon">🚙</div>
           <div class="car-description">
-            <strong>85x Sportline</strong>
-            <br>
-            Fahrzeugdaten folgen später.
+            <strong>85x Sportline</strong><br>Fahrzeugdaten folgen später.
           </div>
         </div>
-
       </div>
 
+    </div>
+  </section>
+
+  <!-- ESSENSPLAN UND REZEPTE -->
+  <section id="essen" class="page">
+    <div class="card meal-editor">
+      <div class="card-label">Gemeinsam planen</div>
+      <h2>🍽️ Unser Abendessen</h2>
+      <p>Wählt einen Tag und legt fest, was es abends geben soll. Änderungen werden mit den anderen Familiengeräten synchronisiert.</p>
+
+      <label for="mealDate">Welcher Tag?</label>
+      <input id="mealDate" type="date">
+
+      <label for="mealRecipe">Rezept auswählen</label>
+      <select id="mealRecipe">
+        <option value="">Kein Rezept ausgewählt</option>
+      </select>
+
+      <label for="mealNote">Notiz (optional)</label>
+      <input id="mealNote" type="text" placeholder="z. B. später essen, Beilage ...">
+
+      <div class="form-row">
+        <button class="action-btn primary" id="saveMealButton" type="button">Tag speichern</button>
+        <button class="action-btn" id="clearMealButton" type="button">Eintrag löschen</button>
+      </div>
+      <div id="mealStatus" class="status" aria-live="polite"></div>
+      <div class="meal-selection" id="mealSelectedInfo"></div>
+    </div>
+
+    <div class="card recipe-panel">
+      <div class="card-label">Unsere Rezeptsammlung</div>
+      <h2>📖 Rezepte hinzufügen</h2>
+      <p>Ihr könnt Rezepte von Hand eintragen und einen Link zur ursprünglichen Rezeptseite speichern.</p>
+
+      <form id="recipeForm">
+        <label for="recipeName">Name des Rezepts</label>
+        <input id="recipeName" type="text" placeholder="z. B. Gemüse-Lasagne" required>
+
+        <label for="recipeIngredients">Zutaten</label>
+        <textarea id="recipeIngredients" placeholder="Zutaten und Mengen"></textarea>
+
+        <label for="recipeInstructions">Zubereitung</label>
+        <textarea id="recipeInstructions" placeholder="Wie wird das Gericht zubereitet?"></textarea>
+
+        <label for="recipeUrl">Rezept-Link (optional)</label>
+        <input id="recipeUrl" type="url" placeholder="https://...">
+
+        <button class="action-btn primary" id="addRecipeButton" type="submit">Rezept speichern</button>
+      </form>
+      <div id="recipeStatus" class="status" aria-live="polite"></div>
+    </div>
+
+    <div class="card purple" style="margin-top:16px">
+      <div class="card-label">Gespeichert für die ganze Familie</div>
+      <h2>⭐ Unsere Rezepte</h2>
+      <div id="recipeList">Rezepte werden geladen …</div>
     </div>
   </section>
 
   <!-- KALENDER -->
-
   <section id="kalender" class="page">
     <div class="card blue page-placeholder">
       <div class="large-icon">📅</div>
       <h2>Unser Familienkalender</h2>
-      <p>
-        Hier entsteht unsere Wochenansicht
-        von Montag bis Sonntag.
-      </p>
+      <p>Hier entsteht unsere Wochenansicht von Montag bis Sonntag.</p>
     </div>
   </section>
 
   <!-- EINKAUF -->
-
   <section id="einkaufen" class="page">
     <div class="card pink page-placeholder">
       <div class="large-icon">🛒</div>
       <h2>Unsere Einkaufsliste</h2>
-      <p>
-        Hier erscheinen später unsere gemeinsamen
-        Einkaufsartikel.
-      </p>
+      <p>Hier erscheinen später unsere gemeinsamen Einkaufsartikel.</p>
     </div>
   </section>
 
   <!-- AUFGABEN -->
-
   <section id="aufgaben" class="page">
     <div class="card green page-placeholder">
       <div class="large-icon">✅</div>
       <h2>Unsere Aufgaben</h2>
-      <p>
-        Aufgaben für Mama, Papa und die ganze Familie.
-      </p>
+      <p>Aufgaben für Mama, Papa und die ganze Familie.</p>
     </div>
   </section>
 
   <!-- KINDER -->
-
   <section id="kinder" class="page">
-
     <h2>⭐ Unsere Kinder</h2>
-
     <div class="dashboard">
-
       <div class="card child-one">
         <h2>🌸 Kind 1</h2>
         <p>⭐⭐⭐ 3 von 5 Aufgaben geschafft</p>
-        <p>
-          Hier entstehen die Morgen- und
-          Abendroutinen.
-        </p>
+        <p>Hier entstehen die Morgen- und Abendroutinen.</p>
       </div>
-
       <div class="card child-two">
         <h2>🩵 Kind 2</h2>
         <p>Das Profil kann später ergänzt werden.</p>
         <p>Eigene Routinen und Aufgaben folgen.</p>
       </div>
-
     </div>
   </section>
 
 </main>
 
-<!-- NAVIGATION -->
-
-<nav>
-  <button class="active"
-    onclick="showPage('start',this)">
-    🏠 Start
-  </button>
-
-  <button onclick="showPage('kalender',this)">
-    📅 Kalender
-  </button>
-
-  <button onclick="showPage('einkaufen',this)">
-    🛒 Einkauf
-  </button>
-
-  <button onclick="showPage('aufgaben',this)">
-    ✅ Aufgaben
-  </button>
-
-  <button onclick="showPage('kinder',this)">
-    ⭐ Kinder
-  </button>
+<nav id="mainNav" class="hidden">
+  <button class="active" onclick="showPage('start',this)">🏠 Start</button>
+  <button id="navEssen" onclick="showPage('essen',this)">🍽️ Essen</button>
+  <button onclick="showPage('kalender',this)">📅 Kalender</button>
+  <button onclick="showPage('einkaufen',this)">🛒 Einkauf</button>
+  <button onclick="showPage('aufgaben',this)">✅ Aufgaben</button>
+  <button onclick="showPage('kinder',this)">⭐ Kinder</button>
 </nav>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+/* SUPABASE – öffentliche Projektverbindung */
+var SUPABASE_URL = "https://thdnhxuxtobiekwepiir.supabase.co";
+var SUPABASE_KEY = "sb_publishable_1rXcSDJKZAht9PUUSOuZmg_3V8IoTmb";
+var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-/* UHRZEIT UND DATUM */
+var currentUser = null;
+var recipes = [];
+var meals = [];
+var realtimeChannel = null;
+
+var dayNames = ["Mo","Di","Mi","Do","Fr","Sa","So"];
+
+function setStatus(id, message, type) {
+  var el = document.getElementById(id);
+  el.textContent = message || "";
+  el.className = "status" + (type ? " " + type : "");
+}
+
+function localDateString(date) {
+  var y = date.getFullYear();
+  var m = String(date.getMonth()+1).padStart(2,"0");
+  var d = String(date.getDate()).padStart(2,"0");
+  return y + "-" + m + "-" + d;
+}
+
+function mondayOfWeek(date) {
+  var d = new Date(date.getFullYear(),date.getMonth(),date.getDate());
+  var weekday = (d.getDay()+6)%7;
+  d.setDate(d.getDate()-weekday);
+  return d;
+}
 
 function updateClock() {
-
   var now = new Date();
-
   document.getElementById("clock").textContent =
-    now.toLocaleTimeString("de-DE", {
-      hour: "2-digit",
-      minute: "2-digit"
-    });
-
+    now.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"});
   document.getElementById("date").textContent =
-    now.toLocaleDateString("de-DE", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric"
+    now.toLocaleDateString("de-DE",{
+      weekday:"long",day:"numeric",month:"long",year:"numeric"
     });
 }
-
 
 /* NAVIGATION */
-
-function showPage(id, button) {
-
-  var pages = document.querySelectorAll(".page");
-  var buttons = document.querySelectorAll("nav button");
-
-  pages.forEach(function(page) {
+function showPage(id,button) {
+  document.querySelectorAll(".page").forEach(function(page) {
     page.classList.remove("active");
   });
-
-  buttons.forEach(function(item) {
+  document.querySelectorAll("nav button").forEach(function(item) {
     item.classList.remove("active");
   });
-
   document.getElementById(id).classList.add("active");
-  button.classList.add("active");
+  if (button) button.classList.add("active");
+  if (id === "essen") renderRecipes();
 }
 
-
-/* WOCHEN-ESSENSPLAN */
-
-function updateMealPlan() {
-
-  var now = new Date();
-
-  // JavaScript: Sonntag = 0, Montag = 1
-  // Unser Plan: Montag = 0, Sonntag = 6
-
-  var today = (now.getDay() + 6) % 7;
-
-  var days = document.querySelectorAll(".meal-day");
-
-  var dayNames = [
-    "Montag",
-    "Dienstag",
-    "Mittwoch",
-    "Donnerstag",
-    "Freitag",
-    "Samstag",
-    "Sonntag"
-  ];
-
-  var todayMeal = "";
-
-  days.forEach(function(day) {
-
-    day.classList.remove("today");
-
-    var dayIndex = parseInt(day.getAttribute("data-day"), 10);
-
-    if (dayIndex === today) {
-
-      day.classList.add("today");
-
-      var meal = day.querySelector("small");
-
-      todayMeal = meal.textContent;
-    }
-  });
-
-  document.getElementById("mealToday").textContent =
-    "Heute (" + dayNames[today] + "): " + todayMeal;
-}
-
-
-/* WETTER */
-
+/* WETTER FÜR 89435 FINNINGEN */
 function loadWeather() {
-
-  var weatherElement =
-    document.getElementById("weather");
-
-  var url =
-    "https://api.open-meteo.com/v1/forecast" +
-    "?latitude=48.137&longitude=11.575" +
+  var weatherElement = document.getElementById("weather");
+  var url = "https://api.open-meteo.com/v1/forecast" +
+    "?latitude=48.650&longitude=10.500" +
     "&current=temperature_2m,weather_code" +
     "&timezone=Europe%2FBerlin";
 
-  fetch(url)
+  fetch(url).then(function(response) {
+    if (!response.ok) throw new Error("Wetter nicht erreichbar");
+    return response.json();
+  }).then(function(data) {
+    var current = data.current;
+    var code = current.weather_code;
+    var icon = "🌤️";
+    var description = "Wolkig";
 
-    .then(function(response) {
+    if (code === 0) { icon="☀️"; description="Sonnig"; }
+    else if (code === 1 || code === 2) { icon="🌤️"; description="Heiter"; }
+    else if (code === 3) { icon="☁️"; description="Bewölkt"; }
+    else if (code === 45 || code === 48) { icon="🌫️"; description="Neblig"; }
+    else if (code >= 51 && code <= 67) { icon="🌧️"; description="Nieselregen"; }
+    else if (code >= 71 && code <= 77) { icon="❄️"; description="Schnee"; }
+    else if (code >= 80 && code <= 82) { icon="🌧️"; description="Regenschauer"; }
+    else if (code >= 85 && code <= 86) { icon="🌨️"; description="Schneeschauer"; }
+    else if (code >= 95) { icon="⛈️"; description="Gewitter"; }
 
-      if (!response.ok) {
-        throw new Error("Wetter nicht erreichbar");
-      }
-
-      return response.json();
-
-    })
-
-    .then(function(data) {
-
-      var current = data.current;
-      var code = current.weather_code;
-
-      var icon = "🌤️";
-      var description = "Wolkig";
-
-      if (code === 0) {
-        icon = "☀️";
-        description = "Sonnig";
-
-      } else if (code === 1 || code === 2) {
-        icon = "🌤️";
-        description = "Heiter";
-
-      } else if (code === 3) {
-        icon = "☁️";
-        description = "Bewölkt";
-
-      } else if (code === 45 || code === 48) {
-        icon = "🌫️";
-        description = "Neblig";
-
-      } else if (code >= 51 && code <= 67) {
-        icon = "🌧️";
-        description = "Nieselregen";
-
-      } else if (code >= 71 && code <= 77) {
-        icon = "❄️";
-        description = "Schnee";
-
-      } else if (code >= 80 && code <= 82) {
-        icon = "🌧️";
-        description = "Regenschauer";
-
-      } else if (code >= 85 && code <= 86) {
-        icon = "🌨️";
-        description = "Schneeschauer";
-
-      } else if (code >= 95) {
-        icon = "⛈️";
-        description = "Gewitter";
-      }
-
-      weatherElement.textContent =
-        icon + " " +
-        Math.round(current.temperature_2m) +
-        " °C · " + description;
-
-    })
-
-    .catch(function() {
-
-      weatherElement.textContent =
-        "🌤️ Wetter gerade nicht verfügbar";
-
-    });
+    weatherElement.textContent =
+      icon + " " + Math.round(current.temperature_2m) + " °C · " + description;
+  }).catch(function() {
+    weatherElement.textContent = "🌤️ Wetter gerade nicht verfügbar";
+  });
 }
 
+/* ANMELDUNG UND FAMILIENZUGRIFF */
+function showLoggedOut() {
+  document.getElementById("loginView").classList.remove("hidden");
+  document.getElementById("appView").classList.add("hidden");
+  document.getElementById("mainNav").classList.add("hidden");
+}
+
+function showLoggedIn() {
+  document.getElementById("loginView").classList.add("hidden");
+  document.getElementById("appView").classList.remove("hidden");
+  document.getElementById("mainNav").classList.remove("hidden");
+  document.getElementById("accountEmail").textContent =
+    currentUser ? currentUser.email : "Angemeldet";
+}
+
+async function checkFamilyMembership() {
+  var result = await supabaseClient
+    .from("familienmitglieder")
+    .select("user_id")
+    .eq("user_id",currentUser.id)
+    .maybeSingle();
+
+  if (result.error) throw result.error;
+  if (!result.data) {
+    throw new Error("Dieses Konto ist noch nicht als Familienmitglied eingetragen.");
+  }
+}
+
+async function handleSession(session) {
+  if (!session) {
+    currentUser = null;
+    if (realtimeChannel) {
+      await supabaseClient.removeChannel(realtimeChannel);
+      realtimeChannel = null;
+    }
+    showLoggedOut();
+    return;
+  }
+
+  currentUser = session.user;
+  try {
+    await checkFamilyMembership();
+    showLoggedIn();
+    await loadAllData();
+    setupRealtime();
+  } catch (error) {
+    showLoggedOut();
+    setStatus("loginStatus",error.message || "Familienzugriff konnte nicht geprüft werden.","error");
+  }
+}
+
+document.getElementById("loginForm").addEventListener("submit",async function(event) {
+  event.preventDefault();
+  var button = document.getElementById("loginButton");
+  button.disabled = true;
+  setStatus("loginStatus","Anmeldung läuft …");
+
+  var result = await supabaseClient.auth.signInWithPassword({
+    email:document.getElementById("email").value.trim(),
+    password:document.getElementById("password").value
+  });
+
+  button.disabled = false;
+  if (result.error) {
+    setStatus("loginStatus","Anmeldung fehlgeschlagen: " + result.error.message,"error");
+  } else {
+    setStatus("loginStatus","Angemeldet.","success");
+  }
+});
+
+document.getElementById("logoutButton").addEventListener("click",async function() {
+  await supabaseClient.auth.signOut();
+});
+
+supabaseClient.auth.onAuthStateChange(function(event,session) {
+  if (event === "SIGNED_OUT" || event === "INITIAL_SESSION" || event === "SIGNED_IN" || event === "TOKEN_REFRESHED") {
+    handleSession(session);
+  }
+});
+
+/* REZEPTE LADEN */
+async function loadRecipes() {
+  var result = await supabaseClient
+    .from("Rezepte")
+    .select("id,name,zutaten,zubereitung,quelle_url,favorit")
+    .order("name",{ascending:true});
+
+  if (result.error) throw result.error;
+  recipes = result.data || [];
+  renderRecipeOptions();
+  renderRecipes();
+}
+
+/* ESSENSPLAN LADEN */
+async function loadMeals() {
+  var start = mondayOfWeek(new Date());
+  var end = new Date(start);
+  end.setDate(end.getDate()+6);
+
+  var result = await supabaseClient
+    .from("essensplan")
+    .select("id,datum,rezept_id,notiz")
+    .gte("datum",localDateString(start))
+    .lte("datum",localDateString(end));
+
+  if (result.error) throw result.error;
+  meals = result.data || [];
+  renderMealWeek();
+  loadMealEditor();
+}
+
+async function loadAllData() {
+  try {
+    await loadRecipes();
+    await loadMeals();
+  } catch (error) {
+    setStatus("mealStatus","Daten konnten nicht geladen werden: " + error.message,"error");
+  }
+}
+
+/* WOCHENANSICHT */
+function getRecipeName(id) {
+  var recipe = recipes.find(function(item) {
+    return String(item.id) === String(id);
+  });
+  return recipe ? recipe.name : "";
+}
+
+function renderMealWeek() {
+  var container = document.getElementById("mealWeek");
+  container.innerHTML = "";
+
+  var start = mondayOfWeek(new Date());
+  var today = localDateString(new Date());
+  var todayMeal = "";
+
+  for (var i=0;i<7;i++) {
+    var date = new Date(start);
+    date.setDate(start.getDate()+i);
+    var key = localDateString(date);
+    var meal = meals.find(function(item) { return item.datum === key; });
+    var name = meal ? getRecipeName(meal.rezept_id) : "";
+    if (meal && !name && meal.notiz) name = meal.notiz;
+    if (!name) name = "Noch offen";
+
+    if (key === today) todayMeal = name;
+
+    var day = document.createElement("div");
+    day.className = "meal-day" + (key === today ? " today" : "");
+    day.setAttribute("data-date",key);
+
+    var strong = document.createElement("strong");
+    strong.textContent = dayNames[i];
+
+    var icon = document.createElement("span");
+    icon.className = "meal-icon";
+    icon.textContent = name === "Noch offen" ? "➕" : "🍽️";
+
+    var small = document.createElement("small");
+    small.textContent = name;
+
+    day.appendChild(strong);
+    day.appendChild(icon);
+    day.appendChild(small);
+    day.addEventListener("click",function() {
+      document.getElementById("mealDate").value = this.getAttribute("data-date");
+      loadMealEditor();
+      showPage("essen",document.getElementById("navEssen"));
+    });
+    container.appendChild(day);
+  }
+
+  var weekday = new Date().toLocaleDateString("de-DE",{weekday:"long"});
+  document.getElementById("mealToday").textContent =
+    "Heute (" + weekday + "): " + (todayMeal || "Noch nichts geplant");
+}
+
+/* REZEPT-AUSWAHL */
+function renderRecipeOptions() {
+  var select = document.getElementById("mealRecipe");
+  var current = select.value;
+  select.innerHTML = "";
+
+  var empty = document.createElement("option");
+  empty.value = "";
+  empty.textContent = "Kein Rezept ausgewählt";
+  select.appendChild(empty);
+
+  recipes.forEach(function(recipe) {
+    var option = document.createElement("option");
+    option.value = recipe.id;
+    option.textContent = (recipe.favorit ? "⭐ " : "") + recipe.name;
+    select.appendChild(option);
+  });
+
+  if (current) select.value = current;
+}
+
+function loadMealEditor() {
+  var dateInput = document.getElementById("mealDate");
+  if (!dateInput.value) dateInput.value = localDateString(new Date());
+
+  var meal = meals.find(function(item) {
+    return item.datum === dateInput.value;
+  });
+
+  document.getElementById("mealRecipe").value =
+    meal && meal.rezept_id ? String(meal.rezept_id) : "";
+  document.getElementById("mealNote").value = meal ? (meal.notiz || "") : "";
+
+  document.getElementById("mealSelectedInfo").textContent =
+    meal ? "Für diesen Tag ist bereits ein Eintrag gespeichert." :
+    "Für diesen Tag ist noch kein Abendessen geplant.";
+  setStatus("mealStatus","");
+}
+
+document.getElementById("mealDate").addEventListener("change",loadMealEditor);
+
+/* ESSEN SPEICHERN */
+document.getElementById("saveMealButton").addEventListener("click",async function() {
+  var date = document.getElementById("mealDate").value;
+  if (!date) {
+    setStatus("mealStatus","Bitte zuerst einen Tag auswählen.","error");
+    return;
+  }
+
+  var recipeValue = document.getElementById("mealRecipe").value;
+  var note = document.getElementById("mealNote").value.trim();
+  var existing = meals.find(function(item) { return item.datum === date; });
+
+  var payload = {
+    datum:date,
+    rezept_id:recipeValue ? Number(recipeValue) : null,
+    notiz:note || null
+  };
+
+  var button = this;
+  button.disabled = true;
+  setStatus("mealStatus","Speichere …");
+
+  var result;
+  if (existing) {
+    result = await supabaseClient.from("essensplan")
+      .update(payload).eq("id",existing.id);
+  } else {
+    result = await supabaseClient.from("essensplan").insert(payload);
+  }
+
+  button.disabled = false;
+  if (result.error) {
+    setStatus("mealStatus","Speichern fehlgeschlagen: " + result.error.message,"error");
+  } else {
+    setStatus("mealStatus","Gespeichert! Die anderen Geräte werden aktualisiert.","success");
+    await loadMeals();
+  }
+});
+
+/* EINEN TAGESEINTRAG LÖSCHEN */
+document.getElementById("clearMealButton").addEventListener("click",async function() {
+  var date = document.getElementById("mealDate").value;
+  var existing = meals.find(function(item) { return item.datum === date; });
+
+  if (!existing) {
+    setStatus("mealStatus","Für diesen Tag gibt es keinen Eintrag.","");
+    return;
+  }
+
+  var result = await supabaseClient.from("essensplan").delete().eq("id",existing.id);
+  if (result.error) {
+    setStatus("mealStatus","Löschen fehlgeschlagen: " + result.error.message,"error");
+  } else {
+    setStatus("mealStatus","Eintrag gelöscht.","success");
+    await loadMeals();
+  }
+});
+
+/* REZEPT HINZUFÜGEN */
+document.getElementById("recipeForm").addEventListener("submit",async function(event) {
+  event.preventDefault();
+
+  var name = document.getElementById("recipeName").value.trim();
+  var url = document.getElementById("recipeUrl").value.trim();
+
+  if (url && !/^https?:\/\//i.test(url)) {
+    setStatus("recipeStatus","Bitte einen vollständigen Link mit https:// eingeben.","error");
+    return;
+  }
+
+  var button = document.getElementById("addRecipeButton");
+  button.disabled = true;
+  setStatus("recipeStatus","Speichere Rezept …");
+
+  var result = await supabaseClient.from("Rezepte").insert({
+    name:name,
+    zutaten:document.getElementById("recipeIngredients").value.trim(),
+    zubereitung:document.getElementById("recipeInstructions").value.trim(),
+    quelle_url:url || null,
+    favorit:false
+  });
+
+  button.disabled = false;
+  if (result.error) {
+    setStatus("recipeStatus","Rezept konnte nicht gespeichert werden: " + result.error.message,"error");
+  } else {
+    this.reset();
+    setStatus("recipeStatus","Rezept wurde für die Familie gespeichert.","success");
+    await loadRecipes();
+  }
+});
+
+/* REZEPTE ANZEIGEN */
+function renderRecipes() {
+  var list = document.getElementById("recipeList");
+  if (!list) return;
+  list.innerHTML = "";
+
+  if (!recipes.length) {
+    list.textContent = "Noch keine Rezepte gespeichert. Fügt oben euer erstes Lieblingsrezept hinzu.";
+    return;
+  }
+
+  recipes.forEach(function(recipe) {
+    var item = document.createElement("div");
+    item.className = "recipe-item";
+
+    var info = document.createElement("div");
+    var title = document.createElement("strong");
+    title.textContent = (recipe.favorit ? "⭐ " : "") + recipe.name;
+    info.appendChild(title);
+
+    var detail = document.createElement("small");
+    detail.textContent = recipe.zutaten ? recipe.zutaten.substring(0,110) : "Noch keine Zutaten hinterlegt";
+    info.appendChild(detail);
+
+    if (recipe.quelle_url) {
+      var link = document.createElement("a");
+      link.href = recipe.quelle_url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "Rezept-Link öffnen";
+      link.style.display = "block";
+      link.style.fontSize = "12px";
+      link.style.marginTop = "5px";
+      info.appendChild(link);
+    }
+
+    var actions = document.createElement("div");
+    actions.className = "recipe-actions";
+
+    var favorite = document.createElement("button");
+    favorite.className = "action-btn";
+    favorite.type = "button";
+    favorite.textContent = recipe.favorit ? "⭐ Favorit" : "☆ Merken";
+    favorite.addEventListener("click",function() {
+      toggleFavorite(recipe);
+    });
+
+    var choose = document.createElement("button");
+    choose.className = "action-btn primary";
+    choose.type = "button";
+    choose.textContent = "Einplanen";
+    choose.addEventListener("click",function() {
+      document.getElementById("mealRecipe").value = String(recipe.id);
+      document.getElementById("mealSelectedInfo").textContent =
+        recipe.name + " ausgewählt. Bitte noch den Tag speichern.";
+      document.getElementById("mealDate").focus();
+      window.scrollTo(0,0);
+    });
+
+    actions.appendChild(favorite);
+    actions.appendChild(choose);
+    item.appendChild(info);
+    item.appendChild(actions);
+    list.appendChild(item);
+  });
+}
+
+async function toggleFavorite(recipe) {
+  var result = await supabaseClient.from("Rezepte")
+    .update({favorit:!recipe.favorit}).eq("id",recipe.id);
+
+  if (result.error) {
+    setStatus("recipeStatus","Favorit konnte nicht geändert werden: " + result.error.message,"error");
+  } else {
+    await loadRecipes();
+  }
+}
+
+/* LIVE-SYNCHRONISIERUNG */
+function setupRealtime() {
+  if (realtimeChannel) {
+    supabaseClient.removeChannel(realtimeChannel);
+  }
+
+  realtimeChannel = supabaseClient.channel("familienzentrale-live")
+    .on("postgres_changes",{
+      event:"*",schema:"public",table:"essensplan"
+    },function() {
+      loadMeals();
+    })
+    .on("postgres_changes",{
+      event:"*",schema:"public",table:"Rezepte"
+    },function() {
+      loadRecipes();
+    })
+    .subscribe();
+}
 
 /* START */
-
 updateClock();
-updateMealPlan();
-
-setInterval(updateClock, 1000);
-
-// Wetter alle 30 Minuten aktualisieren
+setInterval(updateClock,1000);
 loadWeather();
-setInterval(loadWeather, 30 * 60 * 1000);
+setInterval(loadWeather,30*60*1000);
 
-// Tageswechsel berücksichtigen
-setInterval(updateMealPlan, 60 * 1000);
-
+var initialDate = document.getElementById("mealDate");
+initialDate.value = localDateString(new Date());
 </script>
 
 </body>
