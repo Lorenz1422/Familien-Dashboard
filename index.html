@@ -164,14 +164,101 @@ label { display:block; font-size:13px; font-weight:700; margin-top:8px; }
 .status.success { color:#36734A; }
 .meal-editor { background:var(--yellow); }
 .recipe-panel { background:var(--purple); margin-top:16px; }
-.recipe-item {
-  background:#FFFFFF90; border-radius:14px; padding:13px;
-  margin:9px 0; display:flex; justify-content:space-between;
-  align-items:center; gap:12px;
+
+/* NEUE REZEPTKARTEN */
+.recipe-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:12px;
 }
-.recipe-item small { display:block; color:#75695D; margin-top:4px; }
-.recipe-actions { display:flex; gap:6px; flex-wrap:wrap; }
-.recipe-actions button { padding:8px 10px; }
+.recipe-item {
+  background:#FFFFFF90;
+  border-radius:16px;
+  padding:15px;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:12px;
+}
+.recipe-info { min-width:0; }
+.recipe-item strong {
+  display:block;
+  font-size:15px;
+  overflow-wrap:anywhere;
+}
+.recipe-item small {
+  display:block;
+  color:#75695D;
+  margin-top:5px;
+  font-size:12px;
+  line-height:1.4;
+}
+.recipe-actions {
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+.recipe-actions button {
+  padding:9px 11px;
+  font-size:12px;
+}
+.recipe-actions .view-recipe {
+  background:#D2E5E2;
+}
+.recipe-actions .external-recipe {
+  background:#DCE9F5;
+}
+
+/* REZEPT-DETAILANSICHT */
+.recipe-detail {
+  background:#F7F0E6;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 4px 14px rgba(80,65,45,.05);
+}
+.recipe-detail-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:15px;
+}
+.recipe-detail-header h2 {
+  margin:0;
+  overflow-wrap:anywhere;
+}
+.recipe-detail-section {
+  background:#FFFFFF90;
+  border-radius:14px;
+  padding:15px;
+  margin-top:12px;
+}
+.recipe-detail-section h3 {
+  font-size:15px;
+  margin:0 0 10px;
+}
+.recipe-detail-text {
+  font-size:14px;
+  line-height:1.65;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  margin:0;
+}
+.recipe-detail-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:15px;
+}
+.recipe-detail-actions button,
+.recipe-detail-actions a {
+  text-decoration:none;
+  display:inline-block;
+  text-align:center;
+}
 .meal-selection { font-size:13px; color:#75695D; margin-top:8px; }
 .hidden { display:none !important; }
 .account-line {
@@ -199,8 +286,13 @@ a { color:#655B50; overflow-wrap:anywhere; }
   .week-label { font-size:11px; }
   .week-nav-button { min-width:34px; height:34px; }
   nav button { min-width:28%; font-size:12px; padding:11px 4px; }
-  .recipe-item { align-items:flex-start; flex-direction:column; }
+
+  .recipe-grid { grid-template-columns:1fr; }
+  .recipe-item { padding:14px; }
+  .recipe-actions button { flex:1; }
+  .recipe-detail { padding:15px; }
 }
+
 </style>
 </head>
 
@@ -366,6 +458,32 @@ a { color:#655B50; overflow-wrap:anywhere; }
       <div id="recipeStatus" class="status" aria-live="polite"></div>
     </div>
 
+    <!-- NEUE REZEPT-DETAILANSICHT -->
+    <div id="recipeDetail" class="recipe-detail hidden" aria-live="polite">
+      <div class="recipe-detail-header">
+        <div>
+          <div class="card-label">Unser Familienrezept</div>
+          <h2 id="detailRecipeName">Rezept</h2>
+        </div>
+        <button class="action-btn" id="closeRecipeDetailButton" type="button">
+          ✕ Schließen
+        </button>
+      </div>
+
+      <div class="recipe-detail-section">
+        <h3>🧺 Zutaten</h3>
+        <p class="recipe-detail-text" id="detailRecipeIngredients"></p>
+      </div>
+
+      <div class="recipe-detail-section">
+        <h3>👩‍🍳 Zubereitung</h3>
+        <p class="recipe-detail-text" id="detailRecipeInstructions"></p>
+      </div>
+
+      <div class="recipe-detail-actions" id="detailRecipeActions"></div>
+    </div>
+
+    <!-- REZEPTLISTE -->
     <div class="card purple" style="margin-top:16px">
       <div class="card-label">Gespeichert für die ganze Familie</div>
       <h2>⭐ Unsere Rezepte</h2>
@@ -629,9 +747,7 @@ async function loadRecipes() {
   renderRecipes();
 }
 
-/* ESSENSPLAN LADEN
-   Alle Einträge werden geladen, damit auch zukünftige Wochen
-   in der Wochenübersicht angezeigt werden können. */
+/* ESSENSPLAN LADEN */
 async function loadMeals() {
   var result = await supabaseClient
     .from("essensplan")
@@ -866,6 +982,42 @@ document.getElementById("recipeForm").addEventListener("submit",async function(e
   }
 });
 
+/* REZEPT-DETAILANSICHT ÖFFNEN */
+function openRecipeDetail(recipe) {
+  var detail = document.getElementById("recipeDetail");
+
+  document.getElementById("detailRecipeName").textContent = recipe.name;
+  document.getElementById("detailRecipeIngredients").textContent =
+    recipe.zutaten || "Für dieses Rezept wurden noch keine Zutaten eingetragen.";
+  document.getElementById("detailRecipeInstructions").textContent =
+    recipe.zubereitung || "Für dieses Rezept wurde noch keine Zubereitung eingetragen.";
+
+  var actions = document.getElementById("detailRecipeActions");
+  actions.innerHTML = "";
+
+  if (recipe.quelle_url) {
+    var link = document.createElement("a");
+    link.className = "action-btn primary";
+    link.href = recipe.quelle_url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "↗ Externen Link öffnen";
+    actions.appendChild(link);
+  }
+
+  detail.classList.remove("hidden");
+
+  detail.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+}
+
+/* REZEPT-DETAILANSICHT SCHLIESSEN */
+document.getElementById("closeRecipeDetailButton").addEventListener("click",function() {
+  document.getElementById("recipeDetail").classList.add("hidden");
+});
+
 /* REZEPTE ANZEIGEN */
 function renderRecipes() {
   var list = document.getElementById("recipeList");
@@ -877,34 +1029,64 @@ function renderRecipes() {
     return;
   }
 
+  var grid = document.createElement("div");
+  grid.className = "recipe-grid";
+
   recipes.forEach(function(recipe) {
     var item = document.createElement("div");
     item.className = "recipe-item";
 
     var info = document.createElement("div");
+    info.className = "recipe-info";
+
     var title = document.createElement("strong");
     title.textContent = (recipe.favorit ? "⭐ " : "") + recipe.name;
     info.appendChild(title);
 
     var detail = document.createElement("small");
-    detail.textContent = recipe.zutaten ? recipe.zutaten.substring(0,110) : "Noch keine Zutaten hinterlegt";
+    detail.textContent = recipe.zutaten
+      ? recipe.zutaten.substring(0,110) + (recipe.zutaten.length > 110 ? " …" : "")
+      : "Noch keine Zutaten hinterlegt";
     info.appendChild(detail);
 
     if (recipe.quelle_url) {
-      var link = document.createElement("a");
-      link.href = recipe.quelle_url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = "Rezept-Link öffnen";
-      link.style.display = "block";
-      link.style.fontSize = "12px";
-      link.style.marginTop = "5px";
-      info.appendChild(link);
+      var sourceInfo = document.createElement("small");
+      sourceInfo.textContent = "🔗 Externer Rezeptlink vorhanden";
+      info.appendChild(sourceInfo);
+    } else {
+      var manualInfo = document.createElement("small");
+      manualInfo.textContent = "📝 Eigenes Familienrezept";
+      info.appendChild(manualInfo);
     }
 
     var actions = document.createElement("div");
     actions.className = "recipe-actions";
 
+    /* REZEPT ANSEHEN – FUNKTIONIERT IMMER */
+    var view = document.createElement("button");
+    view.className = "action-btn view-recipe";
+    view.type = "button";
+    view.textContent = "📖 Rezept ansehen";
+    view.addEventListener("click",function() {
+      openRecipeDetail(recipe);
+    });
+
+    /* EXTERNEN LINK DIREKT ÖFFNEN – NUR WENN VORHANDEN */
+    if (recipe.quelle_url) {
+      var external = document.createElement("a");
+      external.className = "action-btn external-recipe";
+      external.href = recipe.quelle_url;
+      external.target = "_blank";
+      external.rel = "noopener noreferrer";
+      external.textContent = "↗ Link öffnen";
+      external.style.textDecoration = "none";
+      actions.appendChild(view);
+      actions.appendChild(external);
+    } else {
+      actions.appendChild(view);
+    }
+
+    /* FAVORIT */
     var favorite = document.createElement("button");
     favorite.className = "action-btn";
     favorite.type = "button";
@@ -913,10 +1095,11 @@ function renderRecipes() {
       toggleFavorite(recipe);
     });
 
+    /* EINPLANEN */
     var choose = document.createElement("button");
-    choose.className = "action-btn primary";
+    choose.className = "action-btn";
     choose.type = "button";
-    choose.textContent = "Einplanen";
+    choose.textContent = "🥣 Einplanen";
     choose.addEventListener("click",function() {
       document.getElementById("mealRecipe").value = String(recipe.id);
       document.getElementById("mealSelectedInfo").textContent =
@@ -927,12 +1110,16 @@ function renderRecipes() {
 
     actions.appendChild(favorite);
     actions.appendChild(choose);
+
     item.appendChild(info);
     item.appendChild(actions);
-    list.appendChild(item);
+    grid.appendChild(item);
   });
+
+  list.appendChild(grid);
 }
 
+/* FAVORIT ÄNDERN */
 async function toggleFavorite(recipe) {
   var result = await supabaseClient.from("Rezepte")
     .update({favorit:!recipe.favorit}).eq("id",recipe.id);
