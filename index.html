@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -278,19 +279,6 @@ label { display:block; font-size:13px; font-weight:700; margin-top:8px; }
 }
 a { color:#655B50; overflow-wrap:anywhere; }
 
-/* TAGESÜBERSICHT AUF DER STARTSEITE */
-.today-calendar-card { background:var(--blue); grid-column:span 3; }
-.today-calendar-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap; }
-.today-calendar-date { color:#75695D; font-size:13px; margin-top:-5px; }
-.today-calendar-events { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; margin-top:12px; }
-.today-calendar-event { background:#FFFFFF90; border-radius:12px; padding:11px 13px; min-width:0; }
-.today-calendar-event.birthday { background:#F3DDE5; }
-.today-calendar-event strong { display:block; font-size:14px; overflow-wrap:anywhere; }
-.today-calendar-event small { display:block; color:#75695D; margin-top:5px; line-height:1.4; }
-.today-calendar-empty { background:#FFFFFF75; border-radius:12px; padding:15px; color:#75695D; font-size:13px; margin-top:12px; }
-.calendar-sync-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:12px 0 4px; }
-.calendar-sync-row .calendar-note { flex:1; min-width:180px; }
-
 /* FAMILIENKALENDER */
 .calendar-card {
   background:var(--blue);
@@ -346,7 +334,8 @@ a { color:#655B50; overflow-wrap:anywhere; }
   font-size:16px;
   flex:1;
 }
-.calendar-navigation button,.calendar-view-switch button {
+.calendar-navigation button,
+.calendar-view-switch button {
   border:0;
   background:#FFFFFFA8;
   color:var(--text);
@@ -428,15 +417,6 @@ a { color:#655B50; overflow-wrap:anywhere; }
   flex-direction:column;
   gap:9px;
 }
-.calendar-week-scroll { width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:6px; }
-.calendar-week-grid { display:grid; grid-template-columns:repeat(7,minmax(125px,1fr)); gap:8px; min-width:920px; }
-.calendar-week-column { background:#FFFFFF75; border-radius:13px; padding:10px; min-width:0; }
-.calendar-week-column.today { background:#FFFFFF; outline:2px solid #C49C64; }
-.calendar-week-column-head { font-size:13px; font-weight:700; padding-bottom:9px; border-bottom:1px solid #FFFFFFA8; margin-bottom:9px; }
-.calendar-week-column-head small { display:block; margin-top:4px; color:#75695D; font-size:11px; font-weight:400; }
-.calendar-week-column .calendar-event-item { padding:9px; margin-top:7px; }
-.calendar-week-column .calendar-event-title { font-size:12px; }
-.calendar-week-column .calendar-event-meta { font-size:11px; }
 .calendar-week-row {
   display:grid;
   grid-template-columns:100px minmax(0,1fr);
@@ -515,7 +495,6 @@ a { color:#655B50; overflow-wrap:anywhere; }
 @media(max-width:850px) {
   body { padding:15px; }
   .dashboard { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .today-calendar-card { grid-column:span 2; }
   .meal-card { grid-column:span 2; }
   h1 { font-size:23px; } .clock { font-size:32px; }
 }
@@ -546,9 +525,6 @@ a { color:#655B50; overflow-wrap:anywhere; }
   .calendar-day-event { font-size:9px; padding:3px; }
   .calendar-more { font-size:8px; }
   .calendar-week-row { grid-template-columns:76px minmax(0,1fr); gap:7px; padding:9px; }
-  .today-calendar-card { grid-column:span 1; }
-  .today-calendar-events { grid-template-columns:1fr; }
-  .calendar-week-grid { min-width:910px; }
   .calendar-tabs { gap:5px; }
   .calendar-tab { flex:1; padding:10px 7px; font-size:11px; }
   .calendar-navigation strong { font-size:13px; }
@@ -603,20 +579,6 @@ a { color:#655B50; overflow-wrap:anywhere; }
   <!-- STARTSEITE -->
   <section id="start" class="page active">
     <div class="dashboard">
-
-      <div class="card today-calendar-card">
-        <div class="today-calendar-heading">
-          <div>
-            <div class="card-label">Euer Tag auf einen Blick</div>
-            <h2>☀️ Heute in der Familie</h2>
-            <div class="today-calendar-date" id="todayCalendarDate">Heutige Termine</div>
-          </div>
-          <button class="action-btn" type="button" onclick="showPage('kalender',document.getElementById('navKalender'))">Kalender öffnen →</button>
-        </div>
-        <div id="todayCalendarEvents" aria-live="polite">
-          <div class="today-calendar-empty">Kalendertermine werden geladen …</div>
-        </div>
-      </div>
 
       <div class="card blue">
         <div class="card-label">Unser Alltag</div>
@@ -695,7 +657,10 @@ a { color:#655B50; overflow-wrap:anywhere; }
       <h2>🥣 Unser Abendessen</h2>
       <p>Wählt einen Tag und legt fest, was es abends geben soll. Änderungen werden mit den anderen Familiengeräten synchronisiert.</p>
 
-      <label for="mealDate">Welcher Tag?</label>      <label for="mealRecipe">Rezept auswählen</label>
+      <label for="mealDate">Welcher Tag?</label>
+      <input id="mealDate" type="date">
+
+      <label for="mealRecipe">Rezept auswählen</label>
       <select id="mealRecipe">
         <option value="">Kein Rezept ausgewählt</option>
       </select>
@@ -786,11 +751,6 @@ a { color:#655B50; overflow-wrap:anywhere; }
           <p class="calendar-note">Die Termine kommen aus eurem Apple-Kalender „Familie“.</p>
         </div>
         <div style="font-size:30px">❤️</div>
-      </div>
-
-      <div class="calendar-sync-row">
-        <button class="action-btn primary" id="calendarSyncButton" type="button">🔄 Apple-Kalender jetzt synchronisieren</button>
-        <span class="calendar-note" id="calendarSyncStatus" aria-live="polite">Manuelle Synchronisierung bei Bedarf.</span>
       </div>
 
       <div class="calendar-tabs">
@@ -1015,7 +975,9 @@ function loadWeather() {
   }).catch(function() {
     weatherElement.textContent = "🌤️ Wetter gerade nicht verfügbar";
   });
-}/* ANMELDUNG UND FAMILIENZUGRIFF */
+}
+
+/* ANMELDUNG UND FAMILIENZUGRIFF */
 function showLoggedOut() {
   document.getElementById("loginView").classList.remove("hidden");
   document.getElementById("appView").classList.add("hidden");
@@ -1343,7 +1305,8 @@ document.getElementById("recipeForm").addEventListener("submit",async function(e
       .update(payload).eq("id",editingRecipeId);
   } else {
     payload.favorit = false;
-    result = await supabaseClient.from("Rezepte").insert(payload);  }
+    result = await supabaseClient.from("Rezepte").insert(payload);
+  }
 
   button.disabled = false;
   if (result.error) {
@@ -1664,7 +1627,8 @@ function calendarEventIsBirthday(event) {
 function calendarParseRule(rule) {
   var result = {};
   if (!rule || typeof rule !== "string") return result;
-  rule.replace(/^RRULE:/i,"").split(";").forEach(function(piece) {    var pair = piece.split("=");
+  rule.replace(/^RRULE:/i,"").split(";").forEach(function(piece) {
+    var pair = piece.split("=");
     if (pair.length === 2) result[pair[0].toUpperCase()] = pair[1].toUpperCase();
   });
   return result;
@@ -1796,7 +1760,6 @@ async function loadCalendar() {
     calendarLoadError = result.error.message || "Unbekannter Fehler";
     calendarSetStatus("Kalender konnte nicht geladen werden: " + calendarLoadError,true);
     renderCalendar();
-    renderTodayCalendar();
     return;
   }
 
@@ -1808,112 +1771,7 @@ async function loadCalendar() {
   calendarLoadError = "";
   calendarSetStatus(calendarEvents.length + " Kalendereinträge geladen.",false);
   renderCalendar();
-  renderTodayCalendar();
 }
-
-/* TAGESÜBERSICHT AUF DER STARTSEITE */
-function renderTodayCalendar() {
-  var container = document.getElementById("todayCalendarEvents");
-  var dateLabel = document.getElementById("todayCalendarDate");
-  if (!container || !dateLabel) return;
-
-  var today = new Date();
-  var todayKey = localDateString(today);
-  dateLabel.textContent = today.toLocaleDateString("de-DE",{
-    weekday:"long",day:"numeric",month:"long",year:"numeric"
-  });
-  container.innerHTML = "";
-
-  if (!calendarLoaded) {
-    var loading = document.createElement("div");
-    loading.className = "today-calendar-empty";
-    loading.textContent = calendarLoadError ? "Kalender konnte nicht geladen werden: " + calendarLoadError : "Kalendertermine werden geladen …";
-    container.appendChild(loading);
-    return;
-  }
-
-  var todaysEvents = calendarEvents.filter(function(event) {
-    if (calendarEventOccursOn(event,todayKey)) return true;
-    if (calendarEventIsBirthday(event)) {
-      var startKey = calendarEventStartKey(event);
-      var parts = safeDateParts(startKey);
-      var rule = calendarParseRule(event.apple_rrule);
-      if (parts && rule.FREQ === "YEARLY") {
-        return calendarBirthdayOccurrence(event,today.getFullYear()) === todayKey;
-      }
-    }
-    return false;
-  }).sort(function(a,b) {
-    return calendarEventSortValue(a)-calendarEventSortValue(b);
-  });
-
-  if (!todaysEvents.length) {
-    var empty = document.createElement("div");
-    empty.className = "today-calendar-empty";
-    empty.textContent = "Heute stehen keine Termine im Familienkalender. Genießt den Tag! 🌷";
-    container.appendChild(empty);
-    return;
-  }
-
-  var grid = document.createElement("div");
-  grid.className = "today-calendar-events";
-  todaysEvents.forEach(function(event) {
-    var item = document.createElement("div");
-    item.className = "today-calendar-event" + (calendarEventIsBirthday(event) ? " birthday" : "");
-    var title = document.createElement("strong");
-    title.textContent = (calendarEventIsBirthday(event) ? "🎂 " : "") + (event.titel || "Termin");
-    item.appendChild(title);
-    var details = [];
-    var time = calendarEventTimeLabel(event);
-    if (time) details.push(time);
-    if (event.ort) details.push("📍 " + event.ort);
-    if (event.beschreibung) details.push(event.beschreibung);
-    if (details.length) {
-      var small = document.createElement("small");
-      small.textContent = details.join(" · ");
-      item.appendChild(small);
-    }
-    grid.appendChild(item);
-  });
-  container.appendChild(grid);
-}
-
-/* MANUELLE APPLE-KALENDER-SYNCHRONISIERUNG */
-document.getElementById("calendarSyncButton").addEventListener("click",async function() {
-  var button = this;
-  var status = document.getElementById("calendarSyncStatus");
-  if (!currentUser) {
-    status.textContent = "Bitte zuerst anmelden.";
-    return;
-  }
-
-  button.disabled = true;
-  button.textContent = "⏳ Synchronisierung läuft …";
-  status.textContent = "Apple-Kalender wird mit der Familienzentrale abgeglichen …";
-
-  try {
-    var result = await supabaseClient.functions.invoke("icloud-calendar-sync",{
-      body:{ source:"manual-dashboard" }
-    });
-    if (result.error) throw result.error;
-    if (result.data && result.data.success === false) {
-      throw new Error(result.data.message || result.data.detail || "Die Synchronisierung wurde nicht erfolgreich abgeschlossen.");
-    }
-
-    await loadCalendar();
-    var imported = result.data && typeof result.data.importedCount === "number"
-      ? " " + result.data.importedCount + " Termine importiert."
-      : "";
-    status.textContent = "Synchronisierung erfolgreich." + imported;
-    calendarSetStatus("Kalender erfolgreich synchronisiert.",false);
-  } catch (error) {
-    status.textContent = "Synchronisierung fehlgeschlagen: " + (error.message || "Unbekannter Fehler");
-    calendarSetStatus("Synchronisierung fehlgeschlagen. Bitte Details oben prüfen.",true);
-  } finally {
-    button.disabled = false;
-    button.textContent = "🔄 Apple-Kalender jetzt synchronisieren";
-  }
-});
 
 /* KALENDER-TABS */
 function setCalendarTab(tab) {
@@ -1989,7 +1847,9 @@ function renderCalendar() {
     }
   } else {
     calendarSetStatus(calendarEvents.length + " Kalendereinträge geladen.",false);
-  }  if (calendarTab === "all") {
+  }
+
+  if (calendarTab === "all") {
     if (calendarView === "month") renderCalendarMonth();
     else renderCalendarWeek();
   } else if (calendarTab === "birthdays") {
@@ -2076,47 +1936,36 @@ function renderCalendarWeek() {
   var month = calendarMonth.getMonth();
   var selectedDay = new Date(year,month,1);
   var weekStart = mondayOfWeek(selectedDay);
-  var todayKey = localDateString(new Date());
 
   var heading = document.createElement("p");
   heading.className = "calendar-note";
-  heading.textContent = "Wochenübersicht Montag bis Sonntag · Woche ab " + berlinDateText(localDateString(weekStart),{
+  heading.textContent = "Woche ab " + berlinDateText(localDateString(weekStart),{
     day:"numeric",month:"long",year:"numeric"
   });
   container.appendChild(heading);
 
-  var scroll = document.createElement("div");
-  scroll.className = "calendar-week-scroll";
-  scroll.setAttribute("aria-label","Wochenkalender von Montag bis Sonntag; auf kleinen Bildschirmen horizontal scrollen");
-  var grid = document.createElement("div");
-  grid.className = "calendar-week-grid";
+  var list = document.createElement("div");
+  list.className = "calendar-week-list";
 
   for (var i=0;i<7;i++) {
     var date = new Date(weekStart);
     date.setDate(weekStart.getDate()+i);
     var key = localDateString(date);
 
-    var column = document.createElement("div");
-    column.className = "calendar-week-column" + (key === todayKey ? " today" : "");
+    var row = document.createElement("div");
+    row.className = "calendar-week-row";
 
-    var dateHead = document.createElement("div");
-    dateHead.className = "calendar-week-column-head";
-    dateHead.appendChild(document.createTextNode(date.toLocaleDateString("de-DE",{weekday:"long"})));
+    var dateBox = document.createElement("div");
+    dateBox.className = "calendar-week-date";
+    dateBox.textContent = date.toLocaleDateString("de-DE",{weekday:"long"});
     var dateSmall = document.createElement("small");
     dateSmall.textContent = date.toLocaleDateString("de-DE",{day:"numeric",month:"long"});
-    dateHead.appendChild(dateSmall);
-    column.appendChild(dateHead);
+    dateBox.appendChild(dateSmall);
+    row.appendChild(dateBox);
 
+    var eventsBox = document.createElement("div");
     var dayEvents = calendarEvents.filter(function(event) {
-      if (calendarEventOccursOn(event,key)) return true;
-      if (calendarEventIsBirthday(event)) {
-        var base = safeDateParts(calendarEventStartKey(event));
-        var rule = calendarParseRule(event.apple_rrule);
-        if (base && rule.FREQ === "YEARLY") {
-          return calendarBirthdayOccurrence(event,date.getFullYear()) === key;
-        }
-      }
-      return false;
+      return calendarEventOccursOn(event,key);
     }).sort(function(a,b) {
       return calendarEventSortValue(a)-calendarEventSortValue(b);
     });
@@ -2125,17 +1974,18 @@ function renderCalendarWeek() {
       var empty = document.createElement("div");
       empty.className = "calendar-event-meta";
       empty.textContent = "Keine Termine";
-      column.appendChild(empty);
+      eventsBox.appendChild(empty);
     } else {
       dayEvents.forEach(function(event) {
-        column.appendChild(calendarCreateEventElement(event));
+        eventsBox.appendChild(calendarCreateEventElement(event));
       });
     }
-    grid.appendChild(column);
+
+    row.appendChild(eventsBox);
+    list.appendChild(row);
   }
 
-  scroll.appendChild(grid);
-  container.appendChild(scroll);
+  container.appendChild(list);
 }
 
 /* GEBURTSTAGE – AUSGEWÄHLTER MONAT */
@@ -2320,9 +2170,8 @@ setInterval(loadWeather,30*60*1000);
 var initialDate = document.getElementById("mealDate");
 initialDate.value = localDateString(new Date());
 
-/* Kalenderansicht und Tagesübersicht beim ersten Laden vorbereiten */
+/* Kalenderansicht beim ersten Laden vorbereiten */
 renderCalendar();
-renderTodayCalendar();
 </script>
 
 </body>
