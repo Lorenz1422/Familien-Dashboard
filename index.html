@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -5,633 +6,2173 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#EDE3D3">
 <title>Unsere Familienzentrale</title>
-<style>
-*{box-sizing:border-box}
-:root{--sand:#EDE3D3;--text:#51483F;--muted:#887B6C;--blue:#DCE9F5;--green:#DDE9D8;--pink:#F3DDE5;--yellow:#F7E5C9;--purple:#E8DFF1;--petrol:#D2E5E2}
-body{margin:0;padding:22px 22px 115px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;background:var(--sand);color:var(--text);min-height:100vh}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;gap:20px;position:sticky;top:0;z-index:20;background:var(--sand);padding:10px 0}
-.header-right{display:flex;align-items:center;gap:14px}
-.home-button{flex-shrink:0;width:44px;height:44px;border:0;border-radius:15px;background:#F7F0E6;color:var(--text);font-size:21px;cursor:pointer}
-.brand{display:flex;align-items:center;gap:14px}
-.brand-icon{width:54px;height:54px;border-radius:18px;background:#F7F0E6;display:flex;align-items:center;justify-content:center;font-size:28px}
-h1{margin:0;font-size:27px;font-weight:700;letter-spacing:-.6px}
-.subtitle{margin-top:5px;color:var(--muted);font-size:14px}
-.clock-area{text-align:right;flex-shrink:0}
-.clock{font-size:39px;font-weight:700;letter-spacing:-1px;font-variant-numeric:tabular-nums}
-.weather{margin-top:3px;font-size:15px;color:#655B50}
-.dashboard{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.card{border-radius:23px;padding:20px;min-width:0;min-height:185px;box-shadow:0 5px 16px rgba(80,65,45,.045);position:relative;overflow:hidden}
-.blue{background:var(--blue)}.green{background:var(--green)}.pink{background:var(--pink)}.yellow{background:var(--yellow)}.purple{background:var(--purple)}
-.child-one{background:#F4D5E1}.child-two{background:#D5E8F8}.car-card{background:var(--petrol)}
-h2{margin:0 0 13px;font-size:19px;font-weight:700;letter-spacing:-.3px}
-p{line-height:1.45;margin:8px 0;font-size:14px}
-.card-label{color:#75695D;font-size:12px;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:10px}
-.card-footer{color:#75695D;font-size:12px;margin-top:12px}
-.calendar-event{background:#FFFFFF65;border-radius:11px;padding:9px 11px;margin-top:8px;font-size:14px}
-.task-line{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid #FFFFFF80;font-size:14px}
-.task-count{background:#FFFFFF90;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700}
-.children-preview{display:flex;gap:10px;margin-top:15px}
-.child-mini{flex:1;padding:12px 8px;background:#FFFFFF75;border-radius:15px;text-align:center;min-width:0}
-.child-mini .emoji{font-size:25px;display:block;margin-bottom:6px}
-.child-mini strong{font-size:13px}.child-mini small{display:block;margin-top:5px;font-size:11px;color:#75695D}
-.meal-card{grid-column:span 2;background:var(--yellow)}
-.meal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px;flex-wrap:wrap}
-.meal-badge{background:#FFFFFF90;border-radius:20px;padding:6px 11px;font-size:11px;font-weight:700;color:#80643D}
-.meal-week-navigation{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:5px 0 12px}
-.week-nav-button{border:0;background:#FFFFFF90;color:var(--text);border-radius:11px;min-width:38px;height:36px;font:inherit;font-size:19px;font-weight:700;cursor:pointer}
-.week-label{font-size:13px;font-weight:700;text-align:center;color:#75695D}
-.meal-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}
-.meal-day{background:#FFFFFF75;border-radius:13px;padding:10px 5px;text-align:center;min-width:0;cursor:pointer}
-.meal-day.today{background:#FFFFFF;outline:2px solid #C49C64}
-.meal-day strong{display:block;font-size:12px;margin-bottom:8px}
-.meal-day .meal-icon{display:block;font-size:21px;margin-bottom:6px}
-.meal-day small{display:block;font-size:10px;line-height:1.3;color:#75695D;overflow-wrap:break-word}
-.car-info{display:flex;align-items:center;gap:13px;margin-top:18px}
-.car-icon{font-size:37px}.car-description{font-size:14px;line-height:1.5}
-nav{display:flex;justify-content:space-around;gap:7px;position:fixed;left:12px;right:12px;bottom:10px;z-index:30;margin:0 auto;max-width:1100px;padding:8px;background:#E4D8C7F2;border:1px solid #D6C8B6;border-radius:20px;box-shadow:0 5px 20px #51483F25;flex-wrap:nowrap;backdrop-filter:blur(8px)}
-nav button{flex:1;min-width:0;border:0;background:transparent;color:var(--text);font-family:inherit;font-size:13px;font-weight:600;padding:12px 5px;border-radius:14px;cursor:pointer}
-nav button.active{background:#F8F2E9;box-shadow:0 2px 8px #76644F15}
-.page{display:none}.page.active{display:block}
-.page-placeholder{min-height:300px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-.page-placeholder .large-icon{font-size:48px;margin-bottom:15px}
-.page-placeholder p{color:#75695D}
-.login-wrap{max-width:440px;margin:35px auto}
-.login-card{background:#F7F0E6;border-radius:24px;padding:25px;box-shadow:0 5px 16px rgba(80,65,45,.06)}
-input,textarea,select{width:100%;padding:12px 13px;border:1px solid #D8CBB9;border-radius:12px;background:#FFFCF7;color:var(--text);font:inherit;margin:6px 0 13px;min-width:0}
-textarea{min-height:85px;resize:vertical}
-label{display:block;font-size:13px;font-weight:700;margin-top:8px}
-.action-btn{border:0;border-radius:13px;padding:12px 17px;cursor:pointer;font:inherit;font-weight:700;color:#51483F;background:#E4D8C7}
-.action-btn.primary{background:#D2E5E2}.action-btn.danger{background:#F3DDE5}
-.action-btn:disabled{opacity:.5;cursor:wait}
-.form-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.form-row>*{flex:1}
-.status{font-size:13px;margin:10px 0;min-height:18px;color:#75695D}
-.status.error{color:#A33F46}.status.success{color:#36734A}
-.meal-editor{background:var(--yellow)}.recipe-panel{background:var(--purple);margin-top:16px}
-.recipe-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
-.recipe-item{background:#FFFFFF90;border-radius:16px;padding:15px;min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:12px}
-.recipe-info{min-width:0}.recipe-item strong{display:block;font-size:15px;overflow-wrap:anywhere}
-.recipe-item small{display:block;color:#75695D;margin-top:5px;font-size:12px;line-height:1.4}
-.recipe-actions{display:flex;gap:7px;flex-wrap:wrap}.recipe-actions button{padding:9px 11px;font-size:12px}
-.recipe-actions .view-recipe{background:#D2E5E2}.recipe-actions .external-recipe{background:#DCE9F5}.recipe-actions .edit-recipe{background:#F7E5C9}
-.recipe-search{margin:10px 0 12px}
-.recipe-filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
-.recipe-filter{border:0;border-radius:20px;padding:9px 14px;cursor:pointer;background:#FFFFFF90;color:var(--text);font:inherit;font-size:12px;font-weight:700}
-.recipe-filter.active{background:#F8F2E9;outline:2px solid #C49C64}
-.recipe-count{color:#75695D;font-size:12px;margin:0 0 10px}
-.recipe-form-actions{display:flex;gap:8px;flex-wrap:wrap}
-.recipe-detail{background:#F7F0E6;border-radius:20px;padding:20px;margin-bottom:16px;box-shadow:0 4px 14px rgba(80,65,45,.05)}
-.recipe-detail-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:15px}
-.recipe-detail-header h2{margin:0;overflow-wrap:anywhere}
-.recipe-detail-section{background:#FFFFFF90;border-radius:14px;padding:15px;margin-top:12px}
-.recipe-detail-section h3{font-size:15px;margin:0 0 10px}
-.recipe-detail-text{font-size:14px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}
-.recipe-detail-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
-.recipe-detail-actions button,.recipe-detail-actions a{text-decoration:none;display:inline-block;text-align:center}
-.meal-selection{font-size:13px;color:#75695D;margin-top:8px}
-.hidden{display:none!important}
-.account-line{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 15px;font-size:13px;color:#75695D}
-a{color:#655B50;overflow-wrap:anywhere}
 
-/* Familienkalender */
-.calendar-panel{background:#F7F0E6;margin-bottom:16px}
-.calendar-tabs,.calendar-switches{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.calendar-tab,.calendar-switch{border:0;border-radius:18px;padding:10px 14px;background:#FFFFFF90;color:var(--text);font:inherit;font-size:13px;font-weight:700;cursor:pointer}
-.calendar-tab.active,.calendar-switch.active{background:#D2E5E2;outline:2px solid #B5CFCB}
-.calendar-toolbar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:14px 0}
-.calendar-toolbar strong{font-size:15px;text-align:center;flex:1}
-.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
-.calendar-weekday{text-align:center;font-size:11px;font-weight:700;color:#75695D;padding:7px 0}
-.calendar-cell{min-height:75px;background:#FFFFFF90;border-radius:10px;padding:6px 4px;min-width:0;overflow:hidden}
-.calendar-cell.other-month{opacity:.4}
-.calendar-cell.today{outline:2px solid #C49C64;background:#fff}
-.calendar-cell .day-number{font-size:12px;font-weight:700}
-.calendar-dot{display:block;font-size:9px;line-height:1.25;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:#DCE9F5;border-radius:5px;padding:2px}
-.calendar-dot.birthday{background:#F3DDE5}
-.calendar-list{display:flex;flex-direction:column;gap:9px;margin-top:14px}
-.calendar-entry{background:#FFFFFFA8;border-radius:13px;padding:12px 14px;border-left:4px solid #A9C6DF}
-.calendar-entry.birthday{border-left-color:#D89BB2}
-.calendar-entry strong{display:block;font-size:14px}
-.calendar-entry small{display:block;color:#75695D;font-size:12px;margin-top:5px;line-height:1.4}
-.calendar-empty{background:#FFFFFF80;border-radius:13px;padding:18px;text-align:center;color:#75695D;font-size:14px}
-.calendar-note{font-size:12px;color:#75695D;margin-top:12px}
-@media(max-width:850px){body{padding:15px}.dashboard{grid-template-columns:repeat(2,minmax(0,1fr))}.meal-card{grid-column:span 2}h1{font-size:23px}.clock{font-size:32px}}
-@media(max-width:600px){
-body{padding:12px 12px 105px}header{align-items:flex-start}.header-right{gap:7px}
-.home-button{width:38px;height:38px;border-radius:13px;font-size:18px}
-.brand-icon{width:42px;height:42px;font-size:22px}
-h1{font-size:19px}.subtitle{font-size:12px}.clock{font-size:25px}.weather{font-size:11px}
-.dashboard{grid-template-columns:1fr}.meal-card{grid-column:span 1}
-.meal-week{gap:4px}.meal-day{padding:8px 2px}.meal-day small{font-size:9px}
-.week-label{font-size:11px}.week-nav-button{min-width:34px;height:34px}
-nav{left:6px;right:6px;bottom:6px;gap:2px;padding:5px}
-nav button{min-width:0;font-size:10px;padding:10px 2px}
-.recipe-grid{grid-template-columns:1fr}.recipe-item{padding:14px}
-.recipe-actions button{flex:1}.recipe-detail{padding:15px}
-.calendar-cell{min-height:57px;padding:4px 2px}.calendar-cell .day-number{font-size:11px}
-.calendar-dot{font-size:8px}.calendar-toolbar strong{font-size:13px}
-.calendar-tab,.calendar-switch{font-size:11px;padding:9px 10px}
+<style>
+* { box-sizing: border-box; }
+
+:root {
+  --sand:#EDE3D3; --text:#51483F; --muted:#887B6C;
+  --blue:#DCE9F5; --green:#DDE9D8; --pink:#F3DDE5;
+  --yellow:#F7E5C9; --purple:#E8DFF1; --petrol:#D2E5E2;
+}
+
+body {
+  margin:0; padding:22px 22px 115px; font-family:-apple-system,BlinkMacSystemFont,
+  "Helvetica Neue",Arial,sans-serif; background:var(--sand);
+  color:var(--text); min-height:100vh;
+}
+
+header {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:22px; gap:20px;
+  position:sticky; top:0; z-index:20;
+  background:var(--sand); padding:10px 0;
+}
+.header-right { display:flex; align-items:center; gap:14px; }
+.home-button {
+  flex-shrink:0; width:44px; height:44px; border:0; border-radius:15px;
+  background:#F7F0E6; color:var(--text); font-size:21px; cursor:pointer;
+  box-shadow:0 3px 10px #76644F12;
+}
+.brand { display:flex; align-items:center; gap:14px; }
+.brand-icon {
+  width:54px; height:54px; border-radius:18px; background:#F7F0E6;
+  display:flex; align-items:center; justify-content:center; font-size:28px;
+  box-shadow:0 4px 12px #76644F12;
+}
+h1 { margin:0; font-size:27px; font-weight:700; letter-spacing:-.6px; }
+.subtitle { margin-top:5px; color:var(--muted); font-size:14px; }
+.clock-area { text-align:right; flex-shrink:0; }
+.clock { font-size:39px; font-weight:700; letter-spacing:-1px; font-variant-numeric:tabular-nums; }
+.weather { margin-top:3px; font-size:15px; color:#655B50; }
+
+.dashboard {
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px;
+}
+.card {
+  border-radius:23px; padding:20px; min-width:0; min-height:185px;
+  box-shadow:0 5px 16px rgba(80,65,45,.045); position:relative; overflow:hidden;
+}
+.blue{background:var(--blue)} .green{background:var(--green)}
+.pink{background:var(--pink)} .yellow{background:var(--yellow)}
+.purple{background:var(--purple)}
+.child-one{background:#F4D5E1} .child-two{background:#D5E8F8}
+.car-card{background:var(--petrol)}
+h2 { margin:0 0 13px; font-size:19px; font-weight:700; letter-spacing:-.3px; }
+p { line-height:1.45; margin:8px 0; font-size:14px; }
+.card-label {
+  color:#75695D; font-size:12px; text-transform:uppercase;
+  letter-spacing:1px; font-weight:700; margin-bottom:10px;
+}
+.card-footer { color:#75695D; font-size:12px; margin-top:12px; }
+.calendar-event {
+  background:#FFFFFF65; border-radius:11px; padding:9px 11px;
+  margin-top:8px; font-size:14px;
+}
+.task-line {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:9px 0; border-bottom:1px solid #FFFFFF80; font-size:14px;
+}
+.task-count { background:#FFFFFF90; padding:4px 10px; border-radius:20px; font-size:12px; font-weight:700; }
+
+.children-preview { display:flex; gap:10px; margin-top:15px; }
+.child-mini {
+  flex:1; padding:12px 8px; background:#FFFFFF75; border-radius:15px;
+  text-align:center; min-width:0;
+}
+.child-mini .emoji { font-size:25px; display:block; margin-bottom:6px; }
+.child-mini strong { font-size:13px; }
+.child-mini small { display:block; margin-top:5px; font-size:11px; color:#75695D; }
+
+.meal-card { grid-column:span 2; background:var(--yellow); }
+.meal-header {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:12px; gap:10px; flex-wrap:wrap;
+}
+.meal-badge {
+  background:#FFFFFF90; border-radius:20px; padding:6px 11px;
+  font-size:11px; font-weight:700; color:#80643D;
+}
+.meal-week-navigation {
+  display:flex; align-items:center; justify-content:space-between;
+  gap:8px; margin:5px 0 12px;
+}
+.week-nav-button {
+  border:0; background:#FFFFFF90; color:var(--text);
+  border-radius:11px; min-width:38px; height:36px;
+  font:inherit; font-size:19px; font-weight:700; cursor:pointer;
+}
+.week-nav-button:active { transform:scale(.95); }
+.week-nav-button:disabled { opacity:.4; }
+.week-label {
+  font-size:13px; font-weight:700; text-align:center; color:#75695D;
+}
+.meal-week { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:7px; }
+.meal-day {
+  background:#FFFFFF75; border-radius:13px; padding:10px 5px;
+  text-align:center; min-width:0; cursor:pointer;
+}
+.meal-day.today { background:#FFFFFF; outline:2px solid #C49C64; }
+.meal-day strong { display:block; font-size:12px; margin-bottom:8px; }
+.meal-day .meal-icon { display:block; font-size:21px; margin-bottom:6px; }
+.meal-day small {
+  display:block; font-size:10px; line-height:1.3; color:#75695D;
+  overflow-wrap:break-word;
+}
+.today-label { font-size:10px; color:#8A6940; font-weight:700; margin-top:5px; }
+.car-info { display:flex; align-items:center; gap:13px; margin-top:18px; }
+.car-icon { font-size:37px; }
+.car-description { font-size:14px; line-height:1.5; }
+
+nav {
+  display:flex; justify-content:space-around; gap:7px;
+  position:fixed; left:12px; right:12px; bottom:10px; z-index:30;
+  margin:0 auto; max-width:1100px;
+  padding:8px; background:#E4D8C7F2; border:1px solid #D6C8B6;
+  border-radius:20px; box-shadow:0 5px 20px #51483F25; flex-wrap:nowrap;
+  backdrop-filter:blur(8px);
+}
+nav button {
+  flex:1; min-width:0; border:0; background:transparent; color:var(--text);
+  font-family:inherit; font-size:13px; font-weight:600;
+  padding:12px 5px; border-radius:14px; cursor:pointer;
+}
+nav button.active { background:#F8F2E9; box-shadow:0 2px 8px #76644F15; }
+nav button:active { transform:scale(.97); }
+
+.page { display:none; }
+.page.active { display:block; }
+.page-placeholder {
+  min-height:300px; display:flex; flex-direction:column;
+  justify-content:center; align-items:center; text-align:center;
+}
+.page-placeholder .large-icon { font-size:48px; margin-bottom:15px; }
+.page-placeholder p { color:#75695D; }
+
+.login-wrap { max-width:440px; margin:35px auto; }
+.login-card {
+  background:#F7F0E6; border-radius:24px; padding:25px;
+  box-shadow:0 5px 16px rgba(80,65,45,.06);
+}
+input, textarea, select {
+  width:100%; padding:12px 13px; border:1px solid #D8CBB9;
+  border-radius:12px; background:#FFFCF7; color:var(--text);
+  font:inherit; margin:6px 0 13px; min-width:0;
+}
+textarea { min-height:85px; resize:vertical; }
+label { display:block; font-size:13px; font-weight:700; margin-top:8px; }
+.action-btn {
+  border:0; border-radius:13px; padding:12px 17px; cursor:pointer;
+  font:inherit; font-weight:700; color:#51483F; background:#E4D8C7;
+}
+.action-btn.primary { background:#D2E5E2; }
+.action-btn.danger { background:#F3DDE5; }
+.action-btn:disabled { opacity:.5; cursor:wait; }
+.form-row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.form-row > * { flex:1; }
+.status { font-size:13px; margin:10px 0; min-height:18px; color:#75695D; }
+.status.error { color:#A33F46; }
+.status.success { color:#36734A; }
+.meal-editor { background:var(--yellow); }
+.recipe-panel { background:var(--purple); margin-top:16px; }
+
+/* REZEPTKARTEN */
+.recipe-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:12px;
+}
+.recipe-item {
+  background:#FFFFFF90;
+  border-radius:16px;
+  padding:15px;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:12px;
+}
+.recipe-info { min-width:0; }
+.recipe-item strong {
+  display:block;
+  font-size:15px;
+  overflow-wrap:anywhere;
+}
+.recipe-item small {
+  display:block;
+  color:#75695D;
+  margin-top:5px;
+  font-size:12px;
+  line-height:1.4;
+}
+.recipe-actions {
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+.recipe-actions button {
+  padding:9px 11px;
+  font-size:12px;
+}
+.recipe-actions .view-recipe { background:#D2E5E2; }
+.recipe-actions .external-recipe { background:#DCE9F5; }
+.recipe-actions .edit-recipe { background:#F7E5C9; }
+.recipe-search { margin:10px 0 12px; }
+.recipe-filters { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 12px; }
+.recipe-filter {
+  border:0; border-radius:20px; padding:9px 14px; cursor:pointer;
+  background:#FFFFFF90; color:var(--text); font:inherit; font-size:12px; font-weight:700;
+}
+.recipe-filter.active { background:#F8F2E9; outline:2px solid #C49C64; }
+.recipe-count { color:#75695D; font-size:12px; margin:0 0 10px; }
+.recipe-form-actions { display:flex; gap:8px; flex-wrap:wrap; }
+.recipe-form-actions button { flex:0 0 auto; }
+
+/* REZEPT-DETAILANSICHT */
+.recipe-detail {
+  background:#F7F0E6;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 4px 14px rgba(80,65,45,.05);
+}
+.recipe-detail-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:15px;
+}
+.recipe-detail-header h2 { margin:0; overflow-wrap:anywhere; }
+.recipe-detail-section {
+  background:#FFFFFF90;
+  border-radius:14px;
+  padding:15px;
+  margin-top:12px;
+}
+.recipe-detail-section h3 { font-size:15px; margin:0 0 10px; }
+.recipe-detail-text {
+  font-size:14px;
+  line-height:1.65;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  margin:0;
+}
+.recipe-detail-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:15px;
+}
+.recipe-detail-actions button,
+.recipe-detail-actions a {
+  text-decoration:none;
+  display:inline-block;
+  text-align:center;
+}
+.meal-selection { font-size:13px; color:#75695D; margin-top:8px; }
+.hidden { display:none !important; }
+.account-line {
+  display:flex; justify-content:space-between; align-items:center;
+  gap:10px; margin:0 0 15px; font-size:13px; color:#75695D;
+}
+a { color:#655B50; overflow-wrap:anywhere; }
+
+/* FAMILIENKALENDER */
+.calendar-card {
+  background:var(--blue);
+  border-radius:23px;
+  padding:20px;
+  box-shadow:0 5px 16px rgba(80,65,45,.045);
+  min-width:0;
+}
+.calendar-topline {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+}
+.calendar-topline h2 { margin-bottom:5px; }
+.calendar-note {
+  font-size:12px;
+  color:#75695D;
+  margin:0;
+}
+.calendar-tabs {
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin:15px 0;
+}
+.calendar-tab {
+  border:0;
+  border-radius:18px;
+  padding:10px 14px;
+  background:#FFFFFF90;
+  color:var(--text);
+  font:inherit;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+}
+.calendar-tab.active {
+  background:#FFFFFF;
+  outline:2px solid #9CB5CC;
+}
+.calendar-navigation {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin:15px 0;
+}
+.calendar-navigation strong {
+  text-align:center;
+  font-size:16px;
+  flex:1;
+}
+.calendar-navigation button,
+.calendar-view-switch button {
+  border:0;
+  background:#FFFFFFA8;
+  color:var(--text);
+  border-radius:11px;
+  min-height:37px;
+  padding:8px 13px;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+}
+.calendar-navigation .today-button {
+  font-size:12px;
+  padding:8px 11px;
+}
+.calendar-view-switch {
+  display:flex;
+  gap:7px;
+  margin:12px 0;
+}
+.calendar-view-switch button {
+  font-size:12px;
+  flex:1;
+}
+.calendar-view-switch button.active {
+  background:#FFFFFF;
+  outline:2px solid #9CB5CC;
+}
+.calendar-month-grid {
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:5px;
+}
+.calendar-weekday {
+  text-align:center;
+  font-size:11px;
+  font-weight:700;
+  color:#75695D;
+  padding:7px 2px;
+}
+.calendar-day {
+  min-width:0;
+  min-height:100px;
+  padding:7px 5px;
+  background:#FFFFFF75;
+  border-radius:10px;
+  overflow:hidden;
+}
+.calendar-day.other-month { opacity:.48; }
+.calendar-day.today {
+  background:#FFFFFF;
+  outline:2px solid #C49C64;
+}
+.calendar-day-number {
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:5px;
+}
+.calendar-day-event {
+  font-size:10px;
+  line-height:1.25;
+  padding:4px 5px;
+  margin-top:3px;
+  border-radius:6px;
+  background:#D2E5E2;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+.calendar-day-event.birthday { background:#F3DDE5; }
+.calendar-day-event.all-day { background:#F7E5C9; }
+.calendar-more {
+  font-size:9px;
+  color:#75695D;
+  margin-top:4px;
+}
+.calendar-week-list,
+.calendar-upcoming-list,
+.birthday-list {
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+.calendar-week-row {
+  display:grid;
+  grid-template-columns:100px minmax(0,1fr);
+  gap:10px;
+  padding:12px;
+  background:#FFFFFF75;
+  border-radius:13px;
+}
+.calendar-week-date {
+  font-size:13px;
+  font-weight:700;
+}
+.calendar-week-date small {
+  display:block;
+  margin-top:4px;
+  font-size:11px;
+  color:#75695D;
+  font-weight:400;
+}
+.calendar-event-item,
+.birthday-item {
+  background:#FFFFFF90;
+  border-radius:13px;
+  padding:12px 14px;
+  min-width:0;
+}
+.calendar-event-item.birthday,
+.birthday-item { background:#F3DDE5; }
+.calendar-event-title {
+  font-size:14px;
+  font-weight:700;
+  overflow-wrap:anywhere;
+}
+.calendar-event-meta {
+  font-size:12px;
+  color:#75695D;
+  margin-top:5px;
+  line-height:1.45;
+  overflow-wrap:anywhere;
+}
+.calendar-empty {
+  background:#FFFFFF75;
+  border-radius:13px;
+  padding:18px;
+  text-align:center;
+  color:#75695D;
+  font-size:13px;
+}
+.birthday-day {
+  font-size:23px;
+  font-weight:700;
+  min-width:48px;
+  text-align:center;
+}
+.birthday-item {
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+.birthday-item .birthday-details { min-width:0; flex:1; }
+.birthday-age {
+  font-size:12px;
+  color:#75695D;
+  margin-top:4px;
+}
+.calendar-status {
+  font-size:12px;
+  min-height:18px;
+  margin-top:12px;
+  color:#75695D;
+}
+.calendar-status.error { color:#A33F46; }
+.calendar-loading { opacity:.65; }
+.calendar-section { margin-top:15px; }
+
+@media(max-width:850px) {
+  body { padding:15px; }
+  .dashboard { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .meal-card { grid-column:span 2; }
+  h1 { font-size:23px; } .clock { font-size:32px; }
+}
+@media(max-width:600px) {
+  body { padding:12px 12px 105px; }
+  header { align-items:flex-start; }
+  .header-right { gap:7px; }
+  .home-button { width:38px; height:38px; border-radius:13px; font-size:18px; }
+  .brand-icon { width:42px; height:42px; font-size:22px; }
+  h1 { font-size:19px; } .subtitle { font-size:12px; }
+  .clock { font-size:25px; } .weather { font-size:11px; }
+  .dashboard { grid-template-columns:1fr; }
+  .meal-card { grid-column:span 1; }
+  .meal-week { gap:4px; }
+  .meal-day { padding:8px 2px; }
+  .meal-day small { font-size:9px; }
+  .week-label { font-size:11px; }
+  .week-nav-button { min-width:34px; height:34px; }
+  nav { left:6px; right:6px; bottom:6px; gap:2px; padding:5px; }
+  nav button { min-width:0; font-size:10px; padding:10px 2px; }
+  .recipe-grid { grid-template-columns:1fr; }
+  .recipe-item { padding:14px; }
+  .recipe-actions button { flex:1; }
+  .recipe-detail { padding:15px; }
+  .calendar-card { padding:13px; }
+  .calendar-day { min-height:76px; padding:5px 3px; }
+  .calendar-day-number { font-size:11px; }
+  .calendar-day-event { font-size:9px; padding:3px; }
+  .calendar-more { font-size:8px; }
+  .calendar-week-row { grid-template-columns:76px minmax(0,1fr); gap:7px; padding:9px; }
+  .calendar-tabs { gap:5px; }
+  .calendar-tab { flex:1; padding:10px 7px; font-size:11px; }
+  .calendar-navigation strong { font-size:13px; }
+  .calendar-navigation button { padding:7px 9px; }
 }
 </style>
 </head>
+
 <body>
 
 <header>
-<div class="brand"><div class="brand-icon">❤️</div><div><h1>Unsere Familienzentrale</h1><div class="subtitle" id="date">Willkommen bei uns zu Hause</div></div></div>
-<div class="header-right"><div class="clock-area"><div class="clock" id="clock">--:--</div><div class="weather" id="weather">🌤️ Wetter wird geladen …</div></div>
-<button class="home-button" type="button" onclick="showPage('start',document.getElementById('navStart'))" aria-label="Zur Startseite">🏠</button></div>
+  <div class="brand">
+    <div class="brand-icon">❤️</div>
+    <div>
+      <h1>Unsere Familienzentrale</h1>
+      <div class="subtitle" id="date">Willkommen bei uns zu Hause</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="clock-area">
+      <div class="clock" id="clock">--:--</div>
+      <div class="weather" id="weather">🌤️ Wetter wird geladen …</div>
+    </div>
+    <button class="home-button" type="button" onclick="showPage('start',document.getElementById('navStart'))" aria-label="Zur Startseite">🏠</button>
+  </div>
 </header>
 
+<!-- ANMELDUNG -->
 <section id="loginView" class="login-wrap hidden">
-<div class="login-card"><div class="brand-icon">🔐</div><h2 style="margin-top:15px">Willkommen zurück!</h2>
-<p>Bitte meldet euch mit eurem Familienkonto an.</p>
-<form id="loginForm"><label for="email">E-Mail-Adresse</label><input id="email" type="email" autocomplete="username" required>
-<label for="password">Passwort</label><input id="password" type="password" autocomplete="current-password" required>
-<button class="action-btn primary" id="loginButton" type="submit">Anmelden</button></form>
-<div id="loginStatus" class="status" aria-live="polite"></div></div></section>
+  <div class="login-card">
+    <div class="brand-icon">🔐</div>
+    <h2 style="margin-top:15px">Willkommen zurück!</h2>
+    <p>Bitte meldet euch mit eurem Familienkonto an.</p>
+    <form id="loginForm">
+      <label for="email">E-Mail-Adresse</label>
+      <input id="email" type="email" autocomplete="username" required>
+      <label for="password">Passwort</label>
+      <input id="password" type="password" autocomplete="current-password" required>
+      <button class="action-btn primary" id="loginButton" type="submit">Anmelden</button>
+    </form>
+    <div id="loginStatus" class="status" aria-live="polite"></div>
+  </div>
+</section>
 
 <main id="appView" class="hidden">
-<div class="account-line"><span id="accountEmail">Angemeldet</span><button class="action-btn" id="logoutButton" type="button">Abmelden</button></div>
 
-<section id="start" class="page active">
-<div class="dashboard">
-<div class="card blue"><div class="card-label">Unser Alltag</div><h2>📅 Familienkalender</h2>
-<div id="startCalendarPreview"><div class="calendar-event">Termine werden geladen …</div></div>
-<div class="card-footer">Unsere Termine auf einen Blick</div>
-<button class="action-btn" style="margin-top:10px" onclick="showPage('kalender',document.querySelector('nav button[onclick*=kalender]'))">Kalender öffnen →</button></div>
-<div class="card green"><div class="card-label">Gemeinsam schaffen wir das</div><h2>✅ Unsere Aufgaben</h2>
-<div class="task-line"><span>👨 Papa</span><span class="task-count">2 offen</span></div>
-<div class="task-line"><span>👩 Mama</span><span class="task-count">3 offen</span></div>
-<div class="task-line"><span>👨‍👩‍👧 Gemeinsam</span><span class="task-count">1 offen</span></div></div>
-<div class="card pink"><div class="card-label">Unsere kleinen Helden</div><h2>⭐ Kinderfortschritt</h2>
-<div class="children-preview"><div class="child-mini"><span class="emoji">🌸</span><strong>Kind 1</strong><small>⭐⭐⭐</small><small>3 von 5</small></div>
-<div class="child-mini"><span class="emoji">🩵</span><strong>Kind 2</strong><small>✨</small><small>Bald dabei</small></div></div></div>
-<div class="card meal-card"><div class="meal-header"><div><div class="card-label">Was gibt es heute?</div><h2>🥣 Unser Wochen-Essensplan</h2></div><span class="meal-badge">ABENDESSEN</span></div>
-<div class="meal-week-navigation"><button class="week-nav-button" id="previousWeekButton" type="button">‹</button><div class="week-label" id="mealWeekLabel">Diese Woche</div><button class="week-nav-button" id="nextWeekButton" type="button">›</button></div>
-<div class="meal-week" id="mealWeek"></div><div class="card-footer" id="mealToday">Euer Abendessen für heute</div>
-<div style="margin-top:12px"><button class="action-btn" onclick="showPage('essen',document.getElementById('navEssen'))">Essensplan bearbeiten →</button></div></div>
-<div class="card car-card"><div class="card-label">Unser Familienauto</div><h2>🚗 Škoda Elroq</h2><div class="car-info"><div class="car-icon">🚙</div><div class="car-description"><strong>85x Sportline</strong><br>Fahrzeugdaten folgen später.</div></div></div>
-</div></section>
+  <div class="account-line">
+    <span id="accountEmail">Angemeldet</span>
+    <button class="action-btn" id="logoutButton" type="button">Abmelden</button>
+  </div>
 
-<section id="essen" class="page">
-<div class="card meal-editor"><div class="card-label">Gemeinsam planen</div><h2>🥣 Unser Abendessen</h2>
-<p>Wählt einen Tag und legt fest, was es abends geben soll. Änderungen werden mit den anderen Familiengeräten synchronisiert.</p>
-<label for="mealDate">Welcher Tag?</label><input id="mealDate" type="date">
-<label for="mealRecipe">Rezept auswählen</label><select id="mealRecipe"><option value="">Kein Rezept ausgewählt</option></select>
-<label for="mealNote">Notiz (optional)</label><input id="mealNote" type="text" placeholder="z. B. später essen, Beilage ...">
-<div class="form-row"><button class="action-btn primary" id="saveMealButton" type="button">Tag speichern</button><button class="action-btn" id="clearMealButton" type="button">Eintrag löschen</button></div>
-<div id="mealStatus" class="status" aria-live="polite"></div><div class="meal-selection" id="mealSelectedInfo"></div></div>
+  <!-- STARTSEITE -->
+  <section id="start" class="page active">
+    <div class="dashboard">
 
-<div class="card recipe-panel"><div class="card-label">Unsere Rezeptsammlung</div><h2>📖 Rezepte hinzufügen</h2>
-<p>Ihr könnt Rezepte von Hand eintragen und einen Link zur ursprünglichen Rezeptseite speichern.</p>
-<form id="recipeForm"><label for="recipeName">Name des Rezepts</label><input id="recipeName" type="text" placeholder="z. B. Gemüse-Lasagne" required>
-<label for="recipeIngredients">Zutaten</label><textarea id="recipeIngredients" placeholder="Zutaten und Mengen"></textarea>
-<label for="recipeInstructions">Zubereitung</label><textarea id="recipeInstructions" placeholder="Wie wird das Gericht zubereitet?"></textarea>
-<label for="recipeUrl">Rezept-Link (optional)</label><input id="recipeUrl" type="url" placeholder="https://...">
-<div class="recipe-form-actions"><button class="action-btn primary" id="addRecipeButton" type="submit">Rezept speichern</button><button class="action-btn hidden" id="cancelRecipeEditButton" type="button">Abbrechen</button></div></form>
-<div id="recipeStatus" class="status" aria-live="polite"></div></div>
+      <div class="card blue">
+        <div class="card-label">Unser Alltag</div>
+        <h2>📅 Familienkalender</h2>
+        <div class="calendar-event">🏫 Kindergarten</div>
+        <div class="calendar-event">👨‍👩‍👧 Gemeinsame Familienzeit</div>
+        <div class="card-footer">Unsere Termine auf einen Blick</div>
+        <button class="action-btn" type="button" style="margin-top:12px" onclick="showPage('kalender',document.querySelector('nav button[onclick*=kalender]'))">Kalender öffnen →</button>
+      </div>
 
-<div id="recipeDetail" class="recipe-detail hidden" aria-live="polite"><div class="recipe-detail-header"><div><div class="card-label">Unser Familienrezept</div><h2 id="detailRecipeName">Rezept</h2></div><button class="action-btn" id="closeRecipeDetailButton" type="button">✕ Schließen</button></div>
-<div class="recipe-detail-section"><h3>🧺 Zutaten</h3><p class="recipe-detail-text" id="detailRecipeIngredients"></p></div>
-<div class="recipe-detail-section"><h3>👩‍🍳 Zubereitung</h3><p class="recipe-detail-text" id="detailRecipeInstructions"></p></div><div class="recipe-detail-actions" id="detailRecipeActions"></div></div>
+      <div class="card green">
+        <div class="card-label">Gemeinsam schaffen wir das</div>
+        <h2>✅ Unsere Aufgaben</h2>
+        <div class="task-line"><span>👨 Papa</span><span class="task-count">2 offen</span></div>
+        <div class="task-line"><span>👩 Mama</span><span class="task-count">3 offen</span></div>
+        <div class="task-line"><span>👨‍👩‍👧 Gemeinsam</span><span class="task-count">1 offen</span></div>
+      </div>
 
-<div class="card purple" style="margin-top:16px"><div class="card-label">Gespeichert für die ganze Familie</div><h2>⭐ Unsere Rezepte</h2>
-<input class="recipe-search" id="recipeSearch" type="search" placeholder="🔎 Rezept oder Zutat suchen …" aria-label="Rezepte durchsuchen">
-<div class="recipe-filters"><button class="recipe-filter active" id="filterAllRecipes" type="button">Alle Rezepte</button><button class="recipe-filter" id="filterFavoriteRecipes" type="button">⭐ Favoriten</button></div>
-<div class="recipe-count" id="recipeCount"></div><div id="recipeList">Rezepte werden geladen …</div></div>
-</section>
+      <div class="card pink">
+        <div class="card-label">Unsere kleinen Helden</div>
+        <h2>⭐ Kinderfortschritt</h2>
+        <div class="children-preview">
+          <div class="child-mini">
+            <span class="emoji">🌸</span><strong>Kind 1</strong>
+            <small>⭐⭐⭐</small><small>3 von 5</small>
+          </div>
+          <div class="child-mini">
+            <span class="emoji">🩵</span><strong>Kind 2</strong>
+            <small>✨</small><small>Bald dabei</small>
+          </div>
+        </div>
+      </div>
 
-<!-- FAMILIENKALENDER -->
-<section id="kalender" class="page">
-<div class="card calendar-panel">
-<div class="card-label">Unsere gemeinsame Zeit</div><h2>📅 Familienkalender</h2>
-<div class="calendar-tabs">
-<button class="calendar-tab active" id="calendarTabAll" onclick="setCalendarTab('all')">📅 Alle Termine</button>
-<button class="calendar-tab" id="calendarTabBirthdays" onclick="setCalendarTab('birthdays')">🎂 Geburtstage</button>
-<button class="calendar-tab" id="calendarTabUpcoming" onclick="setCalendarTab('upcoming')">🔔 Demnächst</button>
-</div>
-<div id="calendarAllView">
-<div class="calendar-switches"><button class="calendar-switch active" id="calendarMonthMode" onclick="setCalendarMode('month')">Monat</button><button class="calendar-switch" id="calendarWeekMode" onclick="setCalendarMode('week')">Woche</button></div>
-<div class="calendar-toolbar"><button class="week-nav-button" onclick="changeCalendarPeriod(-1)">‹</button><strong id="calendarPeriodLabel">Monat</strong><button class="week-nav-button" onclick="changeCalendarPeriod(1)">›</button></div>
-<div id="calendarMonthView"><div class="calendar-grid" id="calendarGrid"></div></div>
-<div id="calendarWeekView" class="hidden"></div>
-<div id="calendarSelectedEvents" class="calendar-list"></div>
-</div>
-<div id="calendarBirthdaysView" class="hidden">
-<div class="calendar-toolbar"><button class="week-nav-button" onclick="changeCalendarPeriod(-1)">‹</button><strong id="birthdayMonthLabel">Geburtstage</strong><button class="week-nav-button" onclick="changeCalendarPeriod(1)">›</button></div>
-<div id="birthdayList" class="calendar-list"></div>
-<p class="calendar-note">Angezeigt werden die Geburtstage des ausgewählten Monats. Das Alter erscheint nur, wenn das Geburtsjahr aus dem Apple-Termin erkennbar ist.</p>
-</div>
-<div id="calendarUpcomingView" class="hidden"><h2 style="margin-top:16px">Die nächsten Termine</h2><div id="upcomingList" class="calendar-list"></div></div>
-<div class="calendar-note">🔒 Nur Leseansicht. Termine werden weiterhin ausschließlich im Apple-Kalender „Familie“ gepflegt.</div>
-<div id="calendarStatus" class="status" aria-live="polite"></div>
-</div>
-</section>
+      <div class="card meal-card">
+        <div class="meal-header">
+          <div>
+            <div class="card-label">Was gibt es heute?</div>
+            <h2>🥣 Unser Wochen-Essensplan</h2>
+          </div>
+          <span class="meal-badge">ABENDESSEN</span>
+        </div>
 
-<section id="einkaufen" class="page"><div class="card pink page-placeholder"><div class="large-icon">🛒</div><h2>Unsere Einkaufsliste</h2><p>Hier erscheinen später unsere gemeinsamen Einkaufsartikel.</p></div></section>
-<section id="aufgaben" class="page"><div class="card green page-placeholder"><div class="large-icon">✅</div><h2>Unsere Aufgaben</h2><p>Aufgaben für Mama, Papa und die ganze Familie.</p></div></section>
-<section id="kinder" class="page"><h2>⭐ Unsere Kinder</h2><div class="dashboard">
-<div class="card child-one"><h2>🌸 Kind 1</h2><p>⭐⭐⭐ 3 von 5 Aufgaben geschafft</p><p>Hier entstehen die Morgen- und Abendroutinen.</p></div>
-<div class="card child-two"><h2>🩵 Kind 2</h2><p>Das Profil kann später ergänzt werden.</p><p>Eigene Routinen und Aufgaben folgen.</p></div></div></section>
+        <div class="meal-week-navigation">
+          <button class="week-nav-button" id="previousWeekButton" type="button" aria-label="Vorherige Woche">‹</button>
+          <div class="week-label" id="mealWeekLabel">Diese Woche</div>
+          <button class="week-nav-button" id="nextWeekButton" type="button" aria-label="Nächste Woche">›</button>
+        </div>
+
+        <div class="meal-week" id="mealWeek"></div>
+        <div class="card-footer" id="mealToday">Euer Abendessen für heute</div>
+        <div style="margin-top:12px">
+          <button class="action-btn" type="button" onclick="showPage('essen',document.getElementById('navEssen'))">
+            Essensplan bearbeiten →
+          </button>
+        </div>
+      </div>
+
+      <div class="card car-card">
+        <div class="card-label">Unser Familienauto</div>
+        <h2>🚗 Škoda Elroq</h2>
+        <div class="car-info">
+          <div class="car-icon">🚙</div>
+          <div class="car-description">
+            <strong>85x Sportline</strong><br>Fahrzeugdaten folgen später.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ESSENSPLAN UND REZEPTE -->
+  <section id="essen" class="page">
+    <div class="card meal-editor">
+      <div class="card-label">Gemeinsam planen</div>
+      <h2>🥣 Unser Abendessen</h2>
+      <p>Wählt einen Tag und legt fest, was es abends geben soll. Änderungen werden mit den anderen Familiengeräten synchronisiert.</p>
+
+      <label for="mealDate">Welcher Tag?</label>
+      <input id="mealDate" type="date">
+
+      <label for="mealRecipe">Rezept auswählen</label>
+      <select id="mealRecipe">
+        <option value="">Kein Rezept ausgewählt</option>
+      </select>
+
+      <label for="mealNote">Notiz (optional)</label>
+      <input id="mealNote" type="text" placeholder="z. B. später essen, Beilage ...">
+
+      <div class="form-row">
+        <button class="action-btn primary" id="saveMealButton" type="button">Tag speichern</button>
+        <button class="action-btn" id="clearMealButton" type="button">Eintrag löschen</button>
+      </div>
+      <div id="mealStatus" class="status" aria-live="polite"></div>
+      <div class="meal-selection" id="mealSelectedInfo"></div>
+    </div>
+
+    <div class="card recipe-panel">
+      <div class="card-label">Unsere Rezeptsammlung</div>
+      <h2>📖 Rezepte hinzufügen</h2>
+      <p>Ihr könnt Rezepte von Hand eintragen und einen Link zur ursprünglichen Rezeptseite speichern.</p>
+
+      <form id="recipeForm">
+        <label for="recipeName">Name des Rezepts</label>
+        <input id="recipeName" type="text" placeholder="z. B. Gemüse-Lasagne" required>
+
+        <label for="recipeIngredients">Zutaten</label>
+        <textarea id="recipeIngredients" placeholder="Zutaten und Mengen"></textarea>
+
+        <label for="recipeInstructions">Zubereitung</label>
+        <textarea id="recipeInstructions" placeholder="Wie wird das Gericht zubereitet?"></textarea>
+
+        <label for="recipeUrl">Rezept-Link (optional)</label>
+        <input id="recipeUrl" type="url" placeholder="https://...">
+
+        <div class="recipe-form-actions">
+          <button class="action-btn primary" id="addRecipeButton" type="submit">Rezept speichern</button>
+          <button class="action-btn hidden" id="cancelRecipeEditButton" type="button">Abbrechen</button>
+        </div>
+      </form>
+      <div id="recipeStatus" class="status" aria-live="polite"></div>
+    </div>
+
+    <!-- REZEPT-DETAILANSICHT -->
+    <div id="recipeDetail" class="recipe-detail hidden" aria-live="polite">
+      <div class="recipe-detail-header">
+        <div>
+          <div class="card-label">Unser Familienrezept</div>
+          <h2 id="detailRecipeName">Rezept</h2>
+        </div>
+        <button class="action-btn" id="closeRecipeDetailButton" type="button">
+          ✕ Schließen
+        </button>
+      </div>
+
+      <div class="recipe-detail-section">
+        <h3>🧺 Zutaten</h3>
+        <p class="recipe-detail-text" id="detailRecipeIngredients"></p>
+      </div>
+
+      <div class="recipe-detail-section">
+        <h3>👩‍🍳 Zubereitung</h3>
+        <p class="recipe-detail-text" id="detailRecipeInstructions"></p>
+      </div>
+
+      <div class="recipe-detail-actions" id="detailRecipeActions"></div>
+    </div>
+
+    <!-- REZEPTLISTE -->
+    <div class="card purple" style="margin-top:16px">
+      <div class="card-label">Gespeichert für die ganze Familie</div>
+      <h2>⭐ Unsere Rezepte</h2>
+      <input class="recipe-search" id="recipeSearch" type="search" placeholder="🔎 Rezept oder Zutat suchen …" aria-label="Rezepte durchsuchen">
+      <div class="recipe-filters">
+        <button class="recipe-filter active" id="filterAllRecipes" type="button">Alle Rezepte</button>
+        <button class="recipe-filter" id="filterFavoriteRecipes" type="button">⭐ Favoriten</button>
+      </div>
+      <div class="recipe-count" id="recipeCount"></div>
+      <div id="recipeList">Rezepte werden geladen …</div>
+    </div>
+  </section>
+
+  <!-- FAMILIENKALENDER -->
+  <section id="kalender" class="page">
+    <div class="calendar-card">
+      <div class="calendar-topline">
+        <div>
+          <div class="card-label">Unsere gemeinsame Zeit</div>
+          <h2>📅 Familienkalender</h2>
+          <p class="calendar-note">Die Termine kommen aus eurem Apple-Kalender „Familie“.</p>
+        </div>
+        <div style="font-size:30px">❤️</div>
+      </div>
+
+      <div class="calendar-tabs">
+        <button class="calendar-tab active" id="calendarTabAll" type="button" onclick="setCalendarTab('all')">📅 Alle Termine</button>
+        <button class="calendar-tab" id="calendarTabBirthdays" type="button" onclick="setCalendarTab('birthdays')">🎂 Geburtstage</button>
+        <button class="calendar-tab" id="calendarTabUpcoming" type="button" onclick="setCalendarTab('upcoming')">🔔 Demnächst</button>
+      </div>
+
+      <div id="calendarAllView">
+        <div class="calendar-navigation">
+          <button type="button" id="calendarPrevious" aria-label="Vorheriger Monat">‹</button>
+          <strong id="calendarMonthLabel">Monat</strong>
+          <button type="button" id="calendarNext" aria-label="Nächster Monat">›</button>
+          <button type="button" class="today-button" id="calendarToday">Heute</button>
+        </div>
+
+        <div class="calendar-view-switch">
+          <button type="button" id="calendarMonthViewButton" class="active">Monatsansicht</button>
+          <button type="button" id="calendarWeekViewButton">Wochenansicht</button>
+        </div>
+
+        <div id="calendarMonthView"></div>
+        <div id="calendarWeekView" class="hidden"></div>
+      </div>
+
+      <div id="calendarBirthdaysView" class="hidden">
+        <div class="calendar-navigation">
+          <button type="button" id="birthdayPrevious" aria-label="Vorheriger Monat">‹</button>
+          <strong id="birthdayMonthLabel">Monat</strong>
+          <button type="button" id="birthdayNext" aria-label="Nächster Monat">›</button>
+          <button type="button" class="today-button" id="birthdayToday">Heute</button>
+        </div>
+        <p class="calendar-note">Hier seht ihr die Geburtstage des ausgewählten Monats, nach Datum sortiert.</p>
+        <div id="birthdayList" class="birthday-list calendar-section"></div>
+      </div>
+
+      <div id="calendarUpcomingView" class="hidden">
+        <h2 style="margin-top:18px">🔔 Die nächsten Termine</h2>
+        <p class="calendar-note">Die nächsten anstehenden Einträge aus eurem Familienkalender.</p>
+        <div id="upcomingList" class="calendar-upcoming-list calendar-section"></div>
+      </div>
+
+      <div id="calendarStatus" class="calendar-status" aria-live="polite">Kalender wird geladen …</div>
+    </div>
+  </section>
+
+  <!-- EINKAUF -->
+  <section id="einkaufen" class="page">
+    <div class="card pink page-placeholder">
+      <div class="large-icon">🛒</div>
+      <h2>Unsere Einkaufsliste</h2>
+      <p>Hier erscheinen später unsere gemeinsamen Einkaufsartikel.</p>
+    </div>
+  </section>
+
+  <!-- AUFGABEN -->
+  <section id="aufgaben" class="page">
+    <div class="card green page-placeholder">
+      <div class="large-icon">✅</div>
+      <h2>Unsere Aufgaben</h2>
+      <p>Aufgaben für Mama, Papa und die ganze Familie.</p>
+    </div>
+  </section>
+
+  <!-- KINDER -->
+  <section id="kinder" class="page">
+    <h2>⭐ Unsere Kinder</h2>
+    <div class="dashboard">
+      <div class="card child-one">
+        <h2>🌸 Kind 1</h2>
+        <p>⭐⭐⭐ 3 von 5 Aufgaben geschafft</p>
+        <p>Hier entstehen die Morgen- und Abendroutinen.</p>
+      </div>
+      <div class="card child-two">
+        <h2>🩵 Kind 2</h2>
+        <p>Das Profil kann später ergänzt werden.</p>
+        <p>Eigene Routinen und Aufgaben folgen.</p>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <nav id="mainNav" class="hidden">
-<button id="navStart" class="active" onclick="showPage('start',this)">🏠 Start</button>
-<button id="navEssen" onclick="showPage('essen',this)">🥣 Essen</button>
-<button onclick="showPage('kalender',this)">📅 Kalender</button>
-<button onclick="showPage('einkaufen',this)">🛒 Einkauf</button>
-<button onclick="showPage('aufgaben',this)">✅ Aufgaben</button>
-<button onclick="showPage('kinder',this)">⭐ Kinder</button>
+  <button id="navStart" class="active" onclick="showPage('start',this)">🏠 Start</button>
+  <button id="navEssen" onclick="showPage('essen',this)">🥣 Essen</button>
+  <button id="navKalender" onclick="showPage('kalender',this)">📅 Kalender</button>
+  <button id="navEinkaufen" onclick="showPage('einkaufen',this)">🛒 Einkauf</button>
+  <button id="navAufgaben" onclick="showPage('aufgaben',this)">✅ Aufgaben</button>
+  <button id="navKinder" onclick="showPage('kinder',this)">⭐ Kinder</button>
 </nav>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* SUPABASE – bestehende Projektverbindung */
-var SUPABASE_URL="https://thdnhxuxtobiekwepiir.supabase.co";
-var SUPABASE_KEY="sb_publishable_1rXcSDJKZAht9PUUSOuZmg_3V8IoTmb";
-var supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+/* SUPABASE – öffentliche Projektverbindung */
+var SUPABASE_URL = "https://thdnhxuxtobiekwepiir.supabase.co";
+var SUPABASE_KEY = "sb_publishable_1rXcSDJKZAht9PUUSOuZmg_3V8IoTmb";
+var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-var currentUser=null,recipes=[],meals=[],calendarEvents=[];
-var editingRecipeId=null,recipeFilter="all",realtimeChannel=null;
-var displayedWeekStart=mondayOfWeek(new Date());
-var calendarMonth=new Date(new Date().getFullYear(),new Date().getMonth(),1);
-var calendarMode="month",calendarTab="all",selectedCalendarDate=localDateString(new Date());
-var dayNames=["Mo","Di","Mi","Do","Fr","Sa","So"];
+var currentUser = null;
+var recipes = [];
+var meals = [];
+var editingRecipeId = null;
+var recipeFilter = "all";
+var realtimeChannel = null;
+var displayedWeekStart = mondayOfWeek(new Date());
 
-function setStatus(id,message,type){var el=document.getElementById(id);el.textContent=message||"";el.className="status"+(type?" "+type:"")}
-function localDateString(date){var y=date.getFullYear(),m=String(date.getMonth()+1).padStart(2,"0"),d=String(date.getDate()).padStart(2,"0");return y+"-"+m+"-"+d}
-function mondayOfWeek(date){var d=new Date(date.getFullYear(),date.getMonth(),date.getDate());d.setDate(d.getDate()-(d.getDay()+6)%7);return d}
-function formatWeekRange(start){var end=new Date(start);end.setDate(end.getDate()+6);return start.toLocaleDateString("de-DE",{day:"numeric",month:"short"})+" – "+end.toLocaleDateString("de-DE",{day:"numeric",month:"short",year:"numeric"})}
-function updateClock(){var now=new Date();document.getElementById("clock").textContent=now.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit",timeZone:"Europe/Berlin"});document.getElementById("date").textContent=now.toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long",year:"numeric",timeZone:"Europe/Berlin"})}
+var dayNames = ["Mo","Di","Mi","Do","Fr","Sa","So"];
 
-/* NAVIGATION */
-function showPage(id,button){
-document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active")});
-document.querySelectorAll("nav button").forEach(function(b){b.classList.remove("active")});
-document.getElementById(id).classList.add("active");
-var navButton=button;
-if(!navButton){var ids={start:"navStart",essen:"navEssen"};navButton=ids[id]?document.getElementById(ids[id]):document.querySelector("nav button[onclick*=\""+id+"\"]")}
-if(navButton)navButton.classList.add("active");
-if(id==="essen")renderRecipes();
-if(id==="kalender"){renderCalendar();if(!calendarEvents.length)loadCalendar()}
+/* KALENDER-ZUSTAND */
+var calendarEvents = [];
+var calendarLoaded = false;
+var calendarMonth = new Date(new Date().getFullYear(),new Date().getMonth(),1);
+var calendarView = "month";
+var calendarTab = "all";
+var calendarLoadError = "";
+
+function setStatus(id, message, type) {
+  var el = document.getElementById(id);
+  el.textContent = message || "";
+  el.className = "status" + (type ? " " + type : "");
 }
 
-/* WETTER */
-function loadWeather(){
-var el=document.getElementById("weather");
-fetch("https://api.open-meteo.com/v1/forecast?latitude=48.650&longitude=10.500&current=temperature_2m,weather_code&timezone=Europe%2FBerlin")
-.then(function(r){if(!r.ok)throw new Error("Wetter nicht erreichbar");return r.json()})
-.then(function(data){var c=data.current,code=c.weather_code,icon="🌤️",desc="Wolkig";
-if(code===0){icon="☀️";desc="Sonnig"}else if(code===1||code===2){icon="🌤️";desc="Heiter"}else if(code===3){icon="☁️";desc="Bewölkt"}else if(code===45||code===48){icon="🌫️";desc="Neblig"}else if(code>=51&&code<=67){icon="🌧️";desc="Nieselregen"}else if(code>=71&&code<=77){icon="❄️";desc="Schnee"}else if(code>=80&&code<=82){icon="🌧️";desc="Regenschauer"}else if(code>=85&&code<=86){icon="🌨️";desc="Schneeschauer"}else if(code>=95){icon="⛈️";desc="Gewitter"}
-el.textContent=icon+" "+Math.round(c.temperature_2m)+" °C · "+desc})
-.catch(function(){el.textContent="🌤️ Wetter gerade nicht verfügbar"})
+function localDateString(date) {
+  var y = date.getFullYear();
+  var m = String(date.getMonth()+1).padStart(2,"0");
+  var d = String(date.getDate()).padStart(2,"0");
+  return y + "-" + m + "-" + d;
+}
+
+function mondayOfWeek(date) {
+  var d = new Date(date.getFullYear(),date.getMonth(),date.getDate());
+  var weekday = (d.getDay()+6)%7;
+  d.setDate(d.getDate()-weekday);
+  return d;
+}
+
+function formatWeekRange(start) {
+  var end = new Date(start);
+  end.setDate(end.getDate()+6);
+
+  var startText = start.toLocaleDateString("de-DE",{
+    day:"numeric",month:"short"
+  });
+  var endText = end.toLocaleDateString("de-DE",{
+    day:"numeric",month:"short",year:"numeric"
+  });
+
+  return startText + " – " + endText;
+}
+
+function updateClock() {
+  var now = new Date();
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"});
+  document.getElementById("date").textContent =
+    now.toLocaleDateString("de-DE",{
+      weekday:"long",day:"numeric",month:"long",year:"numeric"
+    });
+}
+
+/* NAVIGATION */
+function showPage(id,button) {
+  document.querySelectorAll(".page").forEach(function(page) {
+    page.classList.remove("active");
+  });
+  document.querySelectorAll("nav button").forEach(function(item) {
+    item.classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
+
+  var navButton = button;
+  if (!navButton) {
+    var navIds = {
+      start:"navStart",
+      essen:"navEssen",
+      kalender:"navKalender",
+      einkaufen:"navEinkaufen",
+      aufgaben:"navAufgaben",
+      kinder:"navKinder"
+    };
+    navButton = navIds[id] ? document.getElementById(navIds[id]) : null;
+  }
+  if (navButton) navButton.classList.add("active");
+
+  if (id === "essen") renderRecipes();
+  if (id === "kalender") {
+    if (!calendarLoaded) loadCalendar();
+    renderCalendar();
+  }
+}
+
+/* WETTER FÜR 89435 FINNINGEN */
+function loadWeather() {
+  var weatherElement = document.getElementById("weather");
+  var url = "https://api.open-meteo.com/v1/forecast" +
+    "?latitude=48.650&longitude=10.500" +
+    "&current=temperature_2m,weather_code" +
+    "&timezone=Europe%2FBerlin";
+
+  fetch(url).then(function(response) {
+    if (!response.ok) throw new Error("Wetter nicht erreichbar");
+    return response.json();
+  }).then(function(data) {
+    var current = data.current;
+    var code = current.weather_code;
+    var icon = "🌤️";
+    var description = "Wolkig";
+
+    if (code === 0) { icon="☀️"; description="Sonnig"; }
+    else if (code === 1 || code === 2) { icon="🌤️"; description="Heiter"; }
+    else if (code === 3) { icon="☁️"; description="Bewölkt"; }
+    else if (code === 45 || code === 48) { icon="🌫️"; description="Neblig"; }
+    else if (code >= 51 && code <= 67) { icon="🌧️"; description="Nieselregen"; }
+    else if (code >= 71 && code <= 77) { icon="❄️"; description="Schnee"; }
+    else if (code >= 80 && code <= 82) { icon="🌧️"; description="Regenschauer"; }
+    else if (code >= 85 && code <= 86) { icon="🌨️"; description="Schneeschauer"; }
+    else if (code >= 95) { icon="⛈️"; description="Gewitter"; }
+
+    weatherElement.textContent =
+      icon + " " + Math.round(current.temperature_2m) + " °C · " + description;
+  }).catch(function() {
+    weatherElement.textContent = "🌤️ Wetter gerade nicht verfügbar";
+  });
 }
 
 /* ANMELDUNG UND FAMILIENZUGRIFF */
-function showLoggedOut(){document.getElementById("loginView").classList.remove("hidden");document.getElementById("appView").classList.add("hidden");document.getElementById("mainNav").classList.add("hidden")}
-function showLoggedIn(){document.getElementById("loginView").classList.add("hidden");document.getElementById("appView").classList.remove("hidden");document.getElementById("mainNav").classList.remove("hidden");document.getElementById("accountEmail").textContent=currentUser?currentUser.email:"Angemeldet"}
-async function checkFamilyMembership(){var r=await supabaseClient.from("familienmitglieder").select("user_id").eq("user_id",currentUser.id).maybeSingle();if(r.error)throw r.error;if(!r.data)throw new Error("Dieses Konto ist noch nicht als Familienmitglied eingetragen.")}
-async function handleSession(session){
-if(!session){currentUser=null;if(realtimeChannel){await supabaseClient.removeChannel(realtimeChannel);realtimeChannel=null}showLoggedOut();return}
-currentUser=session.user;
-try{await checkFamilyMembership();showLoggedIn();await loadAllData();setupRealtime()}
-catch(error){showLoggedOut();setStatus("loginStatus",error.message||"Familienzugriff konnte nicht geprüft werden.","error")}
-}
-document.getElementById("loginForm").addEventListener("submit",async function(e){e.preventDefault();var b=document.getElementById("loginButton");b.disabled=true;setStatus("loginStatus","Anmeldung läuft …");
-var r=await supabaseClient.auth.signInWithPassword({email:document.getElementById("email").value.trim(),password:document.getElementById("password").value});b.disabled=false;
-if(r.error)setStatus("loginStatus","Anmeldung fehlgeschlagen: "+r.error.message,"error");else setStatus("loginStatus","Angemeldet.","success")});
-document.getElementById("logoutButton").addEventListener("click",async function(){await supabaseClient.auth.signOut()});
-supabaseClient.auth.onAuthStateChange(function(event,session){if(event==="SIGNED_OUT"||event==="INITIAL_SESSION"||event==="SIGNED_IN"||event==="TOKEN_REFRESHED")setTimeout(function(){handleSession(session)},0)});
-
-/* DATEN LADEN */
-async function loadRecipes(){
-var r=await supabaseClient.from("Rezepte").select("id,name,zutaten,zubereitung,quelle_url,favorit").order("name",{ascending:true});
-if(r.error)throw r.error;recipes=r.data||[];renderRecipeOptions();renderRecipes()
-}
-async function loadMeals(){
-var r=await supabaseClient.from("essensplan").select("id,datum,rezept_id,notiz").order("datum",{ascending:true});
-if(r.error)throw r.error;meals=r.data||[];renderMealWeek();loadMealEditor()
-}
-async function loadCalendar(){
-if(!currentUser)return;
-setStatus("calendarStatus","Kalendertermine werden geladen …");
-var r=await supabaseClient.from("kalender_termine")
-.select("id,apple_uid,apple_recurrence_id,titel,beschreibung,startzeit,endzeit,ganztag,start_datum,end_datum,ort,kategorie,apple_rrule,apple_exdates,apple_rdates,apple_timezone")
-.order("startzeit",{ascending:true});
-if(r.error){setStatus("calendarStatus","Kalender konnte nicht geladen werden: "+r.error.message,"error");return}
-calendarEvents=r.data||[];setStatus("calendarStatus",calendarEvents.length+" Kalendereinträge geladen.","success");renderCalendar();renderStartCalendarPreview()
-}
-async function loadAllData(){
-try{await loadRecipes();await loadMeals();await loadCalendar()}
-catch(error){setStatus("mealStatus","Daten konnten nicht geladen werden: "+error.message,"error")}
+function showLoggedOut() {
+  document.getElementById("loginView").classList.remove("hidden");
+  document.getElementById("appView").classList.add("hidden");
+  document.getElementById("mainNav").classList.add("hidden");
 }
 
-/* ESSENSPLAN */
-function changeDisplayedWeek(direction){displayedWeekStart.setDate(displayedWeekStart.getDate()+direction*7);renderMealWeek()}
-document.getElementById("previousWeekButton").addEventListener("click",function(){changeDisplayedWeek(-1)});
-document.getElementById("nextWeekButton").addEventListener("click",function(){changeDisplayedWeek(1)});
-function getRecipeName(id){var r=recipes.find(function(x){return String(x.id)===String(id)});return r?r.name:""}
-function renderMealWeek(){
-var c=document.getElementById("mealWeek");c.innerHTML="";
-var start=new Date(displayedWeekStart),today=localDateString(new Date()),todayMeal="";
-var current=localDateString(start)===localDateString(mondayOfWeek(new Date()));
-document.getElementById("mealWeekLabel").textContent=current?"Diese Woche":formatWeekRange(start);
-for(var i=0;i<7;i++){
-var d=new Date(start);d.setDate(start.getDate()+i);var key=localDateString(d);
-var meal=meals.find(function(x){return x.datum===key});var name=meal?getRecipeName(meal.rezept_id):"";
-if(meal&&!name&&meal.notiz)name=meal.notiz;if(!name)name="Noch offen";if(key===today)todayMeal=name;
-var day=document.createElement("div");day.className="meal-day"+(key===today?" today":"");day.setAttribute("data-date",key);
-var strong=document.createElement("strong");strong.textContent=dayNames[i];
-var icon=document.createElement("span");icon.className="meal-icon";icon.textContent=name==="Noch offen"?"➕":"🥣";
-var small=document.createElement("small");small.textContent=name;
-day.appendChild(strong);day.appendChild(icon);day.appendChild(small);
-day.addEventListener("click",function(){document.getElementById("mealDate").value=this.getAttribute("data-date");loadMealEditor();showPage("essen",document.getElementById("navEssen"))});
-c.appendChild(day)
+function showLoggedIn() {
+  document.getElementById("loginView").classList.add("hidden");
+  document.getElementById("appView").classList.remove("hidden");
+  document.getElementById("mainNav").classList.remove("hidden");
+  document.getElementById("accountEmail").textContent =
+    currentUser ? currentUser.email : "Angemeldet";
 }
-document.getElementById("mealToday").textContent=current?"Heute ("+new Date().toLocaleDateString("de-DE",{weekday:"long"})+"): "+(todayMeal||"Noch nichts geplant"):"Wochenplanung für "+formatWeekRange(start)
+
+async function checkFamilyMembership() {
+  var result = await supabaseClient
+    .from("familienmitglieder")
+    .select("user_id")
+    .eq("user_id",currentUser.id)
+    .maybeSingle();
+
+  if (result.error) throw result.error;
+  if (!result.data) {
+    throw new Error("Dieses Konto ist noch nicht als Familienmitglied eingetragen.");
+  }
 }
-function renderRecipeOptions(){
-var s=document.getElementById("mealRecipe"),v=s.value;s.innerHTML="";
-var empty=document.createElement("option");empty.value="";empty.textContent="Kein Rezept ausgewählt";s.appendChild(empty);
-recipes.forEach(function(r){var o=document.createElement("option");o.value=r.id;o.textContent=(r.favorit?"⭐ ":"")+r.name;s.appendChild(o)});
-if(v)s.value=v
+
+async function handleSession(session) {
+  if (!session) {
+    currentUser = null;
+    if (realtimeChannel) {
+      await supabaseClient.removeChannel(realtimeChannel);
+      realtimeChannel = null;
+    }
+    showLoggedOut();
+    return;
+  }
+
+  currentUser = session.user;
+  try {
+    await checkFamilyMembership();
+    showLoggedIn();
+    await loadAllData();
+    setupRealtime();
+  } catch (error) {
+    showLoggedOut();
+    setStatus("loginStatus",error.message || "Familienzugriff konnte nicht geprüft werden.","error");
+  }
 }
-function loadMealEditor(){
-var input=document.getElementById("mealDate");if(!input.value)input.value=localDateString(new Date());
-var meal=meals.find(function(x){return x.datum===input.value});
-document.getElementById("mealRecipe").value=meal&&meal.rezept_id?String(meal.rezept_id):"";
-document.getElementById("mealNote").value=meal?(meal.notiz||""):"";
-document.getElementById("mealSelectedInfo").textContent=meal?"Für diesen Tag ist bereits ein Eintrag gespeichert.":"Für diesen Tag ist noch kein Abendessen geplant.";
-setStatus("mealStatus","")
+
+document.getElementById("loginForm").addEventListener("submit",async function(event) {
+  event.preventDefault();
+  var button = document.getElementById("loginButton");
+  button.disabled = true;
+  setStatus("loginStatus","Anmeldung läuft …");
+
+  var result = await supabaseClient.auth.signInWithPassword({
+    email:document.getElementById("email").value.trim(),
+    password:document.getElementById("password").value
+  });
+
+  button.disabled = false;
+  if (result.error) {
+    setStatus("loginStatus","Anmeldung fehlgeschlagen: " + result.error.message,"error");
+  } else {
+    setStatus("loginStatus","Angemeldet.","success");
+  }
+});
+
+document.getElementById("logoutButton").addEventListener("click",async function() {
+  await supabaseClient.auth.signOut();
+});
+
+supabaseClient.auth.onAuthStateChange(function(event,session) {
+  if (event === "SIGNED_OUT" || event === "INITIAL_SESSION" || event === "SIGNED_IN" || event === "TOKEN_REFRESHED") {
+    setTimeout(function() {
+      handleSession(session);
+    },0);
+  }
+});
+
+/* REZEPTE LADEN */
+async function loadRecipes() {
+  var result = await supabaseClient
+    .from("Rezepte")
+    .select("id,name,zutaten,zubereitung,quelle_url,favorit")
+    .order("name",{ascending:true});
+
+  if (result.error) throw result.error;
+  recipes = result.data || [];
+  renderRecipeOptions();
+  renderRecipes();
 }
+
+/* ESSENSPLAN LADEN */
+async function loadMeals() {
+  var result = await supabaseClient
+    .from("essensplan")
+    .select("id,datum,rezept_id,notiz")
+    .order("datum",{ascending:true});
+
+  if (result.error) throw result.error;
+  meals = result.data || [];
+  renderMealWeek();
+  loadMealEditor();
+}
+
+async function loadAllData() {
+  try {
+    await loadRecipes();
+    await loadMeals();
+  } catch (error) {
+    setStatus("mealStatus","Daten konnten nicht geladen werden: " + error.message,"error");
+  }
+
+  /* Kalender wird separat geladen, damit ein Kalenderfehler
+     die Rezepte und den Essensplan nicht beeinträchtigt. */
+  await loadCalendar();
+}
+
+/* WOCHEN-NAVIGATION */
+function changeDisplayedWeek(direction) {
+  displayedWeekStart.setDate(displayedWeekStart.getDate() + direction * 7);
+  renderMealWeek();
+}
+
+document.getElementById("previousWeekButton").addEventListener("click",function() {
+  changeDisplayedWeek(-1);
+});
+
+document.getElementById("nextWeekButton").addEventListener("click",function() {
+  changeDisplayedWeek(1);
+});
+
+/* WOCHENANSICHT */
+function getRecipeName(id) {
+  var recipe = recipes.find(function(item) {
+    return String(item.id) === String(id);
+  });
+  return recipe ? recipe.name : "";
+}
+
+function renderMealWeek() {
+  var container = document.getElementById("mealWeek");
+  container.innerHTML = "";
+
+  var start = new Date(displayedWeekStart);
+  var today = localDateString(new Date());
+  var todayMeal = "";
+  var isCurrentWeek = localDateString(start) === localDateString(mondayOfWeek(new Date()));
+
+  document.getElementById("mealWeekLabel").textContent =
+    isCurrentWeek ? "Diese Woche" : formatWeekRange(start);
+
+  for (var i=0;i<7;i++) {
+    var date = new Date(start);
+    date.setDate(start.getDate()+i);
+    var key = localDateString(date);
+    var meal = meals.find(function(item) { return item.datum === key; });
+    var name = meal ? getRecipeName(meal.rezept_id) : "";
+    if (meal && !name && meal.notiz) name = meal.notiz;
+    if (!name) name = "Noch offen";
+    if (key === today) todayMeal = name;
+
+    var day = document.createElement("div");
+    day.className = "meal-day" + (key === today ? " today" : "");
+    day.setAttribute("data-date",key);
+
+    var strong = document.createElement("strong");
+    strong.textContent = dayNames[i];
+
+    var icon = document.createElement("span");
+    icon.className = "meal-icon";
+    icon.textContent = name === "Noch offen" ? "➕" : "🥣";
+
+    var small = document.createElement("small");
+    small.textContent = name;
+
+    day.appendChild(strong);
+    day.appendChild(icon);
+    day.appendChild(small);
+    day.addEventListener("click",function() {
+      document.getElementById("mealDate").value = this.getAttribute("data-date");
+      loadMealEditor();
+      showPage("essen",document.getElementById("navEssen"));
+    });
+    container.appendChild(day);
+  }
+
+  if (isCurrentWeek) {
+    var weekday = new Date().toLocaleDateString("de-DE",{weekday:"long"});
+    document.getElementById("mealToday").textContent =
+      "Heute (" + weekday + "): " + (todayMeal || "Noch nichts geplant");
+  } else {
+    document.getElementById("mealToday").textContent =
+      "Wochenplanung für " + formatWeekRange(start);
+  }
+}
+
+/* REZEPT-AUSWAHL */
+function renderRecipeOptions() {
+  var select = document.getElementById("mealRecipe");
+  var current = select.value;
+  select.innerHTML = "";
+
+  var empty = document.createElement("option");
+  empty.value = "";
+  empty.textContent = "Kein Rezept ausgewählt";
+  select.appendChild(empty);
+
+  recipes.forEach(function(recipe) {
+    var option = document.createElement("option");
+    option.value = recipe.id;
+    option.textContent = (recipe.favorit ? "⭐ " : "") + recipe.name;
+    select.appendChild(option);
+  });
+
+  if (current) select.value = current;
+}
+
+function loadMealEditor() {
+  var dateInput = document.getElementById("mealDate");
+  if (!dateInput.value) dateInput.value = localDateString(new Date());
+
+  var meal = meals.find(function(item) {
+    return item.datum === dateInput.value;
+  });
+
+  document.getElementById("mealRecipe").value =
+    meal && meal.rezept_id ? String(meal.rezept_id) : "";
+  document.getElementById("mealNote").value = meal ? (meal.notiz || "") : "";
+
+  document.getElementById("mealSelectedInfo").textContent =
+    meal ? "Für diesen Tag ist bereits ein Eintrag gespeichert." :
+    "Für diesen Tag ist noch kein Abendessen geplant.";
+  setStatus("mealStatus","");
+}
+
 document.getElementById("mealDate").addEventListener("change",loadMealEditor);
-document.getElementById("saveMealButton").addEventListener("click",async function(){
-var date=document.getElementById("mealDate").value;if(!date){setStatus("mealStatus","Bitte zuerst einen Tag auswählen.","error");return}
-var recipe=document.getElementById("mealRecipe").value,note=document.getElementById("mealNote").value.trim();
-var existing=meals.find(function(x){return x.datum===date});
-var payload={datum:date,rezept_id:recipe?Number(recipe):null,notiz:note||null};
-this.disabled=true;setStatus("mealStatus","Speichere …");
-var r=existing?await supabaseClient.from("essensplan").update(payload).eq("id",existing.id):await supabaseClient.from("essensplan").insert(payload);
-this.disabled=false;
-if(r.error)setStatus("mealStatus","Speichern fehlgeschlagen: "+r.error.message,"error");
-else{setStatus("mealStatus","Gespeichert! Die anderen Geräte werden aktualisiert.","success");await loadMeals()}
-});
-document.getElementById("clearMealButton").addEventListener("click",async function(){
-var date=document.getElementById("mealDate").value,existing=meals.find(function(x){return x.datum===date});
-if(!existing){setStatus("mealStatus","Für diesen Tag gibt es keinen Eintrag.");return}
-var r=await supabaseClient.from("essensplan").delete().eq("id",existing.id);
-if(r.error)setStatus("mealStatus","Löschen fehlgeschlagen: "+r.error.message,"error");
-else{setStatus("mealStatus","Eintrag gelöscht.","success");await loadMeals()}
+
+/* ESSEN SPEICHERN */
+document.getElementById("saveMealButton").addEventListener("click",async function() {
+  var date = document.getElementById("mealDate").value;
+  if (!date) {
+    setStatus("mealStatus","Bitte zuerst einen Tag auswählen.","error");
+    return;
+  }
+
+  var recipeValue = document.getElementById("mealRecipe").value;
+  var note = document.getElementById("mealNote").value.trim();
+  var existing = meals.find(function(item) { return item.datum === date; });
+
+  var payload = {
+    datum:date,
+    rezept_id:recipeValue ? Number(recipeValue) : null,
+    notiz:note || null
+  };
+
+  var button = this;
+  button.disabled = true;
+  setStatus("mealStatus","Speichere …");
+
+  var result;
+  if (existing) {
+    result = await supabaseClient.from("essensplan")
+      .update(payload).eq("id",existing.id);
+  } else {
+    result = await supabaseClient.from("essensplan").insert(payload);
+  }
+
+  button.disabled = false;
+  if (result.error) {
+    setStatus("mealStatus","Speichern fehlgeschlagen: " + result.error.message,"error");
+  } else {
+    setStatus("mealStatus","Gespeichert! Die anderen Geräte werden aktualisiert.","success");
+    await loadMeals();
+  }
 });
 
-/* REZEPTE HINZUFÜGEN UND BEARBEITEN */
-document.getElementById("recipeForm").addEventListener("submit",async function(e){
-e.preventDefault();var name=document.getElementById("recipeName").value.trim(),url=document.getElementById("recipeUrl").value.trim();
-if(url&&!/^https?:\/\//i.test(url)){setStatus("recipeStatus","Bitte einen vollständigen Link mit https:// eingeben.","error");return}
-var payload={name:name,zutaten:document.getElementById("recipeIngredients").value.trim(),zubereitung:document.getElementById("recipeInstructions").value.trim(),quelle_url:url||null};
-var b=document.getElementById("addRecipeButton");b.disabled=true;setStatus("recipeStatus",editingRecipeId!==null?"Speichere Änderungen …":"Speichere Rezept …");
-var r=editingRecipeId!==null?await supabaseClient.from("Rezepte").update(payload).eq("id",editingRecipeId):(payload.favorit=false,await supabaseClient.from("Rezepte").insert(payload));
-b.disabled=false;
-if(r.error)setStatus("recipeStatus","Rezept konnte nicht gespeichert werden: "+r.error.message,"error");
-else{var wasEditing=editingRecipeId!==null;resetRecipeForm();setStatus("recipeStatus",wasEditing?"Änderungen wurden gespeichert.":"Rezept wurde für die Familie gespeichert.","success");await loadRecipes()}
+/* EINEN TAGESEINTRAG LÖSCHEN */
+document.getElementById("clearMealButton").addEventListener("click",async function() {
+  var date = document.getElementById("mealDate").value;
+  var existing = meals.find(function(item) { return item.datum === date; });
+
+  if (!existing) {
+    setStatus("mealStatus","Für diesen Tag gibt es keinen Eintrag.","");
+    return;
+  }
+
+  var result = await supabaseClient.from("essensplan").delete().eq("id",existing.id);
+  if (result.error) {
+    setStatus("mealStatus","Löschen fehlgeschlagen: " + result.error.message,"error");
+  } else {
+    setStatus("mealStatus","Eintrag gelöscht.","success");
+    await loadMeals();
+  }
 });
-function startRecipeEdit(r){
-editingRecipeId=r.id;document.getElementById("recipeName").value=r.name||"";document.getElementById("recipeIngredients").value=r.zutaten||"";
-document.getElementById("recipeInstructions").value=r.zubereitung||"";document.getElementById("recipeUrl").value=r.quelle_url||"";
-document.getElementById("addRecipeButton").textContent="Änderungen speichern";document.getElementById("cancelRecipeEditButton").classList.remove("hidden");
-setStatus("recipeStatus","Ihr bearbeitet gerade: "+r.name);document.getElementById("recipeForm").scrollIntoView({behavior:"smooth",block:"start"});document.getElementById("recipeName").focus()
-}
-function resetRecipeForm(){editingRecipeId=null;document.getElementById("recipeForm").reset();document.getElementById("addRecipeButton").textContent="Rezept speichern";document.getElementById("cancelRecipeEditButton").classList.add("hidden")}
-document.getElementById("cancelRecipeEditButton").addEventListener("click",function(){resetRecipeForm();setStatus("recipeStatus","Bearbeitung abgebrochen.")});
-function openRecipeDetail(r){
-document.getElementById("detailRecipeName").textContent=r.name;document.getElementById("detailRecipeIngredients").textContent=r.zutaten||"Für dieses Rezept wurden noch keine Zutaten eingetragen.";
-document.getElementById("detailRecipeInstructions").textContent=r.zubereitung||"Für dieses Rezept wurde noch keine Zubereitung eingetragen.";
-var a=document.getElementById("detailRecipeActions");a.innerHTML="";
-if(r.quelle_url){var link=document.createElement("a");link.className="action-btn primary";link.href=r.quelle_url;link.target="_blank";link.rel="noopener noreferrer";link.textContent="↗ Externen Link öffnen";a.appendChild(link)}
-var d=document.getElementById("recipeDetail");d.classList.remove("hidden");d.scrollIntoView({behavior:"smooth",block:"start"})
-}
-document.getElementById("closeRecipeDetailButton").addEventListener("click",function(){document.getElementById("recipeDetail").classList.add("hidden")});
-function renderRecipes(){
-var list=document.getElementById("recipeList");if(!list)return;list.innerHTML="";
-var search=(document.getElementById("recipeSearch").value||"").trim().toLocaleLowerCase("de-DE");
-var filtered=recipes.filter(function(r){
-var matches=!search||(r.name||"").toLocaleLowerCase("de-DE").includes(search)||(r.zutaten||"").toLocaleLowerCase("de-DE").includes(search)||(r.zubereitung||"").toLocaleLowerCase("de-DE").includes(search);
-return matches&&(recipeFilter!=="favorites"||r.favorit)
+
+/* REZEPT HINZUFÜGEN UND BEARBEITEN */
+document.getElementById("recipeForm").addEventListener("submit",async function(event) {
+  event.preventDefault();
+
+  var name = document.getElementById("recipeName").value.trim();
+  var url = document.getElementById("recipeUrl").value.trim();
+
+  if (url && !/^https?:\/\//i.test(url)) {
+    setStatus("recipeStatus","Bitte einen vollständigen Link mit https:// eingeben.","error");
+    return;
+  }
+
+  var payload = {
+    name:name,
+    zutaten:document.getElementById("recipeIngredients").value.trim(),
+    zubereitung:document.getElementById("recipeInstructions").value.trim(),
+    quelle_url:url || null
+  };
+
+  var button = document.getElementById("addRecipeButton");
+  button.disabled = true;
+  setStatus("recipeStatus",editingRecipeId ? "Speichere Änderungen …" : "Speichere Rezept …");
+
+  var result;
+  if (editingRecipeId !== null) {
+    result = await supabaseClient.from("Rezepte")
+      .update(payload).eq("id",editingRecipeId);
+  } else {
+    payload.favorit = false;
+    result = await supabaseClient.from("Rezepte").insert(payload);
+  }
+
+  button.disabled = false;
+  if (result.error) {
+    setStatus("recipeStatus","Rezept konnte nicht gespeichert werden: " + result.error.message,"error");
+  } else {
+    var wasEditing = editingRecipeId !== null;
+    resetRecipeForm();
+    setStatus("recipeStatus",wasEditing ?
+      "Änderungen wurden gespeichert." :
+      "Rezept wurde für die Familie gespeichert.","success");
+    await loadRecipes();
+  }
 });
-document.getElementById("recipeCount").textContent=filtered.length+(filtered.length===1?" Rezept angezeigt":" Rezepte angezeigt")+(filtered.length!==recipes.length?" (von "+recipes.length+")":"");
-if(!recipes.length){list.textContent="Noch keine Rezepte gespeichert. Fügt oben euer erstes Lieblingsrezept hinzu.";return}
-if(!filtered.length){list.textContent="Keine passenden Rezepte gefunden.";return}
-var grid=document.createElement("div");grid.className="recipe-grid";
-filtered.forEach(function(r){
-var item=document.createElement("div");item.className="recipe-item";
-var info=document.createElement("div");info.className="recipe-info";
-var title=document.createElement("strong");title.textContent=(r.favorit?"⭐ ":"")+r.name;info.appendChild(title);
-var detail=document.createElement("small");detail.textContent=r.zutaten?r.zutaten.substring(0,110)+(r.zutaten.length>110?" …":""):"Noch keine Zutaten hinterlegt";info.appendChild(detail);
-var source=document.createElement("small");source.textContent=r.quelle_url?"🔗 Externer Rezeptlink vorhanden":"📝 Eigenes Familienrezept";info.appendChild(source);
-var actions=document.createElement("div");actions.className="recipe-actions";
-var view=document.createElement("button");view.className="action-btn view-recipe";view.type="button";view.textContent="📖 Rezept ansehen";view.addEventListener("click",function(){openRecipeDetail(r)});actions.appendChild(view);
-if(r.quelle_url){var ext=document.createElement("a");ext.className="action-btn external-recipe";ext.href=r.quelle_url;ext.target="_blank";ext.rel="noopener noreferrer";ext.textContent="↗ Link öffnen";ext.style.textDecoration="none";actions.appendChild(ext)}
-var edit=document.createElement("button");edit.className="action-btn edit-recipe";edit.type="button";edit.textContent="✏️ Bearbeiten";edit.addEventListener("click",function(){startRecipeEdit(r)});actions.appendChild(edit);
-var fav=document.createElement("button");fav.className="action-btn";fav.type="button";fav.textContent=r.favorit?"⭐ Favorit":"☆ Merken";fav.addEventListener("click",function(){toggleFavorite(r)});actions.appendChild(fav);
-var choose=document.createElement("button");choose.className="action-btn";choose.type="button";choose.textContent="🥣 Einplanen";choose.addEventListener("click",function(){document.getElementById("mealRecipe").value=String(r.id);document.getElementById("mealSelectedInfo").textContent=r.name+" ausgewählt. Bitte noch den Tag speichern.";document.getElementById("mealDate").focus();window.scrollTo(0,0)});actions.appendChild(choose);
-item.appendChild(info);item.appendChild(actions);grid.appendChild(item)
-});list.appendChild(grid)
+
+function startRecipeEdit(recipe) {
+  editingRecipeId = recipe.id;
+  document.getElementById("recipeName").value = recipe.name || "";
+  document.getElementById("recipeIngredients").value = recipe.zutaten || "";
+  document.getElementById("recipeInstructions").value = recipe.zubereitung || "";
+  document.getElementById("recipeUrl").value = recipe.quelle_url || "";
+  document.getElementById("addRecipeButton").textContent = "Änderungen speichern";
+  document.getElementById("cancelRecipeEditButton").classList.remove("hidden");
+  setStatus("recipeStatus","Ihr bearbeitet gerade: " + recipe.name);
+  document.getElementById("recipeForm").scrollIntoView({behavior:"smooth",block:"start"});
+  document.getElementById("recipeName").focus();
 }
+
+function resetRecipeForm() {
+  editingRecipeId = null;
+  document.getElementById("recipeForm").reset();
+  document.getElementById("addRecipeButton").textContent = "Rezept speichern";
+  document.getElementById("cancelRecipeEditButton").classList.add("hidden");
+}
+
+document.getElementById("cancelRecipeEditButton").addEventListener("click",function() {
+  resetRecipeForm();
+  setStatus("recipeStatus","Bearbeitung abgebrochen.");
+});
+
+/* REZEPT-DETAILANSICHT ÖFFNEN */
+function openRecipeDetail(recipe) {
+  var detail = document.getElementById("recipeDetail");
+
+  document.getElementById("detailRecipeName").textContent = recipe.name;
+  document.getElementById("detailRecipeIngredients").textContent =
+    recipe.zutaten || "Für dieses Rezept wurden noch keine Zutaten eingetragen.";
+  document.getElementById("detailRecipeInstructions").textContent =
+    recipe.zubereitung || "Für dieses Rezept wurde noch keine Zubereitung eingetragen.";
+
+  var actions = document.getElementById("detailRecipeActions");
+  actions.innerHTML = "";
+
+  if (recipe.quelle_url) {
+    var link = document.createElement("a");
+    link.className = "action-btn primary";
+    link.href = recipe.quelle_url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "↗ Externen Link öffnen";
+    actions.appendChild(link);
+  }
+
+  detail.classList.remove("hidden");
+
+  detail.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+}
+
+/* REZEPT-DETAILANSICHT SCHLIESSEN */
+document.getElementById("closeRecipeDetailButton").addEventListener("click",function() {
+  document.getElementById("recipeDetail").classList.add("hidden");
+});
+
+/* REZEPTE ANZEIGEN, SUCHEN UND FILTERN */
+function renderRecipes() {
+  var list = document.getElementById("recipeList");
+  if (!list) return;
+  list.innerHTML = "";
+
+  var search = (document.getElementById("recipeSearch").value || "").trim().toLocaleLowerCase("de-DE");
+  var filtered = recipes.filter(function(recipe) {
+    var matchesSearch = !search ||
+      (recipe.name || "").toLocaleLowerCase("de-DE").includes(search) ||
+      (recipe.zutaten || "").toLocaleLowerCase("de-DE").includes(search) ||
+      (recipe.zubereitung || "").toLocaleLowerCase("de-DE").includes(search);
+    var matchesFilter = recipeFilter !== "favorites" || recipe.favorit;
+    return matchesSearch && matchesFilter;
+  });
+
+  document.getElementById("recipeCount").textContent =
+    filtered.length + (filtered.length === 1 ? " Rezept angezeigt" : " Rezepte angezeigt") +
+    (filtered.length !== recipes.length ? " (von " + recipes.length + ")" : "");
+
+  if (!recipes.length) {
+    list.textContent = "Noch keine Rezepte gespeichert. Fügt oben euer erstes Lieblingsrezept hinzu.";
+    return;
+  }
+  if (!filtered.length) {
+    list.textContent = "Keine passenden Rezepte gefunden.";
+    return;
+  }
+
+  var grid = document.createElement("div");
+  grid.className = "recipe-grid";
+
+  filtered.forEach(function(recipe) {
+    var item = document.createElement("div");
+    item.className = "recipe-item";
+
+    var info = document.createElement("div");
+    info.className = "recipe-info";
+
+    var title = document.createElement("strong");
+    title.textContent = (recipe.favorit ? "⭐ " : "") + recipe.name;
+    info.appendChild(title);
+
+    var detail = document.createElement("small");
+    detail.textContent = recipe.zutaten
+      ? recipe.zutaten.substring(0,110) + (recipe.zutaten.length > 110 ? " …" : "")
+      : "Noch keine Zutaten hinterlegt";
+    info.appendChild(detail);
+
+    var sourceInfo = document.createElement("small");
+    sourceInfo.textContent = recipe.quelle_url ? "🔗 Externer Rezeptlink vorhanden" : "📝 Eigenes Familienrezept";
+    info.appendChild(sourceInfo);
+
+    var actions = document.createElement("div");
+    actions.className = "recipe-actions";
+
+    var view = document.createElement("button");
+    view.className = "action-btn view-recipe";
+    view.type = "button";
+    view.textContent = "📖 Rezept ansehen";
+    view.addEventListener("click",function() { openRecipeDetail(recipe); });
+    actions.appendChild(view);
+
+    if (recipe.quelle_url) {
+      var external = document.createElement("a");
+      external.className = "action-btn external-recipe";
+      external.href = recipe.quelle_url;
+      external.target = "_blank";
+      external.rel = "noopener noreferrer";
+      external.textContent = "↗ Link öffnen";
+      external.style.textDecoration = "none";
+      actions.appendChild(external);
+    }
+
+    var edit = document.createElement("button");
+    edit.className = "action-btn edit-recipe";
+    edit.type = "button";
+    edit.textContent = "✏️ Bearbeiten";
+    edit.addEventListener("click",function() { startRecipeEdit(recipe); });
+    actions.appendChild(edit);
+
+    var favorite = document.createElement("button");
+    favorite.className = "action-btn";
+    favorite.type = "button";
+    favorite.textContent = recipe.favorit ? "⭐ Favorit" : "☆ Merken";
+    favorite.addEventListener("click",function() { toggleFavorite(recipe); });
+    actions.appendChild(favorite);
+
+    var choose = document.createElement("button");
+    choose.className = "action-btn";
+    choose.type = "button";
+    choose.textContent = "🥣 Einplanen";
+    choose.addEventListener("click",function() {
+      document.getElementById("mealRecipe").value = String(recipe.id);
+      document.getElementById("mealSelectedInfo").textContent =
+        recipe.name + " ausgewählt. Bitte noch den Tag speichern.";
+      document.getElementById("mealDate").focus();
+      window.scrollTo(0,0);
+    });
+    actions.appendChild(choose);
+
+    item.appendChild(info);
+    item.appendChild(actions);
+    grid.appendChild(item);
+  });
+
+  list.appendChild(grid);
+}
+
 document.getElementById("recipeSearch").addEventListener("input",renderRecipes);
-document.getElementById("filterAllRecipes").addEventListener("click",function(){recipeFilter="all";this.classList.add("active");document.getElementById("filterFavoriteRecipes").classList.remove("active");renderRecipes()});
-document.getElementById("filterFavoriteRecipes").addEventListener("click",function(){recipeFilter="favorites";this.classList.add("active");document.getElementById("filterAllRecipes").classList.remove("active");renderRecipes()});
-async function toggleFavorite(r){var result=await supabaseClient.from("Rezepte").update({favorit:!r.favorit}).eq("id",r.id);if(result.error)setStatus("recipeStatus","Favorit konnte nicht geändert werden: "+result.error.message,"error");else await loadRecipes()}
+document.getElementById("filterAllRecipes").addEventListener("click",function() {
+  recipeFilter = "all";
+  this.classList.add("active");
+  document.getElementById("filterFavoriteRecipes").classList.remove("active");
+  renderRecipes();
+});
+document.getElementById("filterFavoriteRecipes").addEventListener("click",function() {
+  recipeFilter = "favorites";
+  this.classList.add("active");
+  document.getElementById("filterAllRecipes").classList.remove("active");
+  renderRecipes();
+});
 
-/* KALENDER: DATUMS- UND ZEITFUNKTIONEN */
-function berlinDateKey(iso){
-if(!iso)return "";
-var parts=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date(iso));
-var values={};parts.forEach(function(p){values[p.type]=p.value});
-return values.year+"-"+values.month+"-"+values.day
-}
-function dateKeyParts(key){var p=key.split("-");return {year:Number(p[0]),month:Number(p[1]),day:Number(p[2])}}
-function keyFromParts(y,m,d){return y+"-"+String(m).padStart(2,"0")+"-"+String(d).padStart(2,"0")}
-function eventStartKey(e){return e.ganztag&&e.start_datum?e.start_datum:berlinDateKey(e.startzeit)}
-function eventEndKey(e){if(e.ganztag&&e.end_datum){var d=dateKeyParts(e.end_datum);var x=new Date(d.year,d.month-1,d.day);x.setDate(x.getDate()-1);return localDateString(x)}return e.endzeit?berlinDateKey(e.endzeit):eventStartKey(e)}
-function eventTime(e){if(e.ganztag)return "Ganztägig";if(!e.startzeit)return "";return new Date(e.startzeit).toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit",timeZone:"Europe/Berlin"})}
-function parseRule(rule){var result={};if(!rule)return result;rule.replace(/^RRULE:/i,"").split(";").forEach(function(part){var p=part.split("=");if(p.length===2)result[p[0].toUpperCase()]=p[1]});return result}
-function excludedOccurrence(e,key){
-var list=e.apple_exdates||[];if(!Array.isArray(list))return false;
-return list.some(function(x){var value=typeof x==="string"?x:(x&&x.date?x.date:"");return value.indexOf(key)===0})
-}
-function getMonthOccurrences(e,year,month){
-var start=eventStartKey(e);if(!start)return [];
-var p=dateKeyParts(start),rule=parseRule(e.apple_rrule),out=[];
-var isBirthday=(e.kategorie||"").toLocaleLowerCase("de-DE").indexOf("geburtstag")>=0;
-if(!e.apple_rrule){if(p.year===year&&p.month===month)out.push({event:e,date:start,year:p.year});return out}
-var freq=rule.FREQ||"";
-if(freq==="YEARLY"&&(isBirthday||rule.BYMONTH||true)){
-var targetMonth=rule.BYMONTH?Number(rule.BYMONTH):p.month;
-var targetDay=rule.BYMONTHDAY?Number(rule.BYMONTHDAY):p.day;
-if(targetMonth!==month||targetDay<1)return out;
-var interval=Number(rule.INTERVAL||1),count=0;
-for(var y=p.year;y<=year;y+=interval){
-count++;
-if(rule.COUNT&&count>Number(rule.COUNT))break;
-var key=keyFromParts(y,targetMonth,targetDay);
-if(y===year&&!excludedOccurrence(e,key)){
-var until=rule.UNTIL?rule.UNTIL.substring(0,10).replace(/-/g,""):null;
-if(!until||key.replace(/-/g,"")<=until)out.push({event:e,date:key,year:y});
-}
-}
-return out
-}
-if(p.year===year&&p.month===month)out.push({event:e,date:start,year:p.year});
-return out
-}
-function occurrenceForDate(e,key){
-var p=dateKeyParts(key),occ=getMonthOccurrences(e,p.year,p.month);
-return occ.some(function(x){return x.date===key})
-}
-function eventMatchesDate(e,key){
-var start=eventStartKey(e),end=eventEndKey(e);if(!start)return false;
-if(e.apple_rrule&&parseRule(e.apple_rrule).FREQ==="YEARLY")return occurrenceForDate(e,key);
-return key>=start&&key<=end
-}
-function eventDisplayDate(e,key){
-var time=eventTime(e);return e.ganztag?"Ganztägig":time
-}
-function sortedEventsForDate(key){
-return calendarEvents.filter(function(e){return eventMatchesDate(e,key)}).sort(function(a,b){return (a.startzeit||a.start_datum||"").localeCompare(b.startzeit||b.start_datum||"")})
-}
-function createEventEntry(e,key){
-var wrap=document.createElement("div"),isBirthday=(e.kategorie||"").toLocaleLowerCase("de-DE").indexOf("geburtstag")>=0;
-wrap.className="calendar-entry"+(isBirthday?" birthday":"");
-var title=document.createElement("strong");title.textContent=(isBirthday?"🎂 ":"")+(e.titel||"Termin");wrap.appendChild(title);
-var info=document.createElement("small"),details=[];
-details.push(eventDisplayDate(e,key));
-if(e.kategorie)details.push(e.kategorie);
-if(e.ort)details.push("📍 "+e.ort);
-info.textContent=details.filter(Boolean).join(" · ");wrap.appendChild(info);
-if(e.beschreibung){var desc=document.createElement("small");desc.textContent=e.beschreibung;wrap.appendChild(desc)}
-return wrap
+/* FAVORIT ÄNDERN */
+async function toggleFavorite(recipe) {
+  var result = await supabaseClient.from("Rezepte")
+    .update({favorit:!recipe.favorit}).eq("id",recipe.id);
+
+  if (result.error) {
+    setStatus("recipeStatus","Favorit konnte nicht geändert werden: " + result.error.message,"error");
+  } else {
+    await loadRecipes();
+  }
 }
 
-/* KALENDER ANSICHTEN */
-function setCalendarTab(tab){
-calendarTab=tab;
-document.getElementById("calendarTabAll").classList.toggle("active",tab==="all");
-document.getElementById("calendarTabBirthdays").classList.toggle("active",tab==="birthdays");
-document.getElementById("calendarTabUpcoming").classList.toggle("active",tab==="upcoming");
-document.getElementById("calendarAllView").classList.toggle("hidden",tab!=="all");
-document.getElementById("calendarBirthdaysView").classList.toggle("hidden",tab!=="birthdays");
-document.getElementById("calendarUpcomingView").classList.toggle("hidden",tab!=="upcoming");
-renderCalendar()
+/* ================================
+   FAMILIENKALENDER – NUR LESEN
+   Datenquelle: kalender_termine
+   Zeitzone für Anzeige: Europe/Berlin
+   ================================ */
+
+function calendarSetStatus(message,isError) {
+  var el = document.getElementById("calendarStatus");
+  el.textContent = message || "";
+  el.className = "calendar-status" + (isError ? " error" : "");
 }
-function setCalendarMode(mode){calendarMode=mode;document.getElementById("calendarMonthMode").classList.toggle("active",mode==="month");document.getElementById("calendarWeekMode").classList.toggle("active",mode==="week");document.getElementById("calendarMonthView").classList.toggle("hidden",mode!=="month");document.getElementById("calendarWeekView").classList.toggle("hidden",mode!=="week");renderCalendar()}
-function changeCalendarPeriod(direction){calendarMonth.setMonth(calendarMonth.getMonth()+direction);renderCalendar()}
-function monthTitle(date){return date.toLocaleDateString("de-DE",{month:"long",year:"numeric"})}
-function renderCalendar(){
-if(calendarTab==="all")renderAllCalendar();
-if(calendarTab==="birthdays")renderBirthdays();
-if(calendarTab==="upcoming")renderUpcoming()
+
+function safeDateParts(dateKey) {
+  if (!dateKey || typeof dateKey !== "string") return null;
+  var match = dateKey.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (!match) return null;
+  return {
+    year:Number(match[1]),
+    month:Number(match[2]),
+    day:Number(match[3])
+  };
 }
-function renderAllCalendar(){
-var y=calendarMonth.getFullYear(),m=calendarMonth.getMonth()+1;
-document.getElementById("calendarPeriodLabel").textContent=monthTitle(calendarMonth);
-if(calendarMode==="week"){renderCalendarWeek();return}
-var grid=document.getElementById("calendarGrid");grid.innerHTML="";
-["Mo","Di","Mi","Do","Fr","Sa","So"].forEach(function(n){var h=document.createElement("div");h.className="calendar-weekday";h.textContent=n;grid.appendChild(h)});
-var first=new Date(y,m-1,1),offset=(first.getDay()+6)%7;
-var days=new Date(y,m,0).getDate(),cells=Math.ceil((offset+days)/7)*7,today=localDateString(new Date());
-for(var i=0;i<cells;i++){
-var date=new Date(y,m-1,1-offset+i),key=localDateString(date),cell=document.createElement("div");
-cell.className="calendar-cell"+(date.getMonth()!==m-1?" other-month":"")+(key===today?" today":"");
-var num=document.createElement("div");num.className="day-number";num.textContent=date.getDate();cell.appendChild(num);
-var events=sortedEventsForDate(key);
-events.slice(0,3).forEach(function(e){var dot=document.createElement("span");dot.className="calendar-dot"+((e.kategorie||"").toLowerCase().indexOf("geburtstag")>=0?" birthday":"");dot.textContent=e.titel||"Termin";cell.appendChild(dot)});
-if(events.length>3){var more=document.createElement("span");more.className="calendar-dot";more.textContent="+"+(events.length-3)+" weitere";cell.appendChild(more)}
-cell.setAttribute("data-date",key);cell.addEventListener("click",function(){selectedCalendarDate=this.getAttribute("data-date");renderSelectedCalendarEvents()});grid.appendChild(cell)
+
+function makeDateKey(year,month,day) {
+  return String(year).padStart(4,"0") + "-" +
+    String(month).padStart(2,"0") + "-" +
+    String(day).padStart(2,"0");
 }
-if(!selectedCalendarDate||selectedCalendarDate.substring(0,7)!==keyFromParts(y,m,1).substring(0,7))selectedCalendarDate=keyFromParts(y,m,1);
-renderSelectedCalendarEvents()
+
+function berlinDateKey(value) {
+  if (!value) return "";
+  var date = new Date(value);
+  if (isNaN(date.getTime())) return "";
+
+  var parts = new Intl.DateTimeFormat("en-CA",{
+    timeZone:"Europe/Berlin",
+    year:"numeric",
+    month:"2-digit",
+    day:"2-digit"
+  }).formatToParts(date);
+
+  var values = {};
+  parts.forEach(function(part) {
+    values[part.type] = part.value;
+  });
+
+  return values.year + "-" + values.month + "-" + values.day;
 }
-function renderSelectedCalendarEvents(){
-var box=document.getElementById("calendarSelectedEvents");box.innerHTML="";
-var heading=document.createElement("h2");heading.textContent=new Date(selectedCalendarDate+"T12:00:00").toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long"});box.appendChild(heading);
-var events=sortedEventsForDate(selectedCalendarDate);
-if(!events.length){var empty=document.createElement("div");empty.className="calendar-empty";empty.textContent="Für diesen Tag sind keine Termine eingetragen.";box.appendChild(empty);return}
-events.forEach(function(e){box.appendChild(createEventEntry(e,selectedCalendarDate))})
+
+function berlinTimeText(value) {
+  if (!value) return "";
+  var date = new Date(value);
+  if (isNaN(date.getTime())) return "";
+  return new Intl.DateTimeFormat("de-DE",{
+    timeZone:"Europe/Berlin",
+    hour:"2-digit",
+    minute:"2-digit"
+  }).format(date) + " Uhr";
 }
-function renderCalendarWeek(){
-var box=document.getElementById("calendarWeekView");box.innerHTML="";
-var selected=new Date(selectedCalendarDate+"T12:00:00");if(isNaN(selected.getTime()))selected=new Date();
-var start=mondayOfWeek(selected),end=new Date(start);end.setDate(end.getDate()+6);
-document.getElementById("calendarPeriodLabel").textContent=formatWeekRange(start);
-for(var i=0;i<7;i++){
-var d=new Date(start);d.setDate(start.getDate()+i);var key=localDateString(d);
-var section=document.createElement("div");section.className="calendar-list";
-var h=document.createElement("h2");h.textContent=d.toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long"});section.appendChild(h);
-var events=sortedEventsForDate(key);
-if(!events.length){var empty=document.createElement("div");empty.className="calendar-empty";empty.textContent="Keine Termine";section.appendChild(empty)}
-else events.forEach(function(e){section.appendChild(createEventEntry(e,key))});
-box.appendChild(section)
+
+function berlinDateText(dateKey,options) {
+  var parts = safeDateParts(dateKey);
+  if (!parts) return dateKey || "";
+  var date = new Date(parts.year,parts.month-1,parts.day,12,0,0);
+  return date.toLocaleDateString("de-DE",options || {
+    day:"numeric",
+    month:"long",
+    year:"numeric"
+  });
 }
+
+function calendarEventStartKey(event) {
+  if (event.ganztag && event.start_datum) return String(event.start_datum).substring(0,10);
+  if (event.startzeit) return berlinDateKey(event.startzeit);
+  if (event.start_datum) return String(event.start_datum).substring(0,10);
+  return "";
 }
-function renderBirthdays(){
-document.getElementById("birthdayMonthLabel").textContent=monthTitle(calendarMonth);
-var list=document.getElementById("birthdayList");list.innerHTML="";
-var y=calendarMonth.getFullYear(),m=calendarMonth.getMonth()+1,items=[];
-calendarEvents.forEach(function(e){
-if((e.kategorie||"").toLocaleLowerCase("de-DE").indexOf("geburtstag")<0)return;
-getMonthOccurrences(e,y,m).forEach(function(o){items.push({event:e,date:o.date,year:o.year})})
+
+function calendarEventEndKey(event) {
+  if (event.ganztag && event.end_datum) {
+    var end = String(event.end_datum).substring(0,10);
+    var parts = safeDateParts(end);
+    if (!parts) return calendarEventStartKey(event);
+    var date = new Date(parts.year,parts.month-1,parts.day);
+    date.setDate(date.getDate()-1);
+    return localDateString(date);
+  }
+  if (event.endzeit) return berlinDateKey(event.endzeit);
+  return calendarEventStartKey(event);
+}
+
+function calendarEventSortValue(event) {
+  if (event.startzeit) {
+    var time = new Date(event.startzeit).getTime();
+    if (!isNaN(time)) return time;
+  }
+  var key = calendarEventStartKey(event);
+  var parts = safeDateParts(key);
+  if (!parts) return Number.MAX_SAFE_INTEGER;
+  return new Date(parts.year,parts.month-1,parts.day).getTime();
+}
+
+function calendarEventIsBirthday(event) {
+  var category = String(event.kategorie || "").toLocaleLowerCase("de-DE");
+  return category === "geburtstag" || category === "birthday";
+}
+
+function calendarParseRule(rule) {
+  var result = {};
+  if (!rule || typeof rule !== "string") return result;
+  rule.replace(/^RRULE:/i,"").split(";").forEach(function(piece) {
+    var pair = piece.split("=");
+    if (pair.length === 2) result[pair[0].toUpperCase()] = pair[1].toUpperCase();
+  });
+  return result;
+}
+
+function calendarExdateKeys(event) {
+  var raw = event.apple_exdates || [];
+  if (!Array.isArray(raw)) return [];
+  return raw.map(function(value) {
+    if (typeof value === "string") {
+      if (/^\d{4}-\d{2}-\d{2}/.test(value)) return value.substring(0,10);
+      var parsed = new Date(value);
+      return isNaN(parsed.getTime()) ? "" : berlinDateKey(parsed.toISOString());
+    }
+    if (value && typeof value === "object") {
+      if (value.date) return String(value.date).substring(0,10);
+      if (value.value) return String(value.value).substring(0,10);
+    }
+    return "";
+  }).filter(Boolean);
+}
+
+function calendarBirthdayOccurrence(event,year) {
+  var baseKey = calendarEventStartKey(event);
+  var base = safeDateParts(baseKey);
+  if (!base) return null;
+
+  var rule = calendarParseRule(event.apple_rrule);
+  if (rule.FREQ !== "YEARLY") {
+    return base.year === year ? baseKey : null;
+  }
+
+  var interval = Math.max(1,Number(rule.INTERVAL || 1));
+  if (year < base.year || (year-base.year)%interval !== 0) return null;
+
+  if (rule.COUNT) {
+    var count = Number(rule.COUNT);
+    var occurrenceNumber = Math.floor((year-base.year)/interval)+1;
+    if (count > 0 && occurrenceNumber > count) return null;
+  }
+
+  if (rule.UNTIL) {
+    var until = rule.UNTIL.substring(0,8);
+    if (/^\d{8}$/.test(until)) {
+      var untilKey = until.substring(0,4)+"-"+until.substring(4,6)+"-"+until.substring(6,8);
+      if (makeDateKey(year,base.month,base.day) > untilKey) return null;
+    } else if (/^\d{4}-\d{2}-\d{2}/.test(rule.UNTIL)) {
+      if (makeDateKey(year,base.month,base.day) > rule.UNTIL.substring(0,10)) return null;
+    }
+  }
+
+  var month = rule.BYMONTH ? Number(rule.BYMONTH) : base.month;
+  var day = rule.BYMONTHDAY ? Number(rule.BYMONTHDAY) : base.day;
+  if (!month || !day) return null;
+
+  var candidate = new Date(year,month-1,day);
+  if (candidate.getFullYear() !== year ||
+      candidate.getMonth() !== month-1 ||
+      candidate.getDate() !== day) return null;
+
+  var key = makeDateKey(year,month,day);
+  if (calendarExdateKeys(event).indexOf(key) !== -1) return null;
+  return key;
+}
+
+function calendarEventOccursOn(event,dateKey) {
+  var startKey = calendarEventStartKey(event);
+  if (!startKey) return false;
+
+  if (event.ganztag && event.end_datum) {
+    var exclusiveEnd = String(event.end_datum).substring(0,10);
+    return dateKey >= startKey && dateKey < exclusiveEnd;
+  }
+
+  var endKey = calendarEventEndKey(event);
+  return dateKey >= startKey && dateKey <= endKey;
+}
+
+function calendarEventTimeLabel(event) {
+  if (event.ganztag) return "Ganztägig";
+  var start = berlinTimeText(event.startzeit);
+  var end = berlinTimeText(event.endzeit);
+  if (start && end) return start + " – " + end;
+  return start || "";
+}
+
+function calendarCreateEventElement(event,extraClass) {
+  var item = document.createElement("div");
+  item.className = "calendar-event-item" +
+    (calendarEventIsBirthday(event) ? " birthday" : "") +
+    (extraClass ? " " + extraClass : "");
+
+  var title = document.createElement("div");
+  title.className = "calendar-event-title";
+  title.textContent = (calendarEventIsBirthday(event) ? "🎂 " : "") + (event.titel || "Termin");
+  item.appendChild(title);
+
+  var metaParts = [];
+  var time = calendarEventTimeLabel(event);
+  if (time) metaParts.push(time);
+  if (event.ort) metaParts.push("📍 " + event.ort);
+
+  var meta = document.createElement("div");
+  meta.className = "calendar-event-meta";
+  meta.textContent = metaParts.join(" · ");
+  if (metaParts.length) item.appendChild(meta);
+
+  if (event.beschreibung) {
+    var description = document.createElement("div");
+    description.className = "calendar-event-meta";
+    description.textContent = event.beschreibung;
+    item.appendChild(description);
+  }
+
+  return item;
+}
+
+async function loadCalendar() {
+  if (!currentUser) return;
+
+  calendarSetStatus("Kalendertermine werden geladen …",false);
+
+  var result = await supabaseClient
+    .from("kalender_termine")
+    .select("id,apple_uid,apple_recurrence_id,titel,beschreibung,startzeit,endzeit,ganztag,start_datum,end_datum,ort,kategorie,apple_rrule,apple_exdates,apple_rdates,apple_timezone");
+
+  if (result.error) {
+    calendarLoaded = false;
+    calendarLoadError = result.error.message || "Unbekannter Fehler";
+    calendarSetStatus("Kalender konnte nicht geladen werden: " + calendarLoadError,true);
+    renderCalendar();
+    return;
+  }
+
+  calendarEvents = result.data || [];
+  calendarEvents.sort(function(a,b) {
+    return calendarEventSortValue(a)-calendarEventSortValue(b);
+  });
+  calendarLoaded = true;
+  calendarLoadError = "";
+  calendarSetStatus(calendarEvents.length + " Kalendereinträge geladen.",false);
+  renderCalendar();
+}
+
+/* KALENDER-TABS */
+function setCalendarTab(tab) {
+  calendarTab = tab;
+
+  document.getElementById("calendarTabAll").classList.toggle("active",tab === "all");
+  document.getElementById("calendarTabBirthdays").classList.toggle("active",tab === "birthdays");
+  document.getElementById("calendarTabUpcoming").classList.toggle("active",tab === "upcoming");
+
+  document.getElementById("calendarAllView").classList.toggle("hidden",tab !== "all");
+  document.getElementById("calendarBirthdaysView").classList.toggle("hidden",tab !== "birthdays");
+  document.getElementById("calendarUpcomingView").classList.toggle("hidden",tab !== "upcoming");
+
+  renderCalendar();
+}
+
+function changeCalendarMonth(direction) {
+  calendarMonth = new Date(calendarMonth.getFullYear(),calendarMonth.getMonth()+direction,1);
+  renderCalendar();
+}
+
+function goCalendarToday() {
+  var now = new Date();
+  calendarMonth = new Date(now.getFullYear(),now.getMonth(),1);
+  renderCalendar();
+}
+
+document.getElementById("calendarPrevious").addEventListener("click",function() {
+  changeCalendarMonth(-1);
 });
-items.sort(function(a,b){return a.date.localeCompare(b.date)});
-if(!items.length){var empty=document.createElement("div");empty.className="calendar-empty";empty.textContent="In diesem Monat sind keine Geburtstage im Apple-Kalender eingetragen.";list.appendChild(empty);return}
-items.forEach(function(item){
-var entry=createEventEntry(item.event,item.date),ageText="";
-var original=eventStartKey(item.event),birthYear=dateKeyParts(original).year;
-var rule=parseRule(item.event.apple_rrule);
-if(birthYear<item.year&&(!rule.UNTIL||Number(rule.UNTIL.substring(0,4))>=item.year))ageText=" · wird "+(item.year-birthYear)+" Jahre alt";
-var small=entry.querySelector("small");if(small)small.textContent=item.date.substring(8,10)+". "+small.textContent+ageText;
-list.appendChild(entry)
-})
-}
-function renderUpcoming(){
-var list=document.getElementById("upcomingList");list.innerHTML="";
-var today=localDateString(new Date()),limit=new Date();limit.setDate(limit.getDate()+60);
-var endKey=localDateString(limit),items=[];
-calendarEvents.forEach(function(e){
-var start=eventStartKey(e);if(!start)return;
-var p=dateKeyParts(start),rule=parseRule(e.apple_rrule);
-if(rule.FREQ==="YEARLY"){
-for(var y=Math.max(p.year,new Date().getFullYear());y<=limit.getFullYear();y++){
-getMonthOccurrences(e,y,p.month).forEach(function(o){if(o.date>=today&&o.date<=endKey)items.push({event:e,date:o.date})})
-}
-}else if(start>=today&&start<=endKey)items.push({event:e,date:start})
+document.getElementById("calendarNext").addEventListener("click",function() {
+  changeCalendarMonth(1);
 });
-items.sort(function(a,b){return a.date.localeCompare(b.date)});
-items=items.slice(0,20);
-if(!items.length){var empty=document.createElement("div");empty.className="calendar-empty";empty.textContent="In den nächsten 60 Tagen stehen keine Termine an.";list.appendChild(empty);return}
-items.forEach(function(item){var entry=createEventEntry(item.event,item.date);var small=entry.querySelector("small");if(small)small.textContent=new Date(item.date+"T12:00:00").toLocaleDateString("de-DE",{weekday:"short",day:"numeric",month:"long"})+" · "+small.textContent;list.appendChild(entry)})
-}
-function renderStartCalendarPreview(){
-var box=document.getElementById("startCalendarPreview");box.innerHTML="";
-var today=localDateString(new Date()),limit=new Date();limit.setDate(limit.getDate()+7);var end=localDateString(limit),items=[];
-calendarEvents.forEach(function(e){var key=eventStartKey(e);if(key>=today&&key<=end)items.push({e:e,key:key})});
-items.sort(function(a,b){return a.key.localeCompare(b.key)});items.slice(0,3).forEach(function(x){
-var div=document.createElement("div");div.className="calendar-event";div.textContent=new Date(x.key+"T12:00:00").toLocaleDateString("de-DE",{weekday:"short",day:"numeric",month:"short"})+" · "+(x.e.titel||"Termin");box.appendChild(div)
+document.getElementById("calendarToday").addEventListener("click",goCalendarToday);
+document.getElementById("birthdayPrevious").addEventListener("click",function() {
+  changeCalendarMonth(-1);
 });
-if(!items.length){var div=document.createElement("div");div.className="calendar-event";div.textContent="Keine anstehenden Termine";box.appendChild(div)}
+document.getElementById("birthdayNext").addEventListener("click",function() {
+  changeCalendarMonth(1);
+});
+document.getElementById("birthdayToday").addEventListener("click",goCalendarToday);
+
+document.getElementById("calendarMonthViewButton").addEventListener("click",function() {
+  calendarView = "month";
+  renderCalendar();
+});
+document.getElementById("calendarWeekViewButton").addEventListener("click",function() {
+  calendarView = "week";
+  renderCalendar();
+});
+
+function renderCalendar() {
+  if (!document.getElementById("calendarMonthLabel")) return;
+
+  var monthLabel = calendarMonth.toLocaleDateString("de-DE",{
+    month:"long",
+    year:"numeric"
+  });
+
+  document.getElementById("calendarMonthLabel").textContent = monthLabel;
+  document.getElementById("birthdayMonthLabel").textContent = monthLabel;
+
+  document.getElementById("calendarMonthViewButton").classList.toggle("active",calendarView === "month");
+  document.getElementById("calendarWeekViewButton").classList.toggle("active",calendarView === "week");
+  document.getElementById("calendarMonthView").classList.toggle("hidden",calendarView !== "month");
+  document.getElementById("calendarWeekView").classList.toggle("hidden",calendarView !== "week");
+
+  if (!calendarLoaded) {
+    if (calendarLoadError) {
+      calendarSetStatus("Kalender konnte nicht geladen werden: " + calendarLoadError,true);
+    } else {
+      calendarSetStatus("Kalendertermine werden geladen …",false);
+    }
+  } else {
+    calendarSetStatus(calendarEvents.length + " Kalendereinträge geladen.",false);
+  }
+
+  if (calendarTab === "all") {
+    if (calendarView === "month") renderCalendarMonth();
+    else renderCalendarWeek();
+  } else if (calendarTab === "birthdays") {
+    renderBirthdayMonth();
+  } else if (calendarTab === "upcoming") {
+    renderUpcomingEvents();
+  }
+}
+
+/* MONATSANSICHT */
+function renderCalendarMonth() {
+  var container = document.getElementById("calendarMonthView");
+  container.innerHTML = "";
+
+  var year = calendarMonth.getFullYear();
+  var month = calendarMonth.getMonth();
+  var firstDay = new Date(year,month,1);
+  var mondayOffset = (firstDay.getDay()+6)%7;
+  var gridStart = new Date(year,month,1-mondayOffset);
+  var todayKey = localDateString(new Date());
+
+  var grid = document.createElement("div");
+  grid.className = "calendar-month-grid";
+
+  ["Mo","Di","Mi","Do","Fr","Sa","So"].forEach(function(day) {
+    var heading = document.createElement("div");
+    heading.className = "calendar-weekday";
+    heading.textContent = day;
+    grid.appendChild(heading);
+  });
+
+  for (var i=0;i<42;i++) {
+    var date = new Date(gridStart);
+    date.setDate(gridStart.getDate()+i);
+    var key = localDateString(date);
+
+    var cell = document.createElement("div");
+    cell.className = "calendar-day";
+    if (date.getMonth() !== month) cell.classList.add("other-month");
+    if (key === todayKey) cell.classList.add("today");
+
+    var number = document.createElement("div");
+    number.className = "calendar-day-number";
+    number.textContent = date.getDate();
+    cell.appendChild(number);
+
+    var dayEvents = calendarEvents.filter(function(event) {
+      return calendarEventOccursOn(event,key);
+    });
+
+    dayEvents.sort(function(a,b) {
+      return calendarEventSortValue(a)-calendarEventSortValue(b);
+    });
+
+    dayEvents.slice(0,3).forEach(function(event) {
+      var eventEl = document.createElement("div");
+      eventEl.className = "calendar-day-event" +
+        (calendarEventIsBirthday(event) ? " birthday" : "") +
+        (event.ganztag ? " all-day" : "");
+      var time = event.ganztag ? "" : berlinTimeText(event.startzeit);
+      eventEl.textContent = (time ? time + " " : "") + (event.titel || "Termin");
+      cell.appendChild(eventEl);
+    });
+
+    if (dayEvents.length > 3) {
+      var more = document.createElement("div");
+      more.className = "calendar-more";
+      more.textContent = "+" + (dayEvents.length-3) + " weitere";
+      cell.appendChild(more);
+    }
+
+    grid.appendChild(cell);
+  }
+
+  container.appendChild(grid);
+}
+
+/* WOCHENANSICHT */
+function renderCalendarWeek() {
+  var container = document.getElementById("calendarWeekView");
+  container.innerHTML = "";
+
+  var year = calendarMonth.getFullYear();
+  var month = calendarMonth.getMonth();
+  var selectedDay = new Date(year,month,1);
+  var weekStart = mondayOfWeek(selectedDay);
+
+  var heading = document.createElement("p");
+  heading.className = "calendar-note";
+  heading.textContent = "Woche ab " + berlinDateText(localDateString(weekStart),{
+    day:"numeric",month:"long",year:"numeric"
+  });
+  container.appendChild(heading);
+
+  var list = document.createElement("div");
+  list.className = "calendar-week-list";
+
+  for (var i=0;i<7;i++) {
+    var date = new Date(weekStart);
+    date.setDate(weekStart.getDate()+i);
+    var key = localDateString(date);
+
+    var row = document.createElement("div");
+    row.className = "calendar-week-row";
+
+    var dateBox = document.createElement("div");
+    dateBox.className = "calendar-week-date";
+    dateBox.textContent = date.toLocaleDateString("de-DE",{weekday:"long"});
+    var dateSmall = document.createElement("small");
+    dateSmall.textContent = date.toLocaleDateString("de-DE",{day:"numeric",month:"long"});
+    dateBox.appendChild(dateSmall);
+    row.appendChild(dateBox);
+
+    var eventsBox = document.createElement("div");
+    var dayEvents = calendarEvents.filter(function(event) {
+      return calendarEventOccursOn(event,key);
+    }).sort(function(a,b) {
+      return calendarEventSortValue(a)-calendarEventSortValue(b);
+    });
+
+    if (!dayEvents.length) {
+      var empty = document.createElement("div");
+      empty.className = "calendar-event-meta";
+      empty.textContent = "Keine Termine";
+      eventsBox.appendChild(empty);
+    } else {
+      dayEvents.forEach(function(event) {
+        eventsBox.appendChild(calendarCreateEventElement(event));
+      });
+    }
+
+    row.appendChild(eventsBox);
+    list.appendChild(row);
+  }
+
+  container.appendChild(list);
+}
+
+/* GEBURTSTAGE – AUSGEWÄHLTER MONAT */
+function getBirthdayOccurrencesForMonth(year,month) {
+  var found = [];
+
+  calendarEvents.forEach(function(event) {
+    if (!calendarEventIsBirthday(event)) return;
+
+    var baseKey = calendarEventStartKey(event);
+    var base = safeDateParts(baseKey);
+    if (!base) return;
+
+    var rule = calendarParseRule(event.apple_rrule);
+    var occurrenceKey = null;
+
+    if (rule.FREQ === "YEARLY") {
+      occurrenceKey = calendarBirthdayOccurrence(event,year);
+    } else if (base.year === year && base.month === month+1) {
+      occurrenceKey = baseKey;
+    }
+
+    if (!occurrenceKey) return;
+    var parts = safeDateParts(occurrenceKey);
+    if (!parts || parts.month !== month+1) return;
+
+    var age = null;
+    var textToSearch = (event.titel || "") + " " + (event.beschreibung || "");
+    var explicitYear = textToSearch.match(/\b(19\d{2}|20\d{2})\b/);
+
+    if (explicitYear) {
+      var candidateAge = year-Number(explicitYear[1]);
+      if (candidateAge >= 0 && candidateAge < 130) age = candidateAge;
+    } else if (rule.FREQ === "YEARLY" && year >= base.year) {
+      var recurringAge = year-base.year;
+      if (recurringAge >= 0 && recurringAge < 130) age = recurringAge;
+    }
+
+    found.push({
+      event:event,
+      dateKey:occurrenceKey,
+      day:parts.day,
+      age:age
+    });
+  });
+
+  found.sort(function(a,b) {
+    if (a.day !== b.day) return a.day-b.day;
+    return String(a.event.titel || "").localeCompare(String(b.event.titel || ""),"de");
+  });
+
+  return found;
+}
+
+function renderBirthdayMonth() {
+  var container = document.getElementById("birthdayList");
+  container.innerHTML = "";
+
+  var birthdays = getBirthdayOccurrencesForMonth(
+    calendarMonth.getFullYear(),
+    calendarMonth.getMonth()
+  );
+
+  if (!birthdays.length) {
+    var empty = document.createElement("div");
+    empty.className = "calendar-empty";
+    empty.textContent = "In diesem Monat sind keine Geburtstage im Kalender eingetragen.";
+    container.appendChild(empty);
+    return;
+  }
+
+  birthdays.forEach(function(birthday) {
+    var item = document.createElement("div");
+    item.className = "birthday-item";
+
+    var day = document.createElement("div");
+    day.className = "birthday-day";
+    day.textContent = birthday.day + ".";
+    item.appendChild(day);
+
+    var details = document.createElement("div");
+    details.className = "birthday-details";
+
+    var title = document.createElement("div");
+    title.className = "calendar-event-title";
+    title.textContent = "🎂 " + (birthday.event.titel || "Geburtstag");
+    details.appendChild(title);
+
+    var dateText = document.createElement("div");
+    dateText.className = "calendar-event-meta";
+    dateText.textContent = berlinDateText(birthday.dateKey,{
+      weekday:"long",day:"numeric",month:"long"
+    });
+    details.appendChild(dateText);
+
+    if (birthday.age !== null) {
+      var age = document.createElement("div");
+      age.className = "birthday-age";
+      age.textContent = "Wird " + birthday.age + " Jahre alt";
+      details.appendChild(age);
+    }
+
+    item.appendChild(details);
+    container.appendChild(item);
+  });
+}
+
+/* DEMNÄCHST – NÄCHSTE ANSTEHENDE TERMINE */
+function renderUpcomingEvents() {
+  var container = document.getElementById("upcomingList");
+  container.innerHTML = "";
+
+  var now = new Date();
+  var todayKey = berlinDateKey(now.toISOString());
+  var upcoming = calendarEvents.filter(function(event) {
+    var startKey = calendarEventStartKey(event);
+    if (!startKey) return false;
+
+    if (event.ganztag) return startKey >= todayKey;
+    if (event.startzeit) return new Date(event.startzeit).getTime() >= now.getTime();
+    return startKey >= todayKey;
+  });
+
+  upcoming.sort(function(a,b) {
+    return calendarEventSortValue(a)-calendarEventSortValue(b);
+  });
+
+  upcoming = upcoming.slice(0,20);
+
+  if (!upcoming.length) {
+    var empty = document.createElement("div");
+    empty.className = "calendar-empty";
+    empty.textContent = "Aktuell stehen keine zukünftigen Termine im Kalender.";
+    container.appendChild(empty);
+    return;
+  }
+
+  upcoming.forEach(function(event) {
+    var item = calendarCreateEventElement(event);
+    var dateKey = calendarEventStartKey(event);
+    var date = document.createElement("div");
+    date.className = "calendar-event-meta";
+    date.textContent = berlinDateText(dateKey,{
+      weekday:"long",day:"numeric",month:"long",year:"numeric"
+    });
+    item.insertBefore(date,item.children[1] || null);
+    container.appendChild(item);
+  });
 }
 
 /* LIVE-SYNCHRONISIERUNG */
-function setupRealtime(){
-if(realtimeChannel)supabaseClient.removeChannel(realtimeChannel);
-realtimeChannel=supabaseClient.channel("familienzentrale-live")
-.on("postgres_changes",{event:"*",schema:"public",table:"essensplan"},function(){loadMeals()})
-.on("postgres_changes",{event:"*",schema:"public",table:"Rezepte"},function(){loadRecipes()})
-.on("postgres_changes",{event:"*",schema:"public",table:"kalender_termine"},function(){loadCalendar()})
-.subscribe()
+function setupRealtime() {
+  if (realtimeChannel) {
+    supabaseClient.removeChannel(realtimeChannel);
+  }
+
+  realtimeChannel = supabaseClient.channel("familienzentrale-live")
+    .on("postgres_changes",{
+      event:"*",schema:"public",table:"essensplan"
+    },function() {
+      loadMeals();
+    })
+    .on("postgres_changes",{
+      event:"*",schema:"public",table:"Rezepte"
+    },function() {
+      loadRecipes();
+    })
+    .on("postgres_changes",{
+      event:"*",schema:"public",table:"kalender_termine"
+    },function() {
+      loadCalendar();
+    })
+    .subscribe();
 }
 
 /* START */
-updateClock();setInterval(updateClock,1000);loadWeather();setInterval(loadWeather,30*60*1000);
-document.getElementById("mealDate").value=localDateString(new Date());
+updateClock();
+setInterval(updateClock,1000);
+loadWeather();
+setInterval(loadWeather,30*60*1000);
+
+var initialDate = document.getElementById("mealDate");
+initialDate.value = localDateString(new Date());
+
+/* Kalenderansicht beim ersten Laden vorbereiten */
+renderCalendar();
 </script>
+
 </body>
 </html>
