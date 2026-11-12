@@ -2070,114 +2070,72 @@ function renderCalendarMonth() {
 /* WOCHENANSICHT */
 function renderCalendarWeek() {
   var container = document.getElementById("calendarWeekView");
-  if (!container) return;
+  container.innerHTML = "";
 
-  try {
-    container.innerHTML = "";
+  var year = calendarMonth.getFullYear();
+  var month = calendarMonth.getMonth();
+  var selectedDay = new Date(year,month,1);
+  var weekStart = mondayOfWeek(selectedDay);
+  var todayKey = localDateString(new Date());
 
-    var selectedDay = new Date(
-      calendarMonth.getFullYear(),
-      calendarMonth.getMonth(),
-      1
-    );
-    var weekStart = mondayOfWeek(selectedDay);
-    var todayKey = localDateString(new Date());
+  var heading = document.createElement("p");
+  heading.className = "calendar-note";
+  heading.textContent = "Wochenübersicht Montag bis Sonntag · Woche ab " + berlinDateText(localDateString(weekStart),{
+    day:"numeric",month:"long",year:"numeric"
+  });
+  container.appendChild(heading);
 
-    var heading = document.createElement("p");
-    heading.className = "calendar-note";
-    heading.textContent = "Wochenübersicht · Montag bis Sonntag";
-    container.appendChild(heading);
+  var scroll = document.createElement("div");
+  scroll.className = "calendar-week-scroll";
+  scroll.setAttribute("aria-label","Wochenkalender von Montag bis Sonntag; auf kleinen Bildschirmen horizontal scrollen");
+  var grid = document.createElement("div");
+  grid.className = "calendar-week-grid";
 
-    var scroll = document.createElement("div");
-    scroll.className = "calendar-week-scroll";
+  for (var i=0;i<7;i++) {
+    var date = new Date(weekStart);
+    date.setDate(weekStart.getDate()+i);
+    var key = localDateString(date);
 
-    var grid = document.createElement("div");
-    grid.className = "calendar-week-grid";
+    var column = document.createElement("div");
+    column.className = "calendar-week-column" + (key === todayKey ? " today" : "");
 
-    var names = [
-      "Montag","Dienstag","Mittwoch","Donnerstag",
-      "Freitag","Samstag","Sonntag"
-    ];
+    var dateHead = document.createElement("div");
+    dateHead.className = "calendar-week-column-head";
+    dateHead.appendChild(document.createTextNode(date.toLocaleDateString("de-DE",{weekday:"long"})));
+    var dateSmall = document.createElement("small");
+    dateSmall.textContent = date.toLocaleDateString("de-DE",{day:"numeric",month:"long"});
+    dateHead.appendChild(dateSmall);
+    column.appendChild(dateHead);
 
-    for (var i = 0; i < 7; i++) {
-      var date = new Date(weekStart);
-      date.setDate(weekStart.getDate() + i);
-
-      var key = localDateString(date);
-      var column = document.createElement("div");
-      column.className = "calendar-week-column";
-
-      if (key === todayKey) column.classList.add("today");
-
-      var head = document.createElement("div");
-      head.className = "calendar-week-column-head";
-
-      var name = document.createElement("strong");
-      name.textContent = names[i];
-      head.appendChild(name);
-
-      var dateLabel = document.createElement("small");
-      dateLabel.textContent = date.toLocaleDateString("de-DE", {
-        day:"numeric",
-        month:"long"
-      });
-      head.appendChild(dateLabel);
-      column.appendChild(head);
-
-      var events = calendarEvents.filter(function(event) {
-        return calendarEventOccursOn(event,key);
-      });
-
-      events.sort(function(a,b) {
-        return calendarEventSortValue(a) - calendarEventSortValue(b);
-      });
-
-      if (events.length === 0) {
-        var empty = document.createElement("div");
-        empty.className = "calendar-event-meta";
-        empty.textContent = "Keine Termine";
-        column.appendChild(empty);
-      }
-
-      events.forEach(function(event) {
-        var item = document.createElement("div");
-        item.className = "calendar-event-item";
-
-        var title = document.createElement("div");
-        title.className = "calendar-event-title";
-        title.textContent = (event.ganztag ? "📌 " : "") +
-          (event.titel || "Termin");
-        item.appendChild(title);
-
-        var details = [];
-        var time = calendarEventTimeLabel(event);
-        if (time) details.push(time);
-        if (event.ort) details.push("📍 " + event.ort);
-
-        if (details.length) {
-          var meta = document.createElement("div");
-          meta.className = "calendar-event-meta";
-          meta.textContent = details.join(" · ");
-          item.appendChild(meta);
+    var dayEvents = calendarEvents.filter(function(event) {
+      if (calendarEventOccursOn(event,key)) return true;
+      if (calendarEventIsBirthday(event)) {
+        var base = safeDateParts(calendarEventStartKey(event));
+        var rule = calendarParseRule(event.apple_rrule);
+        if (base && rule.FREQ === "YEARLY") {
+          return calendarBirthdayOccurrence(event,date.getFullYear()) === key;
         }
+      }
+      return false;
+    }).sort(function(a,b) {
+      return calendarEventSortValue(a)-calendarEventSortValue(b);
+    });
 
-        column.appendChild(item);
+    if (!dayEvents.length) {
+      var empty = document.createElement("div");
+      empty.className = "calendar-event-meta";
+      empty.textContent = "Keine Termine";
+      column.appendChild(empty);
+    } else {
+      dayEvents.forEach(function(event) {
+        column.appendChild(calendarCreateEventElement(event));
       });
-
-      grid.appendChild(column);
     }
-
-    scroll.appendChild(grid);
-    container.appendChild(scroll);
-
-  } catch (error) {
-    container.innerHTML = "";
-    var message = document.createElement("p");
-    message.className = "calendar-empty";
-    message.textContent = "Fehler beim Anzeigen der Wochenansicht: " +
-      error.message;
-    container.appendChild(message);
+    grid.appendChild(column);
   }
+
+  scroll.appendChild(grid);
+  container.appendChild(scroll);
 }
 
 /* GEBURTSTAGE – AUSGEWÄHLTER MONAT */
