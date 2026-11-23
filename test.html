@@ -174,14 +174,39 @@ nav button:active { transform:scale(.97); }
 .page-placeholder .large-icon { font-size:48px; margin-bottom:15px; }
 .page-placeholder p { color:#75695D; }
 
-/* TEMPORÄRER TEST FÜR PRIVATE ZAUBERGARTEN-BILDER */
+/* ZAUBERGARTEN-TESTVERSION */
 .garden-image-test { background:#DDE9D8; margin-top:16px; }
-.garden-image-test img {
-  display:block; width:200px; max-width:100%; height:auto;
-  margin:14px auto 0; border-radius:16px;
-  background:#FFFFFF90; padding:8px;
-}
-.garden-image-test .action-btn { min-height:48px; }
+.test-garden-workspace { margin-top:16px; background:#DDE9D8; }
+.test-garden-topline { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+.test-garden-pill { display:inline-flex; align-items:center; gap:6px; border-radius:20px; padding:7px 11px; background:#FFFFFFA8; font-size:12px; font-weight:800; }
+.test-garden-layout { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(270px,1fr); gap:14px; margin-top:12px; align-items:start; }
+.test-garden-canvas-wrap { min-width:0; }
+.test-garden-canvas { position:relative; min-height:440px; overflow:hidden; border:3px solid #FFFFFFB8; border-radius:22px; background:linear-gradient(180deg,#CFE9F2 0%,#DDF0D9 47%,#A9CE9C 48%,#8FBD83 100%); box-shadow:inset 0 0 35px #547B4930; touch-action:pan-y; }
+.test-garden-canvas:before { content:""; position:absolute; left:-5%; right:-5%; bottom:17%; height:18%; border-radius:50%; background:#B8D9A8; opacity:.75; }
+.test-garden-canvas:after { content:"☁️"; position:absolute; top:7%; left:9%; font-size:35px; opacity:.65; pointer-events:none; }
+.test-garden-object-layer { position:absolute; inset:0; z-index:2; }
+.test-garden-object { position:absolute; display:flex; align-items:center; justify-content:center; width:72px; height:72px; padding:2px; border:2px solid transparent; border-radius:16px; background:#FFFFFF20; transform:translate(-50%,-50%); cursor:grab; touch-action:none; user-select:none; }
+.test-garden-object.selected { border-color:#FFFFFF; background:#FFFFFF55; box-shadow:0 0 0 3px #6F936B88; }
+.test-garden-object:active { cursor:grabbing; }
+.test-garden-object img { width:100%; height:100%; object-fit:contain; pointer-events:none; filter:drop-shadow(0 3px 3px #344A2B35); }
+.test-garden-object-fallback { font-size:42px; pointer-events:none; }
+.test-garden-side { min-width:0; }
+.test-garden-panel { background:#FFFFFF80; border-radius:16px; padding:13px; margin-bottom:12px; }
+.test-garden-panel h3 { margin:0 0 9px; font-size:15px; }
+.test-garden-catalog { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+.test-garden-item { min-width:0; display:flex; flex-direction:column; gap:6px; padding:9px; border-radius:13px; background:#FFFFFFB8; }
+.test-garden-item img { display:block; width:100%; height:76px; object-fit:contain; }
+.test-garden-item strong { font-size:12px; line-height:1.25; min-height:30px; }
+.test-garden-item small { font-size:10px; color:#75695D; }
+.test-garden-item button { width:100%; padding:8px 5px; border:0; border-radius:9px; background:#D2E5E2; color:var(--text); font:inherit; font-size:11px; font-weight:800; cursor:pointer; }
+.test-garden-item button:disabled { opacity:.55; cursor:wait; }
+.test-garden-controls { display:flex; gap:6px; flex-wrap:wrap; }
+.test-garden-controls button { flex:1; min-width:70px; border:0; border-radius:9px; padding:9px 7px; background:#FFFFFFD8; color:var(--text); font:inherit; font-size:11px; font-weight:800; cursor:pointer; }
+.test-garden-controls button.danger { background:#F3DDE5; }
+.test-garden-help { color:#75695D; font-size:11px; margin-top:8px; }
+.test-garden-empty { padding:16px 8px; text-align:center; color:#75695D; font-size:12px; }
+@media(max-width:850px) { .test-garden-layout { grid-template-columns:1fr; } .test-garden-canvas { min-height:390px; } }
+@media(max-width:600px) { .test-garden-canvas { min-height:340px; } .test-garden-catalog { grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; } .test-garden-item { padding:7px; } .test-garden-item img { height:62px; } .test-garden-item strong { font-size:10px; } .test-garden-item button { font-size:10px; } }
 
 .login-wrap { max-width:440px; margin:35px auto; }
 .login-card {
@@ -1267,38 +1292,61 @@ a { color:#655B50; overflow-wrap:anywhere; }
       </div>
     </div>
 
-    <!-- VORÜBERGEHENDER TEST: TESTGARTEN ANLEGEN / ÖFFNEN -->
+    <!-- SEPARATER ZAUBERGARTEN-TESTBETRIEB -->
     <div class="card garden-image-test">
       <div class="card-label">Getrennter Testbetrieb</div>
-      <h2>🪄 Testgarten öffnen</h2>
-      <p>Dieser Knopf legt für das ausgewählte Kinderprofil einen separaten Testgarten an oder öffnet den bereits vorhandenen. Echte Gärten und echte Sterne bleiben unberührt.</p>
+      <h2>🪄 Zaubergarten ausprobieren</h2>
+      <p>Hier kannst du alle 15 Gartenobjekte kostenlos freischalten und frei gestalten. Testkäufe verwenden ausschließlich das Testinventar und buchen keine echten Sterne ab.</p>
       <label for="testGardenChild">Kinderprofil auswählen</label>
       <select id="testGardenChild">
         <option value="ebe02b3e-e215-471b-afaf-d00b9ca0b853">Mila</option>
         <option value="79ec1dd8-dab5-4855-a4a3-bc2326e0e11f">Kind 2</option>
       </select>
-      <button class="action-btn primary" id="openTestGardenButton" type="button">
-        🪄 Testgarten öffnen
-      </button>
-      <div id="testGardenStatus" class="status" aria-live="polite">
-        Bitte anmelden und ein Kinderprofil auswählen.
-      </div>
+      <button class="action-btn primary" id="openTestGardenButton" type="button">🪄 Testgarten öffnen</button>
+      <div id="testGardenStatus" class="status" aria-live="polite">Bitte anmelden und ein Kinderprofil auswählen.</div>
       <div id="testGardenId" class="status"></div>
     </div>
 
-    <!-- VORÜBERGEHENDER TEST: PRIVATES GARTENBILD -->
-    <div class="card garden-image-test">
-      <div class="card-label">Technischer Funktionstest</div>
-      <h2>🌼 Privates Gartenbild testen</h2>
-      <p>Dieser Test lädt das Gänseblümchen mit deinem angemeldeten Familienkonto. Der Bildspeicher bleibt privat.</p>
-      <button class="action-btn primary" id="testGardenImageButton" type="button">
-        🌷 Gartenbild sicher laden
-      </button>
-      <div id="gardenImageTestStatus" class="status" aria-live="polite">
-        Bitte anmelden und den Test starten.
+    <div id="testGardenWorkspace" class="card test-garden-workspace hidden">
+      <div class="test-garden-topline">
+        <div>
+          <div class="card-label">Dein magischer Ort</div>
+          <h2 id="testGardenHeading">🌱 Mein Testgarten</h2>
+        </div>
+        <span class="test-garden-pill">✨ Testbudget: ∞</span>
       </div>
-      <img id="gardenTestImage" class="hidden" alt="Gänseblümchen aus dem privaten Familien-Garten">
+      <div class="test-garden-layout">
+        <div class="test-garden-canvas-wrap">
+          <div id="testGardenCanvas" class="test-garden-canvas" aria-label="Dein gestaltbarer Testgarten">
+            <div id="testGardenObjectsLayer" class="test-garden-object-layer"></div>
+          </div>
+          <div class="test-garden-help">Tipp: Ziehe ein Objekt mit Maus oder Finger an eine andere Stelle. Tippe ein Objekt an, um es zu drehen, zu vergrößern oder zu entfernen.</div>
+          <div id="testGardenSelectedControls" class="test-garden-panel hidden" style="margin-top:10px">
+            <h3 id="testGardenSelectedTitle">Ausgewähltes Objekt</h3>
+            <div class="test-garden-controls">
+              <button type="button" id="testGardenRotateLeft">↶ Drehen</button>
+              <button type="button" id="testGardenRotateRight">↷ Drehen</button>
+              <button type="button" id="testGardenSizeDown">− Kleiner</button>
+              <button type="button" id="testGardenSizeUp">＋ Größer</button>
+              <button type="button" class="danger" id="testGardenRemove">Entfernen</button>
+            </div>
+          </div>
+        </div>
+        <div class="test-garden-side">
+          <div class="test-garden-panel">
+            <h3>🌼 Gartenkatalog</h3>
+            <p style="font-size:11px;margin:0 0 9px">Alle Gegenstände sind im Test kostenlos. Der angezeigte Sternpreis ist nur der spätere Originalpreis.</p>
+            <div id="testGardenCatalog" class="test-garden-catalog"><div class="test-garden-empty">Katalog wird geladen …</div></div>
+          </div>
+          <div class="test-garden-panel">
+            <h3>🎒 Freigeschaltete Gegenstände</h3>
+            <div id="testGardenInventory" class="test-garden-help">Inventar wird geladen …</div>
+          </div>
+        </div>
+      </div>
+      <div id="testGardenWorkspaceStatus" class="status" aria-live="polite"></div>
     </div>
+
   </section>
 
   <!-- SUNGROW-PV-DASHBOARD -->
@@ -1590,73 +1638,308 @@ document.getElementById("logoutButton").addEventListener("click",async function(
   await supabaseClient.auth.signOut();
 });
 
-/* PRIVATER ZAUBERGARTEN-BILDTEST */
+/* ZAUBERGARTEN-TESTVERSION: DATEN UND BILDER */
+var testGardenState = null;
+var testGardenImageCache = {};
+var testGardenDrag = null;
+
 function resetGardenImageTest() {
-  var image = document.getElementById("gardenTestImage");
-  var button = document.getElementById("testGardenImageButton");
-  if (image) {
-    image.removeAttribute("src");
-    image.classList.add("hidden");
-  }
-  if (button) button.disabled = false;
-  var status = document.getElementById("gardenImageTestStatus");
+  testGardenState = null;
+  testGardenImageCache = {};
+  var workspace = document.getElementById("testGardenWorkspace");
+  if (workspace) workspace.classList.add("hidden");
+  var status = document.getElementById("testGardenStatus");
   if (status) {
-    status.textContent = "Bitte anmelden und den Test starten.";
+    status.textContent = "Bitte anmelden und ein Kinderprofil auswählen.";
     status.className = "status";
   }
 }
 
-async function testGardenImage() {
-  var button = document.getElementById("testGardenImageButton");
-  var image = document.getElementById("gardenTestImage");
-  var status = document.getElementById("gardenImageTestStatus");
+function setGardenStatus(message,type) {
+  var el = document.getElementById("testGardenWorkspaceStatus");
+  if (!el) return;
+  el.textContent = message || "";
+  el.className = "status" + (type ? " " + type : "");
+}
 
-  if (!currentUser) {
-    status.textContent = "Bitte zuerst mit einem Elternkonto anmelden.";
-    status.className = "status error";
+function gardenEscape(value) {
+  return String(value == null ? "" : value).replace(/[&<>"']/g,function(ch) {
+    return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[ch];
+  });
+}
+
+function gardenEmoji(type) {
+  var icons = {blume:"🌼",pflanze:"☘️",baum:"🌳",tier:"🦋",dekoration:"✨",gebaeude:"🏡",sonstiges:"🌱"};
+  return icons[type] || "🌱";
+}
+
+async function getTestGardenImage(path) {
+  if (!path) return null;
+  if (/^https?:\/\//i.test(path)) return path;
+  var cleanPath = String(path).replace(/^\/+/,"").replace(/^kinder-garten-bilder\//,"");
+  if (testGardenImageCache[cleanPath]) return testGardenImageCache[cleanPath];
+  var result = await supabaseClient.storage.from("kinder-garten-bilder").createSignedUrl(cleanPath,3600);
+  if (result.error) {
+    console.warn("Gartenbild konnte nicht signiert werden:",cleanPath,result.error.message);
+    return null;
+  }
+  var url = result.data && result.data.signedUrl ? result.data.signedUrl : null;
+  if (url) testGardenImageCache[cleanPath] = url;
+  return url;
+}
+
+async function loadTestGarden(gardenId,childId) {
+  setGardenStatus("Testgarten und Gegenstände werden geladen …");
+  var gardenResult = await supabaseClient.from("kinder_zaubergarten_test")
+    .select("id,familien_id,kind_id,titel,hintergrund")
+    .eq("id",gardenId).single();
+  if (gardenResult.error) throw gardenResult.error;
+  var garden = gardenResult.data;
+  if (garden.kind_id !== childId) throw new Error("Der Testgarten gehört nicht zum ausgewählten Kinderprofil.");
+
+  var catalogResult = await supabaseClient.from("kinder_garten_katalog")
+    .select("id,schluessel,titel,beschreibung,objekt_typ,bild_url,sternpreis,aktiv,sortierung")
+    .eq("familien_id",garden.familien_id).eq("aktiv",true).order("sortierung");
+  if (catalogResult.error) throw catalogResult.error;
+
+  testGardenState = {
+    gardenId:garden.id, childId:childId, familyId:garden.familien_id,
+    title:garden.titel || "Mein Testgarten", catalog:catalogResult.data || [],
+    inventory:[], objects:[], selectedObjectId:null, imageUrls:{}
+  };
+
+  await Promise.all(testGardenState.catalog.map(async function(item) {
+    item._signedImage = await getTestGardenImage(item.bild_url);
+    testGardenState.imageUrls[item.id] = item._signedImage;
+  }));
+
+  await refreshTestGardenData();
+  document.getElementById("testGardenHeading").textContent = "🌱 " + testGardenState.title;
+  document.getElementById("testGardenWorkspace").classList.remove("hidden");
+  setGardenStatus("Dein Testgarten ist bereit. Alle Gegenstände sind kostenlos freischaltbar.","success");
+}
+
+async function refreshTestGardenData() {
+  if (!testGardenState) return;
+  var inventoryResult = await supabaseClient.from("kinder_garten_inventar_test")
+    .select("id,katalog_id,freigeschaltet_am")
+    .eq("familien_id",testGardenState.familyId)
+    .eq("kind_id",testGardenState.childId);
+  if (inventoryResult.error) throw inventoryResult.error;
+
+  var objectsResult = await supabaseClient.from("kinder_zaubergarten_objekte_test")
+    .select("id,garten_id,objekt_typ,objekt_schluessel,titel,bild_url,position_x,position_y,groesse,drehung,ebene")
+    .eq("familien_id",testGardenState.familyId)
+    .eq("garten_id",testGardenState.gardenId)
+    .order("ebene");
+  if (objectsResult.error) throw objectsResult.error;
+
+  testGardenState.inventory = inventoryResult.data || [];
+  testGardenState.objects = objectsResult.data || [];
+  renderTestGardenCatalog();
+  renderTestGardenInventory();
+  renderTestGardenObjects();
+  renderTestGardenSelectedControls();
+}
+
+function renderTestGardenCatalog() {
+  var host = document.getElementById("testGardenCatalog");
+  if (!host || !testGardenState) return;
+  host.innerHTML = "";
+  testGardenState.catalog.forEach(function(item) {
+    var owned = testGardenState.inventory.some(function(entry) { return entry.katalog_id === item.id; });
+    var card = document.createElement("div");
+    card.className = "test-garden-item";
+    var image = item._signedImage
+      ? '<img src="' + gardenEscape(item._signedImage) + '" alt="' + gardenEscape(item.titel) + '">'
+      : '<div class="test-garden-empty" style="font-size:35px;padding:8px">' + gardenEmoji(item.objekt_typ) + '</div>';
+    card.innerHTML = image + '<strong>' + gardenEscape(item.titel) + '</strong>' +
+      '<small>Original: ' + Number(item.sternpreis || 0) + ' ⭐</small>' +
+      '<button type="button">' + (owned ? '＋ In den Garten' : '✨ Kostenlos holen') + '</button>';
+    var button = card.querySelector("button");
+    button.addEventListener("click",function() {
+      if (owned) placeTestGardenItem(item.id,button);
+      else buyTestGardenItem(item.id,button);
+    });
+    host.appendChild(card);
+  });
+  if (!testGardenState.catalog.length) host.innerHTML = '<div class="test-garden-empty">Im Katalog sind keine aktiven Gegenstände.</div>';
+}
+
+function renderTestGardenInventory() {
+  var host = document.getElementById("testGardenInventory");
+  if (!host || !testGardenState) return;
+  if (!testGardenState.inventory.length) {
+    host.textContent = "Noch nichts freigeschaltet. Hole dir oben deine ersten Zaubergarten-Gegenstände – kostenlos im Test.";
     return;
   }
+  host.innerHTML = testGardenState.inventory.map(function(entry) {
+    var item = testGardenState.catalog.find(function(c) { return c.id === entry.katalog_id; });
+    return '<div style="display:flex;align-items:center;gap:7px;padding:6px 0;border-bottom:1px solid #75695D22;font-size:11px">' +
+      '<span style="font-size:19px">' + (item ? gardenEmoji(item.objekt_typ) : '🌱') + '</span>' +
+      '<strong style="flex:1">' + gardenEscape(item ? item.titel : 'Gegenstand') + '</strong>' +
+      '<span>' + testGardenState.objects.filter(function(o) { return o.objekt_schluessel === entry.katalog_id; }).length + ' im Garten</span></div>';
+  }).join("");
+}
 
+function renderTestGardenObjects() {
+  var layer = document.getElementById("testGardenObjectsLayer");
+  if (!layer || !testGardenState) return;
+  layer.innerHTML = "";
+  testGardenState.objects.forEach(function(object) {
+    var item = testGardenState.catalog.find(function(c) { return c.id === object.objekt_schluessel; });
+    var node = document.createElement("div");
+    node.className = "test-garden-object" + (object.id === testGardenState.selectedObjectId ? " selected" : "");
+    node.dataset.objectId = object.id;
+    node.title = object.titel || (item && item.titel) || "Gartenobjekt";
+    node.style.left = Number(object.position_x) + "%";
+    node.style.top = Number(object.position_y) + "%";
+    node.style.width = Math.round(72 * Number(object.groesse || 1)) + "px";
+    node.style.height = Math.round(72 * Number(object.groesse || 1)) + "px";
+    node.style.zIndex = String(Number(object.ebene || 1) + 2);
+    node.style.transform = "translate(-50%,-50%) rotate(" + Number(object.drehung || 0) + "deg)";
+    var imageUrl = (item && item._signedImage) || null;
+    node.innerHTML = imageUrl
+      ? '<img src="' + gardenEscape(imageUrl) + '" alt="' + gardenEscape(node.title) + '" draggable="false">'
+      : '<span class="test-garden-object-fallback">' + gardenEmoji(object.objekt_typ) + '</span>';
+    node.addEventListener("pointerdown",startTestGardenDrag);
+    node.addEventListener("click",function(event) {
+      event.stopPropagation();
+      testGardenState.selectedObjectId = object.id;
+      renderTestGardenObjects();
+      renderTestGardenSelectedControls();
+    });
+    layer.appendChild(node);
+  });
+}
+
+function renderTestGardenSelectedControls() {
+  var panel = document.getElementById("testGardenSelectedControls");
+  if (!panel || !testGardenState) return;
+  var object = testGardenState.objects.find(function(o) { return o.id === testGardenState.selectedObjectId; });
+  if (!object) { panel.classList.add("hidden"); return; }
+  panel.classList.remove("hidden");
+  document.getElementById("testGardenSelectedTitle").textContent = "Ausgewählt: " + object.titel;
+}
+
+async function buyTestGardenItem(catalogId,button) {
   button.disabled = true;
-  image.classList.add("hidden");
-  image.removeAttribute("src");
-  status.textContent = "Privates Bild wird sicher angefordert …";
-  status.className = "status";
-
+  setGardenStatus("Gegenstand wird kostenlos freigeschaltet …");
   try {
-    var path = "ccb7876a-7e57-4cb3-874c-afae3db92810/garten/gaensebluemchen.png";
-    var result = await supabaseClient.storage
-      .from("kinder-garten-bilder")
-      .createSignedUrl(path,300);
-
+    var result = await supabaseClient.rpc("kinder_testgarten_objekt_kaufen",{
+      p_kind_id:testGardenState.childId,p_katalog_id:catalogId
+    });
     if (result.error) throw result.error;
-    if (!result.data || !result.data.signedUrl) {
-      throw new Error("Supabase hat keine signierte Bild-URL zurückgegeben.");
-    }
-
-    image.onload = function() {
-      image.classList.remove("hidden");
-      status.textContent = "Erfolgreich! Das private Gänseblümchen wurde geladen.";
-      status.className = "status success";
-      button.disabled = false;
-    };
-
-    image.onerror = function() {
-      image.classList.add("hidden");
-      status.textContent = "Die signierte URL wurde erstellt, aber das Bild konnte nicht angezeigt werden.";
-      status.className = "status error";
-      button.disabled = false;
-    };
-
-    image.src = result.data.signedUrl;
+    await refreshTestGardenData();
+    setGardenStatus(result.data ? "Gegenstand kostenlos freigeschaltet! ✨" : "Dieser Gegenstand ist bereits freigeschaltet.","success");
   } catch (error) {
-    status.textContent = "Bildabruf fehlgeschlagen: " + (error.message || "Unbekannter Fehler");
-    status.className = "status error";
-    button.disabled = false;
+    setGardenStatus("Freischalten fehlgeschlagen: " + (error.message || "Unbekannter Fehler"),"error");
+  } finally { button.disabled = false; }
+}
+
+async function placeTestGardenItem(catalogId,button) {
+  button.disabled = true;
+  try {
+    var result = await supabaseClient.rpc("kinder_testgarten_objekt_platzieren",{
+      p_garten_id:testGardenState.gardenId,p_katalog_id:catalogId,
+      p_position_x:Math.round(28 + Math.random()*44),
+      p_position_y:Math.round(35 + Math.random()*48),p_groesse:1,p_drehung:0
+    });
+    if (result.error) throw result.error;
+    await refreshTestGardenData();
+    setGardenStatus("Dein Gegenstand steht jetzt im Garten. Du kannst ihn mit Maus oder Finger verschieben.","success");
+  } catch (error) {
+    setGardenStatus("Platzieren fehlgeschlagen: " + (error.message || "Unbekannter Fehler"),"error");
+  } finally { button.disabled = false; }
+}
+
+function startTestGardenDrag(event) {
+  if (!testGardenState) return;
+  var node = event.currentTarget;
+  var object = testGardenState.objects.find(function(o) { return o.id === node.dataset.objectId; });
+  if (!object) return;
+  event.preventDefault();
+  testGardenState.selectedObjectId = object.id;
+  renderTestGardenSelectedControls();
+  var canvas = document.getElementById("testGardenCanvas");
+  var rect = canvas.getBoundingClientRect();
+  testGardenDrag = {id:object.id,node:node,rect:rect,moved:false,x:Number(object.position_x),y:Number(object.position_y),size:Number(object.groesse || 1),rotation:Number(object.drehung || 0)};
+  node.setPointerCapture(event.pointerId);
+  node.onpointermove = function(moveEvent) {
+    if (!testGardenDrag || testGardenDrag.id !== object.id) return;
+    var dx = moveEvent.clientX - testGardenDrag.rect.left;
+    var dy = moveEvent.clientY - testGardenDrag.rect.top;
+    var x = Math.max(0,Math.min(100,dx / testGardenDrag.rect.width * 100));
+    var y = Math.max(0,Math.min(100,dy / testGardenDrag.rect.height * 100));
+    testGardenDrag.x = Math.round(x * 10) / 10;
+    testGardenDrag.y = Math.round(y * 10) / 10;
+    testGardenDrag.moved = true;
+    node.style.left = testGardenDrag.x + "%";
+    node.style.top = testGardenDrag.y + "%";
+  };
+  node.onpointerup = async function() {
+    node.onpointermove = null;
+    node.onpointerup = null;
+    var drag = testGardenDrag;
+    testGardenDrag = null;
+    if (!drag || !drag.moved) return;
+    await saveTestGardenObject(drag.id,drag.x,drag.y,drag.size,drag.rotation,"Position gespeichert.");
+  };
+  node.onpointercancel = function() { testGardenDrag = null; node.onpointermove = null; node.onpointerup = null; };
+}
+
+async function saveTestGardenObject(objectId,x,y,size,rotation,successText) {
+  try {
+    var result = await supabaseClient.rpc("kinder_testgarten_objekt_bewegen",{
+      p_objekt_id:objectId,p_position_x:x,p_position_y:y,p_groesse:size,p_drehung:rotation
+    });
+    if (result.error) throw result.error;
+    if (!result.data) throw new Error("Das Testobjekt wurde nicht gefunden.");
+    var object = testGardenState.objects.find(function(o) { return o.id === objectId; });
+    if (object) { object.position_x=x; object.position_y=y; object.groesse=size; object.drehung=rotation; }
+    renderTestGardenObjects();
+    renderTestGardenSelectedControls();
+    setGardenStatus(successText || "Änderung gespeichert.","success");
+  } catch (error) {
+    setGardenStatus("Änderung konnte nicht gespeichert werden: " + (error.message || "Unbekannter Fehler"),"error");
+    await refreshTestGardenData();
   }
 }
 
-document.getElementById("testGardenImageButton").addEventListener("click",testGardenImage);
+async function changeSelectedTestGardenObject(change) {
+  if (!testGardenState) return;
+  var object = testGardenState.objects.find(function(o) { return o.id === testGardenState.selectedObjectId; });
+  if (!object) return;
+  var size = Math.max(0.25,Math.min(3,Number(object.groesse || 1) + (change.size || 0)));
+  var rotation = ((Number(object.drehung || 0) + (change.rotation || 0)) % 360 + 360) % 360;
+  await saveTestGardenObject(object.id,Number(object.position_x),Number(object.position_y),Math.round(size*100)/100,rotation,"Objekt angepasst und gespeichert.");
+}
+
+async function removeSelectedTestGardenObject() {
+  if (!testGardenState || !testGardenState.selectedObjectId) return;
+  var objectId = testGardenState.selectedObjectId;
+  try {
+    var result = await supabaseClient.rpc("kinder_testgarten_objekt_entfernen",{p_objekt_id:objectId});
+    if (result.error) throw result.error;
+    testGardenState.selectedObjectId = null;
+    await refreshTestGardenData();
+    setGardenStatus("Objekt aus dem Testgarten entfernt. Es bleibt im Testinventar.","success");
+  } catch (error) {
+    setGardenStatus("Entfernen fehlgeschlagen: " + (error.message || "Unbekannter Fehler"),"error");
+  }
+}
+
+document.getElementById("testGardenRotateLeft").addEventListener("click",function() { changeSelectedTestGardenObject({rotation:-15}); });
+document.getElementById("testGardenRotateRight").addEventListener("click",function() { changeSelectedTestGardenObject({rotation:15}); });
+document.getElementById("testGardenSizeDown").addEventListener("click",function() { changeSelectedTestGardenObject({size:-0.1}); });
+document.getElementById("testGardenSizeUp").addEventListener("click",function() { changeSelectedTestGardenObject({size:0.1}); });
+document.getElementById("testGardenRemove").addEventListener("click",removeSelectedTestGardenObject);
+document.getElementById("testGardenCanvas").addEventListener("click",function(event) {
+  if (event.target.id === "testGardenCanvas" || event.target.id === "testGardenObjectsLayer") {
+    if (testGardenState) testGardenState.selectedObjectId = null;
+    renderTestGardenObjects(); renderTestGardenSelectedControls();
+  }
+});
 
 /* VORÜBERGEHENDER TEST: SEPARATEN TESTGARTEN ÖFFNEN */
 async function openTestGarden() {
@@ -1686,9 +1969,12 @@ async function openTestGarden() {
       throw new Error("Die Funktion hat keine Testgarten-ID zurückgegeben.");
     }
 
-    status.textContent = "Erfolgreich! Der separate Testgarten wurde gefunden bzw. angelegt.";
-    status.className = "status success";
+    status.textContent = "Testgarten gefunden. Die Gartenwelt wird geladen …";
+    status.className = "status";
     idOutput.textContent = "Testgarten-ID: " + result.data;
+    await loadTestGarden(result.data,childId);
+    status.textContent = "Erfolgreich! Dein separater Testgarten ist geöffnet.";
+    status.className = "status success";
   } catch (error) {
     status.textContent = "Testgarten konnte nicht geöffnet werden: " + (error.message || "Unbekannter Fehler");
     status.className = "status error";
