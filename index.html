@@ -174,6 +174,15 @@ nav button:active { transform:scale(.97); }
 .page-placeholder .large-icon { font-size:48px; margin-bottom:15px; }
 .page-placeholder p { color:#75695D; }
 
+/* TEMPORÄRER TEST FÜR PRIVATE ZAUBERGARTEN-BILDER */
+.garden-image-test { background:#DDE9D8; margin-top:16px; }
+.garden-image-test img {
+  display:block; width:200px; max-width:100%; height:auto;
+  margin:14px auto 0; border-radius:16px;
+  background:#FFFFFF90; padding:8px;
+}
+.garden-image-test .action-btn { min-height:48px; }
+
 .login-wrap { max-width:440px; margin:35px auto; }
 .login-card {
   background:#F7F0E6; border-radius:24px; padding:25px;
@@ -1257,6 +1266,20 @@ a { color:#655B50; overflow-wrap:anywhere; }
         <p>Eigene Routinen und Aufgaben folgen.</p>
       </div>
     </div>
+
+    <!-- VORÜBERGEHENDER TEST: PRIVATES GARTENBILD -->
+    <div class="card garden-image-test">
+      <div class="card-label">Technischer Funktionstest</div>
+      <h2>🌼 Privates Gartenbild testen</h2>
+      <p>Dieser Test lädt das Gänseblümchen mit deinem angemeldeten Familienkonto. Der Bildspeicher bleibt privat.</p>
+      <button class="action-btn primary" id="testGardenImageButton" type="button">
+        🌷 Gartenbild sicher laden
+      </button>
+      <div id="gardenImageTestStatus" class="status" aria-live="polite">
+        Bitte anmelden und den Test starten.
+      </div>
+      <img id="gardenTestImage" class="hidden" alt="Gänseblümchen aus dem privaten Familien-Garten">
+    </div>
   </section>
 
   <!-- SUNGROW-PV-DASHBOARD -->
@@ -1504,6 +1527,7 @@ async function checkFamilyMembership() {
 async function handleSession(session) {
   if (!session) {
     currentUser = null;
+    resetGardenImageTest();
     if (realtimeChannel) {
       await supabaseClient.removeChannel(realtimeChannel);
       realtimeChannel = null;
@@ -1546,6 +1570,74 @@ document.getElementById("loginForm").addEventListener("submit",async function(ev
 document.getElementById("logoutButton").addEventListener("click",async function() {
   await supabaseClient.auth.signOut();
 });
+
+/* PRIVATER ZAUBERGARTEN-BILDTEST */
+function resetGardenImageTest() {
+  var image = document.getElementById("gardenTestImage");
+  var button = document.getElementById("testGardenImageButton");
+  if (image) {
+    image.removeAttribute("src");
+    image.classList.add("hidden");
+  }
+  if (button) button.disabled = false;
+  var status = document.getElementById("gardenImageTestStatus");
+  if (status) {
+    status.textContent = "Bitte anmelden und den Test starten.";
+    status.className = "status";
+  }
+}
+
+async function testGardenImage() {
+  var button = document.getElementById("testGardenImageButton");
+  var image = document.getElementById("gardenTestImage");
+  var status = document.getElementById("gardenImageTestStatus");
+
+  if (!currentUser) {
+    status.textContent = "Bitte zuerst mit einem Elternkonto anmelden.";
+    status.className = "status error";
+    return;
+  }
+
+  button.disabled = true;
+  image.classList.add("hidden");
+  image.removeAttribute("src");
+  status.textContent = "Privates Bild wird sicher angefordert …";
+  status.className = "status";
+
+  try {
+    var path = "ccb7876a-7e57-4cb3-874c-afae3db92810/garten/gaensebluemchen.png";
+    var result = await supabaseClient.storage
+      .from("kinder-garten-bilder")
+      .createSignedUrl(path,300);
+
+    if (result.error) throw result.error;
+    if (!result.data || !result.data.signedUrl) {
+      throw new Error("Supabase hat keine signierte Bild-URL zurückgegeben.");
+    }
+
+    image.onload = function() {
+      image.classList.remove("hidden");
+      status.textContent = "Erfolgreich! Das private Gänseblümchen wurde geladen.";
+      status.className = "status success";
+      button.disabled = false;
+    };
+
+    image.onerror = function() {
+      image.classList.add("hidden");
+      status.textContent = "Die signierte URL wurde erstellt, aber das Bild konnte nicht angezeigt werden.";
+      status.className = "status error";
+      button.disabled = false;
+    };
+
+    image.src = result.data.signedUrl;
+  } catch (error) {
+    status.textContent = "Bildabruf fehlgeschlagen: " + (error.message || "Unbekannter Fehler");
+    status.className = "status error";
+    button.disabled = false;
+  }
+}
+
+document.getElementById("testGardenImageButton").addEventListener("click",testGardenImage);
 
 supabaseClient.auth.onAuthStateChange(function(event,session) {
   if (event === "SIGNED_OUT" || event === "INITIAL_SESSION" || event === "SIGNED_IN" || event === "TOKEN_REFRESHED") {
