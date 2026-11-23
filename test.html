@@ -1320,7 +1320,7 @@ a { color:#655B50; overflow-wrap:anywhere; }
           <div id="testGardenCanvas" class="test-garden-canvas" aria-label="Dein gestaltbarer Testgarten">
             <div id="testGardenObjectsLayer" class="test-garden-object-layer"></div>
           </div>
-          <div class="test-garden-help">Tipp: Ziehe ein Objekt mit Maus oder Finger an eine andere Stelle. Tippe ein Objekt an, um es zu drehen, zu vergrößern oder zu entfernen.</div>
+          <div class="test-garden-help">Tipp: Ziehe ein Objekt mit einem Finger oder der Maus. Auf dem Touchscreen kannst du es mit Daumen und Zeigefinger auseinander- oder zusammenziehen, um es zu vergrößern oder zu verkleinern. Die Größe ist auf Faktor 3 begrenzt.</div>
           <div id="testGardenSelectedControls" class="test-garden-panel hidden" style="margin-top:10px">
             <h3 id="testGardenSelectedTitle">Ausgewähltes Objekt</h3>
             <div class="test-garden-controls">
@@ -1641,7 +1641,7 @@ document.getElementById("logoutButton").addEventListener("click",async function(
 /* ZAUBERGARTEN-TESTVERSION: DATEN UND BILDER */
 var testGardenState = null;
 var testGardenImageCache = {};
-var testGardenDrag = null;
+var testGardenGesture = null;
 
 function resetGardenImageTest() {
   testGardenState = null;
@@ -1858,35 +1858,117 @@ function startTestGardenDrag(event) {
   var node = event.currentTarget;
   var object = testGardenState.objects.find(function(o) { return o.id === node.dataset.objectId; });
   if (!object) return;
+  if (event.pointerType === "mouse" && event.button !== 0) return;
   event.preventDefault();
+
+  if (testGardenGesture && testGardenGesture.id !== object.id) return;
+
   testGardenState.selectedObjectId = object.id;
   renderTestGardenSelectedControls();
+
   var canvas = document.getElementById("testGardenCanvas");
   var rect = canvas.getBoundingClientRect();
-  testGardenDrag = {id:object.id,node:node,rect:rect,moved:false,x:Number(object.position_x),y:Number(object.position_y),size:Number(object.groesse || 1),rotation:Number(object.drehung || 0)};
-  node.setPointerCapture(event.pointerId);
-  node.onpointermove = function(moveEvent) {
-    if (!testGardenDrag || testGardenDrag.id !== object.id) return;
-    var dx = moveEvent.clientX - testGardenDrag.rect.left;
-    var dy = moveEvent.clientY - testGardenDrag.rect.top;
-    var x = Math.max(0,Math.min(100,dx / testGardenDrag.rect.width * 100));
-    var y = Math.max(0,Math.min(100,dy / testGardenDrag.rect.height * 100));
-    testGardenDrag.x = Math.round(x * 10) / 10;
-    testGardenDrag.y = Math.round(y * 10) / 10;
-    testGardenDrag.moved = true;
-    node.style.left = testGardenDrag.x + "%";
-    node.style.top = testGardenDrag.y + "%";
-  };
-  node.onpointerup = async function() {
-    node.onpointermove = null;
-    node.onpointerup = null;
-    var drag = testGardenDrag;
-    testGardenDrag = null;
-    if (!drag || !drag.moved) return;
-    await saveTestGardenObject(drag.id,drag.x,drag.y,drag.size,drag.rotation,"Position gespeichert.");
-  };
-  node.onpointercancel = function() { testGardenDrag = null; node.onpointermove = null; node.onpointerup = null; };
+  if (!testGardenGesture) {
+    testGardenGesture = {
+      id: object.id,
+      node: node,
+      rect: rect,
+      pointers: {},
+      x: Number(object.position_x),
+      y: Number(object.position_y),
+      size: Number(object.groesse || 1),
+      rotation: Number(object.drehung || 0),
+      moved: false,
+      mode: "drag",
+      dragStartX: event.clientX,
+      dragStartY: event.clientY,
+      dragBaseX: Number(object.position_x),
+      dragBaseY: Number(object.position_y),
+      pinchStartDistance: 0,
+      pinchStartSize: Number(object.groesse || 1)
+    };
+  }
+
+  var gesture = testGardenGesture;
+  gesture.pointers[event.pointerId] = {x:event.clientX,y:event.clientY};
+  try { node.setPointerCapture(event.pointerId); } catch (e) {}
+
+  var pointerIds = Object.keys(gesture.pointers);
+  if (pointerIds.length === 2) {
+    var a = gesture.pointers[pointerIds[0]];
+    var b = gesture.pointers[pointerIds[1]];
+    gesture.mode = "pinch";
+    gesture.pinchStartDistance = Math.max(1,Math.hypot(a.x-b.x,a.y-b.y));
+    gesture.pinchStartSize = gesture.size;
+  }
 }
+
+function handleTestGardenPointerMove(event) {
+  var gesture = testGardenGesture;
+  if (!gesture || !gesture.pointers[event.pointerId]) return;
+  event.preventDefault();
+  gesture.pointers[event.pointerId] = {x:event.clientX,y:event.clientY};
+  var pointerIds = Object.keys(gesture.pointers);
+
+  if (pointerIds.length >= 2 && gesture.mode === "pinch") {
+    var a = gesture.pointers[pointerIds[0]];
+    var b = gesture.pointers[pointerIds[1]];
+    var distance = Math.max(1,Math.hypot(a.x-b.x,a.y-b.y));
+    var nextSize = Math.max(0.25,Math.min(3,gesture.pinchStartSize * distance / gesture.pinchStartDistance));
+    gesture.size = Math.round(nextSize * 100) / 100;
+    gesture.moved = true;
+    gesture.node.style.width = Math.round(72 * gesture.size) + "px";
+    gesture.node.style.height = Math.round(72 * gesture.size) + "px";
+    return;
+  }
+
+  if (pointerIds.length === 1 && gesture.mode === "drag") {
+    var point = gesture.pointers[pointerIds[0]];
+    var dx = point.x - gesture.dragStartX;
+    var dy = point.y - gesture.dragStartY;
+    var x = Math.max(0,Math.min(100,gesture.dragBaseX + dx / gesture.rect.width * 100));
+    var y = Math.max(0,Math.min(100,gesture.dragBaseY + dy / gesture.rect.height * 100));
+    gesture.x = Math.round(x * 10) / 10;
+    gesture.y = Math.round(y * 10) / 10;
+    if (Math.abs(dx) + Math.abs(dy) > 2) gesture.moved = true;
+    gesture.node.style.left = gesture.x + "%";
+    gesture.node.style.top = gesture.y + "%";
+  }
+}
+
+async function finishTestGardenPointer(event) {
+  var gesture = testGardenGesture;
+  if (!gesture || !gesture.pointers[event.pointerId]) return;
+  delete gesture.pointers[event.pointerId];
+  var remainingIds = Object.keys(gesture.pointers);
+
+  if (remainingIds.length === 1) {
+    var remaining = gesture.pointers[remainingIds[0]];
+    gesture.mode = "drag";
+    gesture.dragStartX = remaining.x;
+    gesture.dragStartY = remaining.y;
+    gesture.dragBaseX = gesture.x;
+    gesture.dragBaseY = gesture.y;
+    return;
+  }
+  if (remainingIds.length > 1) return;
+
+  testGardenGesture = null;
+  if (!gesture.moved) return;
+  await saveTestGardenObject(
+    gesture.id,
+    gesture.x,
+    gesture.y,
+    gesture.size,
+    gesture.rotation,
+    "Position und Größe gespeichert."
+  );
+}
+
+var testGardenCanvas = document.getElementById("testGardenCanvas");
+testGardenCanvas.addEventListener("pointermove",handleTestGardenPointerMove);
+testGardenCanvas.addEventListener("pointerup",finishTestGardenPointer);
+testGardenCanvas.addEventListener("pointercancel",finishTestGardenPointer);
 
 async function saveTestGardenObject(objectId,x,y,size,rotation,successText) {
   try {
