@@ -218,7 +218,7 @@ nav button:active { transform:scale(.97); }
 .magic-world-progress-line { display:flex; justify-content:space-between; align-items:center; gap:10px; font-weight:800; font-size:13px; color:#294a39; }
 .magic-world-progress-track { height:13px; border-radius:99px; background:#ffffffb8; overflow:hidden; margin-top:7px; box-shadow:inset 0 2px 4px #294a3920; }
 .magic-world-progress-fill { height:100%; width:0; border-radius:99px; background:linear-gradient(90deg,#66bd83,#f5d36c); transition:width .55s cubic-bezier(.2,.8,.2,1); box-shadow:0 0 12px #fff2a5; }
-.magic-world-scene { position:relative; isolation:isolate; width:100%; aspect-ratio:3/2; min-height:360px; max-height:760px; overflow:hidden; border-radius:24px; border:3px solid #fff4d4; background:#315c48 url('./zauberwald_hintergrund.png') center 52%/cover no-repeat; box-shadow:0 12px 30px #203b2b35,inset 0 0 0 1px #fff8; }
+.magic-world-scene { position:relative; isolation:isolate; width:100%; aspect-ratio:16/9; min-height:360px; max-height:760px; overflow:hidden; border-radius:24px; border:3px solid #fff4d4; background:#315c48 url('./zauberwald_hintergrund.png') center 52%/cover no-repeat; box-shadow:0 12px 30px #203b2b35,inset 0 0 0 1px #fff8; }
 .magic-world-scene:before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:linear-gradient(180deg,#142d3320 0%,transparent 27%,transparent 72%,#102d2a38 100%); }
 .magic-world-scene:after { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(ellipse at 50% 48%,transparent 45%,#11291b28 100%); }
 .magic-world-title-art { position:absolute; z-index:2; left:50%; top:12px; transform:translateX(-50%); padding:9px 24px; border:2px solid #f5d68b; border-radius:18px 18px 26px 26px; color:#fff7d9; background:linear-gradient(180deg,#79502b,#422c20); font-family:Georgia,serif; font-size:clamp(18px,3vw,30px); font-weight:900; text-shadow:0 2px 4px #24150c; box-shadow:0 5px 14px #17251c88; white-space:nowrap; }
@@ -226,6 +226,25 @@ nav button:active { transform:scale(.97); }
 .magic-world-marker:hover { transform:translate(-50%,-50%) scale(1.12); box-shadow:0 0 0 5px #ffe49a88,0 7px 20px #102b1eaa; }
 .magic-world-marker:active { transform:translate(-50%,-50%) scale(.94); }
 .magic-world-marker img { width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 3px 4px #1c2d2088); }
+.magic-world-marker.locked:after { content:"🔒"; position:absolute; inset:0; display:grid; place-items:center; font-size:clamp(17px,2.5vw,27px); color:#795b25; text-shadow:0 1px 3px #fff; }
+.magic-world-marker.unlocked { width:clamp(58px,8vw,118px); height:clamp(62px,10vw,142px); padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; transform:translate(-50%,-88%); animation:objectAppear .75s cubic-bezier(.2,.8,.2,1) both, objectFloat 4.5s ease-in-out 1s infinite; }
+.magic-world-marker.unlocked:hover { transform:translate(-50%,-92%) scale(1.08); box-shadow:none; }
+.magic-world-marker.unlocked:after { display:none; }
+.magic-world-marker.unlocked img { width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 8px 7px #172a1c88); }
+.magic-world-marker .magic-world-check { display:none; }
+.magic-world-marker.locked { color:#795b25; }
+.magic-world-marker.locked span { display:none; }
+.magic-world-marker.locked { font-size:0; }
+.magic-world-item img { filter:drop-shadow(0 3px 4px #1c2d2040); }
+.magic-world-item img.locked-preview { filter:grayscale(.75) opacity(.52) drop-shadow(0 2px 3px #1c2d2030); }
+@keyframes objectAppear { from { opacity:0; transform:translate(-50%,-70%) scale(.35); filter:brightness(2); } to { opacity:1; transform:translate(-50%,-88%) scale(1); filter:brightness(1); } }
+@keyframes objectFloat { 0%,100% { translate:0 0; } 50% { translate:0 -4px; } }
+.magic-world-celebration-card.celebrating { animation:worldGlow 1.8s ease-in-out infinite, celebrationPulse 3s ease-in-out infinite; }
+.magic-world-confetti { animation:worldFloat .8s ease-in-out infinite alternate; text-shadow:0 0 18px #f6d97b; }
+@keyframes celebrationPulse { 0%,100% { box-shadow:0 18px 60px #0008,0 0 0 0 #ffe58a00; } 50% { box-shadow:0 18px 60px #0008,0 0 0 16px #ffe58a44; } }
+.magic-world-test-actions { display:flex;gap:8px;flex-wrap:wrap;margin-top:8px; }
+.magic-world-scene.world-celebration-active { animation:forestAwaken 2.2s ease-in-out infinite alternate; }
+@keyframes forestAwaken { from { filter:saturate(1) brightness(1); box-shadow:0 12px 30px #203b2b35,0 0 0 0 #ffe78a00; } to { filter:saturate(1.35) brightness(1.13); box-shadow:0 12px 30px #203b2b35,0 0 32px 12px #ffe78a88; } }
 .magic-world-marker .magic-world-emoji { display:none; }
 .magic-world-marker.locked { background:radial-gradient(circle at 35% 25%,#fff8dc,#a69a79); border:2px solid #fff4d1; opacity:.92; }
 .magic-world-marker.locked:after { content:"✦"; position:absolute; color:#8c641e; font-size:25px; text-shadow:0 1px 2px #fff; }
@@ -234,6 +253,10 @@ nav button:active { transform:scale(.97); }
 .magic-world-items { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; margin-top:14px; }
 .magic-world-item { min-width:0; border-radius:17px; padding:11px; background:linear-gradient(145deg,#fffdf3,#e7eddc); display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px; border:1px solid #fff; box-shadow:0 4px 12px #294a3914; }
 .magic-world-item img { width:70px; height:64px; object-fit:contain; }
+.magic-world-lock-art { width:70px;height:64px;display:grid;place-items:center;border-radius:18px;background:radial-gradient(circle,#fff8d8,#d9e4ca);color:#8b713d;font-size:28px;box-shadow:inset 0 0 12px #8c9b6b33; }
+.magic-world-lock-art.discovered { background:radial-gradient(circle,#fff4b5,#f0cf75);color:#9b6c22; }
+.magic-unlock-placeholder { width:min(320px,75vw);height:180px;margin:10px auto;display:grid;place-items:center;align-content:center;gap:8px;border-radius:24px;background:radial-gradient(circle at 50% 40%,#fff6c8,#d4e6c9 72%,#9ebc91);color:#9b7434;font-size:64px;box-shadow:inset 0 0 30px #fff9,0 8px 24px #3c573533; }
+.magic-unlock-placeholder small {font-size:14px;font-weight:800;letter-spacing:.04em;}
 .magic-world-item .magic-world-emoji { display:none; }
 .magic-world-item strong { font-size:12px; line-height:1.2; min-height:28px; color:#344c39; }
 .magic-world-item small { color:#75695d; font-size:10px; }
@@ -1392,7 +1415,7 @@ a { color:#655B50; overflow-wrap:anywhere; }
       <h3 style="margin:17px 0 8px">Deine 20 Zauberwald-Schätze</h3>
       <div id="magicWorldItems" class="magic-world-items"></div>
       <div id="magicWorldStatus" class="status magic-world-status" aria-live="polite"></div>
-      <button type="button" id="magicWorldReplayCelebration" class="action-btn primary hidden" style="margin-top:8px">🎉 Abschlussfeier erneut ansehen</button>
+      <div class="magic-world-test-actions"><button type="button" id="magicWorldReplayCelebration" class="action-btn primary hidden">🎉 Abschlussfeier erneut ansehen</button><button type="button" id="magicWorldPreviewCelebration" class="action-btn" style="background:#e8e0f5;color:#51406f">Abschlussanimation testen</button><button type="button" id="magicWorldResetProgress" class="action-btn" style="background:#fff4dc;color:#725126">Testfortschritt zurücksetzen</button></div>
     </div>
 
     <div id="magicWorldCelebration" class="magic-world-celebration hidden" role="dialog" aria-modal="true" aria-labelledby="magicWorldCelebrationTitle">
@@ -1400,10 +1423,8 @@ a { color:#655B50; overflow-wrap:anywhere; }
         <div class="magic-world-confetti">✨ 🌟 🎉 🌟 ✨</div>
         <h2 id="magicWorldCelebrationTitle">Du hast es geschafft!</h2>
         <p id="magicWorldCelebrationText">Dein Zauberwald ist vollständig. Du kannst richtig stolz auf dich sein!</p>
-        <p id="magicWorldSpokenStatus" style="font-size:11px"></p>
-        <button type="button" id="magicWorldReplayVoice">🔊 Glückwunsch noch einmal hören</button>
         <button type="button" class="secondary" id="magicWorldCloseCelebration">Weiter zum Zauberwald</button>
-        <h3 style="margin:14px 0 5px;color:#426348">Welche Welt möchtest du als Nächstes entdecken?</h3>
+        <h3 style="margin:14px 0 5px;color:#426348">Mama oder Papa dürfen dir deine Glückwünsche vorlesen. Welche Welt möchtest du als Nächstes entdecken?</h3>
         <div class="magic-world-next-choices">
           <button type="button" class="magic-world-next-choice" data-world-choice="unterwasserwelt">🌊 Unterwasserwelt</button>
           <button type="button" class="magic-world-next-choice" data-world-choice="pirateninsel">🏴‍☠️ Pirateninsel</button>
@@ -1417,7 +1438,7 @@ a { color:#655B50; overflow-wrap:anywhere; }
       <div id="magicUnlockPanel" class="magic-unlock-panel">
         <button type="button" id="magicUnlockClose" class="magic-unlock-close" aria-label="Schließen">×</button>
         <div style="font-size:13px;font-weight:900;letter-spacing:1px;color:#9b7434;text-transform:uppercase">Ein neuer Zauberwald-Schatz</div>
-        <img id="magicUnlockImage" class="magic-unlock-art" alt="" src="">
+        <img id="magicUnlockImage" class="magic-unlock-art" alt="" src="" style="display:none"><div id="magicUnlockPlaceholder" class="magic-unlock-placeholder">✧<small>Dein magischer Schatz</small></div>
         <h2 id="magicUnlockName" class="magic-unlock-name">Dein neues Element</h2>
         <p id="magicUnlockCopy" class="magic-unlock-copy">Möchtest du diesen Schatz entdecken?</p>
         <button type="button" id="magicUnlockConfirm" class="magic-unlock-action">✨ Jetzt entdecken</button>
@@ -1771,7 +1792,6 @@ function resetGardenImageTest() {
   var celebration = document.getElementById("magicWorldCelebration");
   if (celebration) celebration.classList.add("hidden");
   magicWorldState = null;
-  if (window.speechSynthesis) window.speechSynthesis.cancel();
   var status = document.getElementById("testGardenStatus");
   if (status) {
     status.textContent = "Bitte anmelden und ein Kinderprofil auswählen.";
@@ -2205,8 +2225,8 @@ function getMagicWorldCatalogItem(element) {
 }
 
 function getMagicWorldImage(element) {
-  var item = getMagicWorldCatalogItem(element);
-  return item && item._signedImage ? item._signedImage : null;
+  // Eigenständige 3D-Illustrationen aus dem assets-Ordner; keine alten Katalog-Icons.
+  return element && element.key ? "./assets/" + element.key + ".png" : null;
 }
 
 function renderZauberwald() {
@@ -2234,8 +2254,7 @@ function renderZauberwald() {
     marker.setAttribute("aria-label",marker.title);
     marker.innerHTML = isUnlocked && imageUrl
       ? '<img src="' + gardenEscape(imageUrl) + '" alt="' + gardenEscape(element.name) + '">'
-      : '<span aria-hidden="true">' + (isUnlocked ? '✦' : '✧') + '</span>';
-    if (isUnlocked) marker.insertAdjacentHTML("beforeend",'<span class="magic-world-check">✓</span>');
+      : '<span aria-hidden="true">🔒</span>';
     marker.addEventListener("click",function() {
       openMagicWorldUnlock(element.key);
     });
@@ -2244,13 +2263,13 @@ function renderZauberwald() {
     var card = document.createElement("div");
     card.className = "magic-world-item" + (isUnlocked ? " is-unlocked" : "");
     var visual = imageUrl
-      ? '<img src="' + gardenEscape(imageUrl) + '" alt="' + gardenEscape(element.name) + '">'
-      : '<div class="magic-world-emoji" aria-hidden="true">✧</div>';
+      ? '<img class="' + (isUnlocked ? '' : 'locked-preview') + '" src="' + gardenEscape(imageUrl) + '" alt="' + gardenEscape(element.name) + '">'
+      : '<div class="magic-world-lock-art sealed" aria-hidden="true"><span>◇</span></div>';
     card.innerHTML = visual + '<strong>' + gardenEscape(element.name) + '</strong>' +
       '<small>' + (isUnlocked ? 'Schon entdeckt' : 'Wartet auf dich') + '</small>' +
-      '<button type="button">' + (isUnlocked ? 'Noch einmal ansehen' : 'Im Test entdecken') + '</button>';
+      '<button type="button"' + (isUnlocked ? ' disabled' : '') + '>' + (isUnlocked ? 'Bereits entdeckt' : 'Jetzt entdecken') + '</button>';
     var cardButton = card.querySelector("button");
-    cardButton.addEventListener("click",function() { openMagicWorldUnlock(element.key); });
+    if (!isUnlocked) cardButton.addEventListener("click",function() { openMagicWorldUnlock(element.key); });
     itemsHost.appendChild(card);
   });
 
@@ -2276,10 +2295,12 @@ function openMagicWorldUnlock(elementKey) {
   pendingMagicWorldElement = element;
   var imageUrl = getMagicWorldImage(element);
   var image = document.getElementById("magicUnlockImage");
-  image.src = imageUrl || "./zauberwald_hintergrund.png";
-  image.alt = element.name;
-  image.style.objectFit = imageUrl ? "contain" : "cover";
-  if (!imageUrl) image.style.width = "min(420px,85vw)";
+  image.src = imageUrl || "";
+  image.alt = imageUrl ? element.name : "";
+  image.style.display = imageUrl ? "block" : "none";
+  image.style.objectFit = "contain";
+  var placeholder = document.getElementById("magicUnlockPlaceholder");
+  if (placeholder) placeholder.style.display = imageUrl ? "none" : "grid";
   document.getElementById("magicUnlockName").textContent = element.name;
   var unlocked = magicWorldState.unlocked.has(element.key);
   document.getElementById("magicUnlockCopy").textContent = unlocked
@@ -2343,52 +2364,52 @@ document.getElementById("magicUnlockConfirm").addEventListener("click",function(
   unlockMagicWorldElement(pendingMagicWorldElement.key,this);
 });
 
-function speakMagicWorldCongratulations() {
-  var name = getMagicWorldChildName();
-  var messages = [
-    "Hallo " + name + "! Du hast es geschafft! Dein Zauberwald ist vollständig. Du hast mit Geduld und Ausdauer alle 20 magischen Elemente freigeschaltet. Du kannst richtig stolz auf dich sein! Ich freue mich auf dein nächstes Abenteuer!",
-    "Juhu, " + name + "! Was für eine tolle Leistung! Dein Zauberwald ist zum Leben erwacht. Du bist drangeblieben und hast dein Ziel erreicht. Sei stolz auf dich! Welche magische Welt entdeckst du als Nächstes?"
-  ];
-  var message = messages[Math.floor(Math.random() * messages.length)];
-  var spokenStatus = document.getElementById("magicWorldSpokenStatus");
-  if (!window.speechSynthesis || typeof SpeechSynthesisUtterance === "undefined") {
-    spokenStatus.textContent = "Dein Browser unterstützt hier leider keine Sprachausgabe. Die Glückwünsche bleiben zum Lesen sichtbar.";
-    return;
+function showMagicWorldCelebration(isPreview) {
+  if (!magicWorldState || (magicWorldState.celebrationShown && !isPreview)) return;
+  if (!isPreview) {
+    magicWorldState.celebrationShown = true;
+    localStorage.setItem("zauberwald_celebration_" + magicWorldState.childId,"yes");
   }
-  try {
-    window.speechSynthesis.cancel();
-    var utterance = new SpeechSynthesisUtterance(message);
-    utterance.lang = "de-DE";
-    utterance.rate = 0.92;
-    utterance.pitch = 1.08;
-    utterance.onstart = function() { spokenStatus.textContent = "🔊 Deine persönliche Glückwunschnachricht wird vorgelesen …"; };
-    utterance.onend = function() { spokenStatus.textContent = "✨ Das war deine persönliche Glückwunschnachricht."; };
-    utterance.onerror = function() { spokenStatus.textContent = "Die Sprachausgabe konnte nicht gestartet werden. Du kannst es erneut versuchen."; };
-    window.speechSynthesis.speak(utterance);
-  } catch (e) {
-    spokenStatus.textContent = "Die Sprachausgabe ist auf diesem Gerät nicht verfügbar.";
-  }
-}
-
-function showMagicWorldCelebration() {
-  if (!magicWorldState || magicWorldState.celebrationShown) return;
-  magicWorldState.celebrationShown = true;
-  localStorage.setItem("zauberwald_celebration_" + magicWorldState.childId,"yes");
   var name = getMagicWorldChildName();
   document.getElementById("magicWorldCelebrationText").textContent =
-    "Liebe " + name + ", dein Zauberwald ist vollständig! Du hast alle 20 magischen Elemente freigeschaltet. Du kannst richtig stolz auf dich sein. Welche Welt möchtest du als Nächstes entdecken?";
+    "Liebe " + name + ", dein Zauberwald ist vollständig! Du hast alle 20 magischen Elemente freigeschaltet. Du kannst richtig stolz auf dich sein. Mama oder Papa dürfen dir deine Glückwünsche vorlesen. Welche Welt möchtest du als Nächstes entdecken?";
+  if (isPreview) document.getElementById("magicWorldCelebrationText").textContent = "Vorschau der Abschlussfeier: Wenn alle 20 Schätze entdeckt sind, erwacht dein Zauberwald zum Leben! Mama oder Papa dürfen dir diese Glückwünsche vorlesen.";
   var overlay = document.getElementById("magicWorldCelebration");
   var card = document.getElementById("magicWorldCelebrationCard");
   overlay.classList.remove("hidden");
   card.classList.add("celebrating");
-  speakMagicWorldCongratulations();
+  document.getElementById("magicWorldScene").classList.add("world-celebration-active");
   if (magicWorldCelebrationTimer) clearTimeout(magicWorldCelebrationTimer);
   magicWorldCelebrationTimer = setTimeout(function() {
     card.classList.remove("celebrating");
+    document.getElementById("magicWorldScene").classList.remove("world-celebration-active");
   },30000);
 }
 
-document.getElementById("magicWorldReplayVoice").addEventListener("click",speakMagicWorldCongratulations);
+document.getElementById("magicWorldResetProgress").addEventListener("click",async function() {
+  if (!magicWorldState) return;
+  var childName = getMagicWorldChildName();
+  if (!confirm("Möchtest du den TEST-Fortschritt von " + childName + " im Zauberwald wirklich zurücksetzen? Es werden ausschließlich Test-Freischaltungen gelöscht. Echte Sterne und echte Gartendaten bleiben unberührt.")) return;
+  this.disabled = true;
+  try {
+    var result = await supabaseClient.rpc("kinder_welt_fortschritt_zuruecksetzen_test", { p_kind_id: magicWorldState.childId, p_welt_schluessel: "zauberwald" });
+    if (result.error) throw result.error;
+    localStorage.removeItem("zauberwald_celebration_" + magicWorldState.childId);
+    await loadZauberwaldProgress();
+    document.getElementById("magicWorldStatus").textContent = "Testfortschritt zurückgesetzt. Jetzt kannst du die Elemente erneut freischalten und die Animation testen.";
+    document.getElementById("magicWorldStatus").className = "status success magic-world-status";
+  } catch (error) {
+    document.getElementById("magicWorldStatus").textContent = "Zurücksetzen nicht möglich: " + (error.message || "Unbekannter Fehler") + ". Bitte zuerst das ergänzende SQL ausführen.";
+    document.getElementById("magicWorldStatus").className = "status error magic-world-status";
+  } finally { this.disabled = false; }
+});
+
+document.getElementById("magicWorldPreviewCelebration").addEventListener("click",function() {
+  if (!magicWorldState) return;
+  magicWorldState.celebrationShown = false;
+  showMagicWorldCelebration(true);
+});
+
 document.getElementById("magicWorldReplayCelebration").addEventListener("click",function() {
   if (magicWorldState) magicWorldState.celebrationShown = false;
   showMagicWorldCelebration();
@@ -2401,12 +2422,11 @@ document.querySelectorAll("[data-world-choice]").forEach(function(button) {
     document.querySelectorAll("[data-world-choice]").forEach(function(other) {
       other.style.outline = other === button ? "3px solid #D7A92C" : "none";
     });
-    document.getElementById("magicWorldSpokenStatus").textContent = labels[choice] + " ist als nächste Welt vorgemerkt. Sie wird im nächsten Ausbauschritt aktiviert.";
+    document.getElementById("magicWorldStatus").textContent = labels[choice] + " ist als nächste Welt vorgemerkt. Sie wird im nächsten Ausbauschritt aktiviert.";
   });
 });
 document.getElementById("magicWorldCloseCelebration").addEventListener("click",function() {
   document.getElementById("magicWorldCelebration").classList.add("hidden");
-  if (window.speechSynthesis) window.speechSynthesis.cancel();
 });
 
 /* VORÜBERGEHENDER TEST: SEPARATEN TESTGARTEN ÖFFNEN */
