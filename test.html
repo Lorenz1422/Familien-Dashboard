@@ -209,54 +209,67 @@ nav button:active { transform:scale(.97); }
 @media(max-width:600px) { .test-garden-canvas { min-height:340px; } .test-garden-catalog { grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; } .test-garden-item { padding:7px; } .test-garden-item img { height:62px; } .test-garden-item strong { font-size:10px; } .test-garden-item button { font-size:10px; } }
 
 
-/* NEUER KINDERBEREICH: ZAUBERWELTEN-PROTOTYP */
+/* ZAUBERWELTEN – EINHEITLICHER 3D-MÄRCHENSTIL */
 #testGardenWorkspace { display:none !important; }
-.magic-world-card { margin-top:16px; background:#E7EEDC; }
+.magic-world-card { margin-top:16px; padding:clamp(12px,2vw,22px); background:linear-gradient(145deg,#e8f0e4,#cddfcf); }
 .magic-world-header { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
-.magic-world-tag { border-radius:999px; padding:7px 12px; background:#fff9; font-size:12px; font-weight:800; }
+.magic-world-tag { border-radius:999px; padding:8px 13px; background:#fff9e9; color:#62441e; font-size:12px; font-weight:800; box-shadow:0 3px 10px #263b2b20; }
 .magic-world-progress { margin:12px 0 15px; }
-.magic-world-progress-line { display:flex; justify-content:space-between; align-items:center; gap:10px; font-weight:800; font-size:13px; }
-.magic-world-progress-track { height:12px; border-radius:99px; background:#FFFFFFB8; overflow:hidden; margin-top:7px; }
-.magic-world-progress-fill { height:100%; width:0; border-radius:99px; background:linear-gradient(90deg,#72B77A,#E5C86C); transition:width .45s ease; }
-.magic-world-scene { position:relative; width:100%; aspect-ratio:16/10; min-height:390px; max-height:680px; overflow:hidden; border-radius:22px; border:3px solid #FFFFFFC9; background:linear-gradient(180deg,#A8D9E8 0%,#D6EAD4 45%,#A6CC91 46%,#79AE70 100%); box-shadow:inset 0 -30px 70px #426C3C35; }
-.magic-world-scene:before { content:""; position:absolute; left:-8%; right:-8%; bottom:16%; height:34%; background:#80B477; border-radius:50% 50% 0 0 / 28% 28% 0 0; box-shadow:0 -25px 0 #9BC98B; }
-.magic-world-scene:after { content:""; position:absolute; left:34%; bottom:-13%; width:34%; height:34%; border-radius:50%; background:linear-gradient(140deg,#9ED9E8,#64B4C8); transform:rotate(-12deg); opacity:.85; box-shadow:0 0 0 9px #B5DDA7; }
-.magic-world-sun { position:absolute; top:7%; right:10%; width:62px; height:62px; border-radius:50%; background:#FFE9A2; box-shadow:0 0 38px #FFF1B8; }
-.magic-world-cloud { position:absolute; top:11%; left:10%; font-size:34px; opacity:.72; }
-.magic-world-title-art { position:absolute; left:50%; top:7%; transform:translateX(-50%); color:#315B42; font-family:Georgia,serif; font-size:clamp(18px,3vw,29px); font-weight:900; text-shadow:0 2px 0 #FFFFFFB8; white-space:nowrap; }
-.magic-world-marker { position:absolute; z-index:3; transform:translate(-50%,-50%); width:clamp(38px,6.4vw,76px); height:clamp(38px,6.4vw,76px); border:2px solid #FFFFFFB8; border-radius:18px; background:#FFFFFF9C; display:flex; align-items:center; justify-content:center; padding:4px; box-shadow:0 4px 12px #35533B35; cursor:pointer; transition:transform .2s,opacity .2s,filter .2s; }
-.magic-world-marker:active { transform:translate(-50%,-50%) scale(.92); }
-.magic-world-marker img { width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 3px 3px #344A2B35); }
-.magic-world-marker .magic-world-emoji { font-size:clamp(22px,4vw,43px); line-height:1; }
-.magic-world-marker.locked { background:#E7E9DFB8; border:2px dashed #FFFFFF; filter:grayscale(1); opacity:.7; }
-.magic-world-marker.locked .magic-world-emoji { opacity:.42; }
-.magic-world-marker.unlocked { background:#FFFDF0D9; border-color:#F5D77A; box-shadow:0 0 0 3px #F5D77A66,0 5px 15px #35533B35; }
-.magic-world-marker .magic-world-check { position:absolute; right:-6px; top:-8px; font-size:17px; background:#fff; border-radius:50%; line-height:1; }
-.magic-world-items { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:9px; margin-top:14px; }
-.magic-world-item { min-width:0; border-radius:14px; padding:9px; background:#FFFFFFB8; display:flex; flex-direction:column; align-items:center; text-align:center; gap:5px; border:1px solid #FFFFFFC9; }
-.magic-world-item img { width:62px; height:58px; object-fit:contain; }
-.magic-world-item .magic-world-emoji { font-size:39px; height:58px; display:flex; align-items:center; }
-.magic-world-item strong { font-size:12px; line-height:1.2; min-height:28px; }
-.magic-world-item small { color:#75695D; font-size:10px; }
-.magic-world-item button { width:100%; border:0; border-radius:9px; padding:8px 4px; background:#D8E8D1; color:#304C36; font:inherit; font-size:10px; font-weight:800; cursor:pointer; }
-.magic-world-item button:disabled { opacity:.7; cursor:default; }
-.magic-world-item.is-unlocked { background:#F5F8E9; border-color:#C6DDB7; }
+.magic-world-progress-line { display:flex; justify-content:space-between; align-items:center; gap:10px; font-weight:800; font-size:13px; color:#294a39; }
+.magic-world-progress-track { height:13px; border-radius:99px; background:#ffffffb8; overflow:hidden; margin-top:7px; box-shadow:inset 0 2px 4px #294a3920; }
+.magic-world-progress-fill { height:100%; width:0; border-radius:99px; background:linear-gradient(90deg,#66bd83,#f5d36c); transition:width .55s cubic-bezier(.2,.8,.2,1); box-shadow:0 0 12px #fff2a5; }
+.magic-world-scene { position:relative; isolation:isolate; width:100%; aspect-ratio:3/2; min-height:360px; max-height:760px; overflow:hidden; border-radius:24px; border:3px solid #fff4d4; background:#315c48 url('./zauberwald_hintergrund.png') center 52%/cover no-repeat; box-shadow:0 12px 30px #203b2b35,inset 0 0 0 1px #fff8; }
+.magic-world-scene:before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:linear-gradient(180deg,#142d3320 0%,transparent 27%,transparent 72%,#102d2a38 100%); }
+.magic-world-scene:after { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(ellipse at 50% 48%,transparent 45%,#11291b28 100%); }
+.magic-world-title-art { position:absolute; z-index:2; left:50%; top:12px; transform:translateX(-50%); padding:9px 24px; border:2px solid #f5d68b; border-radius:18px 18px 26px 26px; color:#fff7d9; background:linear-gradient(180deg,#79502b,#422c20); font-family:Georgia,serif; font-size:clamp(18px,3vw,30px); font-weight:900; text-shadow:0 2px 4px #24150c; box-shadow:0 5px 14px #17251c88; white-space:nowrap; }
+.magic-world-marker { position:absolute; z-index:3; transform:translate(-50%,-50%); width:clamp(36px,5.8vw,68px); height:clamp(36px,5.8vw,68px); border:2px solid #fff0c4; border-radius:50%; background:radial-gradient(circle at 35% 25%,#fffde8,#d8c18b); display:flex; align-items:center; justify-content:center; padding:5px; box-shadow:0 4px 14px #102b1e88,0 0 0 3px #fff4; cursor:pointer; transition:transform .2s,box-shadow .2s; }
+.magic-world-marker:hover { transform:translate(-50%,-50%) scale(1.12); box-shadow:0 0 0 5px #ffe49a88,0 7px 20px #102b1eaa; }
+.magic-world-marker:active { transform:translate(-50%,-50%) scale(.94); }
+.magic-world-marker img { width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 3px 4px #1c2d2088); }
+.magic-world-marker .magic-world-emoji { display:none; }
+.magic-world-marker.locked { background:radial-gradient(circle at 35% 25%,#fff8dc,#a69a79); border:2px solid #fff4d1; opacity:.92; }
+.magic-world-marker.locked:after { content:"✦"; position:absolute; color:#8c641e; font-size:25px; text-shadow:0 1px 2px #fff; }
+.magic-world-marker.unlocked { background:radial-gradient(circle at 35% 25%,#fffde8,#f4d16f); border-color:#fff1a8; box-shadow:0 0 0 3px #ffdf79a8,0 0 22px #ffdf79cc; animation:markerBreathe 3.2s ease-in-out infinite; }
+.magic-world-marker .magic-world-check { position:absolute; right:-5px; top:-5px; font-size:12px; background:#fff7d6; color:#477c4a; border:1px solid #e6c86b; border-radius:50%; width:19px; height:19px; display:grid; place-items:center; }
+.magic-world-items { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; margin-top:14px; }
+.magic-world-item { min-width:0; border-radius:17px; padding:11px; background:linear-gradient(145deg,#fffdf3,#e7eddc); display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px; border:1px solid #fff; box-shadow:0 4px 12px #294a3914; }
+.magic-world-item img { width:70px; height:64px; object-fit:contain; }
+.magic-world-item .magic-world-emoji { display:none; }
+.magic-world-item strong { font-size:12px; line-height:1.2; min-height:28px; color:#344c39; }
+.magic-world-item small { color:#75695d; font-size:10px; }
+.magic-world-item button { width:100%; border:0; border-radius:12px; padding:9px 5px; background:linear-gradient(180deg,#f5d985,#d9a94c); color:#503718; font:inherit; font-size:11px; font-weight:900; cursor:pointer; box-shadow:0 3px 8px #76502128; }
+.magic-world-item button:disabled { background:#d8e8d1; color:#3e6946; opacity:1; cursor:default; box-shadow:none; }
+.magic-world-item.is-unlocked { background:linear-gradient(145deg,#fff9d9,#e2f0d8); border-color:#e7c96e; }
 .magic-world-status { margin-top:12px; font-size:12px; }
-.magic-world-legend { display:flex; gap:12px; flex-wrap:wrap; font-size:11px; color:#5C7057; margin-top:9px; }
-.magic-world-celebration { position:fixed; inset:0; z-index:1000; background:#183B2CEB; display:flex; align-items:center; justify-content:center; padding:18px; }
+.magic-world-legend { display:flex; gap:12px; flex-wrap:wrap; font-size:11px; color:#46634c; margin-top:9px; }
+.magic-world-celebration { position:fixed; inset:0; z-index:1000; background:#102b24ed; display:flex; align-items:center; justify-content:center; padding:18px; }
 .magic-world-celebration.hidden { display:none; }
-.magic-world-celebration-card { width:min(620px,100%); max-height:92vh; overflow:auto; background:linear-gradient(145deg,#FFF8DC,#E1F1D8); border:3px solid #F6D97B; border-radius:26px; padding:22px; text-align:center; box-shadow:0 18px 60px #0006; position:relative; }
+.magic-world-celebration-card { width:min(620px,100%); max-height:92vh; overflow:auto; background:linear-gradient(145deg,#fff8dc,#dcebd5); border:3px solid #f6d97b; border-radius:26px; padding:22px; text-align:center; box-shadow:0 18px 60px #0008; position:relative; }
 .magic-world-celebration-card.celebrating { animation:worldGlow 2.5s ease-in-out infinite; }
 .magic-world-confetti { font-size:30px; letter-spacing:8px; animation:worldFloat 2s ease-in-out infinite alternate; }
-.magic-world-celebration h2 { color:#326B42; font-family:Georgia,serif; font-size:clamp(26px,5vw,42px); margin:9px 0; }
-.magic-world-celebration p { color:#49614A; line-height:1.5; }
-.magic-world-celebration button { border:0; border-radius:12px; padding:12px 16px; margin:5px; background:#5E9B66; color:white; font:inherit; font-weight:800; cursor:pointer; }
-.magic-world-celebration button.secondary { background:#E6EAD8; color:#38513A; }
+.magic-world-celebration h2 { color:#326b42; font-family:Georgia,serif; font-size:clamp(26px,5vw,42px); margin:9px 0; }
+.magic-world-celebration p { color:#49614a; line-height:1.5; }
+.magic-world-celebration button { border:0; border-radius:12px; padding:12px 16px; margin:5px; background:#5e9b66; color:white; font:inherit; font-weight:800; cursor:pointer; }
+.magic-world-celebration button.secondary { background:#e6ead8; color:#38513a; }
 .magic-world-next-choices { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-top:12px; }
-.magic-world-next-choice { background:#FFFFFFB8; border-radius:12px; padding:9px 5px; font-size:11px; font-weight:800; }
-@keyframes worldGlow { 0%,100% { box-shadow:0 0 20px #FFE88A66; } 50% { box-shadow:0 0 55px #FFE88ACC; } }
+.magic-world-next-choice { background:#ffffffb8; border-radius:12px; padding:9px 5px; font-size:11px; font-weight:800; }
+/* Vollbild-Freischaltung */
+.magic-unlock-overlay { position:fixed; inset:0; z-index:1200; display:flex; align-items:center; justify-content:center; padding:clamp(12px,3vw,32px); background:linear-gradient(135deg,#102b24f2,#1e4738f2); backdrop-filter:blur(8px); }
+.magic-unlock-overlay.hidden { display:none; }
+.magic-unlock-panel { position:relative; width:min(920px,100%); max-height:96vh; overflow:auto; border:3px solid #f4d68d; border-radius:28px; background:linear-gradient(145deg,#fff8e7,#dcebd7); box-shadow:0 24px 80px #0009; text-align:center; padding:clamp(18px,4vw,34px); }
+.magic-unlock-close { position:absolute; top:12px; right:12px; z-index:2; width:44px; height:44px; border:2px solid #fff0c3; border-radius:50%; background:#684626; color:white; font-size:25px; cursor:pointer; }
+.magic-unlock-art { width:min(300px,70vw); height:clamp(180px,34vh,290px); object-fit:contain; display:block; margin:6px auto 12px; filter:drop-shadow(0 12px 14px #30462c45); }
+.magic-unlock-name { margin:5px 0; color:#3e593d; font:900 clamp(26px,5vw,42px) Georgia,serif; }
+.magic-unlock-copy { color:#52664d; font-size:clamp(14px,2vw,18px); line-height:1.5; }
+.magic-unlock-action { min-width:min(300px,100%); border:2px solid #fff0b8; border-radius:18px; padding:15px 22px; background:linear-gradient(180deg,#f9df8b,#d99f3f); color:#4e3519; font-family:inherit; font-size:17px; font-weight:900; box-shadow:0 7px 16px #76502135; cursor:pointer; }
+.magic-unlock-action:disabled { opacity:.65; cursor:wait; }
+.magic-unlock-note { margin-top:10px; color:#6e755e; font-size:11px; }
+.magic-unlock-panel.reveal { animation:unlockReveal .7s cubic-bezier(.2,.8,.2,1); }
+@keyframes unlockReveal { 0% { transform:scale(.86); opacity:.3; filter:brightness(1.8); } 65% { transform:scale(1.035); } 100% { transform:scale(1); opacity:1; filter:brightness(1); } }
+@keyframes markerBreathe { 0%,100% { box-shadow:0 0 0 3px #ffdf7966,0 0 14px #ffdf7977; } 50% { box-shadow:0 0 0 5px #ffdf79aa,0 0 24px #ffdf79cc; } }
+@keyframes worldGlow { 0%,100% { box-shadow:0 0 20px #ffe88a66; } 50% { box-shadow:0 0 55px #ffe88acc; } }
 @keyframes worldFloat { from { transform:translateY(0) rotate(-2deg); } to { transform:translateY(-8px) rotate(2deg); } }
-@media(max-width:700px) { .magic-world-items { grid-template-columns:repeat(3,minmax(0,1fr)); } .magic-world-scene { min-height:340px; aspect-ratio:4/5; } .magic-world-marker { width:clamp(34px,9vw,58px); height:clamp(34px,9vw,58px); border-radius:13px; } .magic-world-title-art { top:5%; } }
+@media(max-width:700px) { .magic-world-items { grid-template-columns:repeat(3,minmax(0,1fr)); } .magic-world-scene { min-height:440px; aspect-ratio:4/5; background-position:center center; } .magic-world-marker { width:clamp(34px,9vw,58px); height:clamp(34px,9vw,58px); } .magic-world-title-art { top:10px; } }
 @media(max-width:390px) { .magic-world-items { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 
 .login-wrap { max-width:440px; margin:35px auto; }
@@ -1362,21 +1375,20 @@ a { color:#655B50; overflow-wrap:anywhere; }
       <div class="magic-world-header">
         <div>
           <div class="card-label">Dein Abenteuer beginnt</div>
-          <h2>🌳 Der Zauberwald</h2>
+          <h2>Der Zauberwald</h2>
           <p style="margin:4px 0 0;font-size:12px">20 magische Elemente · feste Plätze · kostenloser Testmodus</p>
         </div>
-        <span class="magic-world-tag">✨ Teststerne: unbegrenzt</span>
+        <span class="magic-world-tag">Kostenloser Testmodus</span>
       </div>
       <div class="magic-world-progress">
         <div class="magic-world-progress-line"><span id="magicWorldProgressText">0 von 20 Elementen</span><strong id="magicWorldPercent">0 %</strong></div>
         <div class="magic-world-progress-track"><div id="magicWorldProgressFill" class="magic-world-progress-fill"></div></div>
       </div>
       <div id="magicWorldScene" class="magic-world-scene" aria-label="Der Zauberwald mit 20 festen Elementplätzen">
-        <div class="magic-world-sun"></div><div class="magic-world-cloud">☁️</div>
-        <div class="magic-world-title-art">Der Zauberwald</div>
+        <div class="magic-world-title-art">Mein Zauberwald</div>
         <div id="magicWorldMarkers"></div>
       </div>
-      <div class="magic-world-legend"><span>✨ Freigeschaltet</span><span>🔒 Noch geheim</span><span>Jedes Element erscheint automatisch an seinem Platz.</span></div>
+      <div class="magic-world-legend"><span>Leuchtender Rahmen = freigeschaltet</span><span>Goldenes Siegel = noch geheim</span><span>Jedes Element erscheint automatisch an seinem festen Platz.</span></div>
       <h3 style="margin:17px 0 8px">Deine 20 Zauberwald-Schätze</h3>
       <div id="magicWorldItems" class="magic-world-items"></div>
       <div id="magicWorldStatus" class="status magic-world-status" aria-live="polite"></div>
@@ -1398,6 +1410,18 @@ a { color:#655B50; overflow-wrap:anywhere; }
           <button type="button" class="magic-world-next-choice" data-world-choice="dinosaurierland">🦕 Dinosaurierland</button>
         </div>
         <p style="font-size:10px;margin-bottom:0">Die Auswahl der nächsten Welt wird im nächsten Ausbauschritt dauerhaft gespeichert.</p>
+      </div>
+    </div>
+
+    <div id="magicWorldUnlock" class="magic-unlock-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="magicUnlockName">
+      <div id="magicUnlockPanel" class="magic-unlock-panel">
+        <button type="button" id="magicUnlockClose" class="magic-unlock-close" aria-label="Schließen">×</button>
+        <div style="font-size:13px;font-weight:900;letter-spacing:1px;color:#9b7434;text-transform:uppercase">Ein neuer Zauberwald-Schatz</div>
+        <img id="magicUnlockImage" class="magic-unlock-art" alt="" src="">
+        <h2 id="magicUnlockName" class="magic-unlock-name">Dein neues Element</h2>
+        <p id="magicUnlockCopy" class="magic-unlock-copy">Möchtest du diesen Schatz entdecken?</p>
+        <button type="button" id="magicUnlockConfirm" class="magic-unlock-action">✨ Jetzt entdecken</button>
+        <div class="magic-unlock-note">Im Testmodus kostenlos – es werden keine echten Sterne abgezogen.</div>
       </div>
     </div>
 
@@ -2208,12 +2232,12 @@ function renderZauberwald() {
     marker.style.top = element.y + "%";
     marker.title = element.name + (isUnlocked ? " – freigeschaltet" : " – noch geheim");
     marker.setAttribute("aria-label",marker.title);
-    marker.innerHTML = imageUrl
+    marker.innerHTML = isUnlocked && imageUrl
       ? '<img src="' + gardenEscape(imageUrl) + '" alt="' + gardenEscape(element.name) + '">'
-      : '<span class="magic-world-emoji">' + element.emoji + '</span>';
-    if (isUnlocked) marker.insertAdjacentHTML("beforeend",'<span class="magic-world-check">✅</span>');
+      : '<span aria-hidden="true">' + (isUnlocked ? '✦' : '✧') + '</span>';
+    if (isUnlocked) marker.insertAdjacentHTML("beforeend",'<span class="magic-world-check">✓</span>');
     marker.addEventListener("click",function() {
-      if (!isUnlocked) unlockMagicWorldElement(element.key,marker);
+      openMagicWorldUnlock(element.key);
     });
     markers.appendChild(marker);
 
@@ -2221,12 +2245,12 @@ function renderZauberwald() {
     card.className = "magic-world-item" + (isUnlocked ? " is-unlocked" : "");
     var visual = imageUrl
       ? '<img src="' + gardenEscape(imageUrl) + '" alt="' + gardenEscape(element.name) + '">'
-      : '<div class="magic-world-emoji">' + element.emoji + '</div>';
+      : '<div class="magic-world-emoji" aria-hidden="true">✧</div>';
     card.innerHTML = visual + '<strong>' + gardenEscape(element.name) + '</strong>' +
-      '<small>' + (isUnlocked ? 'Bereits freigeschaltet' : 'Später: ' + element.price + ' ⭐') + '</small>' +
-      '<button type="button" ' + (isUnlocked ? 'disabled' : '') + '>' + (isUnlocked ? '✓ Freigeschaltet' : '✨ Im Test kostenlos') + '</button>';
+      '<small>' + (isUnlocked ? 'Schon entdeckt' : 'Wartet auf dich') + '</small>' +
+      '<button type="button">' + (isUnlocked ? 'Noch einmal ansehen' : 'Im Test entdecken') + '</button>';
     var cardButton = card.querySelector("button");
-    if (!isUnlocked) cardButton.addEventListener("click",function() { unlockMagicWorldElement(element.key,cardButton); });
+    cardButton.addEventListener("click",function() { openMagicWorldUnlock(element.key); });
     itemsHost.appendChild(card);
   });
 
@@ -2243,6 +2267,41 @@ function renderZauberwald() {
   }
 }
 
+var pendingMagicWorldElement = null;
+
+function openMagicWorldUnlock(elementKey) {
+  if (!magicWorldState) return;
+  var element = MAGIC_WORLD_ELEMENTS.find(function(item) { return item.key === elementKey; });
+  if (!element) return;
+  pendingMagicWorldElement = element;
+  var imageUrl = getMagicWorldImage(element);
+  var image = document.getElementById("magicUnlockImage");
+  image.src = imageUrl || "./zauberwald_hintergrund.png";
+  image.alt = element.name;
+  image.style.objectFit = imageUrl ? "contain" : "cover";
+  if (!imageUrl) image.style.width = "min(420px,85vw)";
+  document.getElementById("magicUnlockName").textContent = element.name;
+  var unlocked = magicWorldState.unlocked.has(element.key);
+  document.getElementById("magicUnlockCopy").textContent = unlocked
+    ? "Diesen Schatz hast du schon entdeckt! Er gehört jetzt für immer zu deinem Zauberwald."
+    : "Ein neuer Schatz wartet auf dich. Bist du bereit, ihn in deinem Zauberwald zum Leuchten zu bringen?";
+  var confirm = document.getElementById("magicUnlockConfirm");
+  confirm.textContent = unlocked ? "Zurück in meinen Zauberwald" : "Ja, ich möchte ihn entdecken!";
+  confirm.disabled = false;
+  confirm.dataset.alreadyUnlocked = unlocked ? "yes" : "no";
+  document.getElementById("magicWorldUnlock").classList.remove("hidden");
+  document.getElementById("magicUnlockPanel").classList.remove("reveal");
+  void document.getElementById("magicUnlockPanel").offsetWidth;
+  document.getElementById("magicUnlockPanel").classList.add("reveal");
+  document.body.style.overflow = "hidden";
+}
+
+function closeMagicWorldUnlock() {
+  document.getElementById("magicWorldUnlock").classList.add("hidden");
+  document.body.style.overflow = "";
+  pendingMagicWorldElement = null;
+}
+
 async function unlockMagicWorldElement(elementKey,button) {
   if (!magicWorldState || magicWorldState.unlocked.has(elementKey)) return;
   if (button) button.disabled = true;
@@ -2257,14 +2316,32 @@ async function unlockMagicWorldElement(elementKey,button) {
     if (result.error) throw result.error;
     await loadZauberwaldProgress();
     var element = MAGIC_WORLD_ELEMENTS.find(function(item) { return item.key === elementKey; });
-    status.textContent = element ? element.name + " ist jetzt an seinem Platz erschienen! ✨" : "Element freigeschaltet!";
+    closeMagicWorldUnlock();
+    var marker = document.querySelector('.magic-world-marker[title^="' + (element ? CSS.escape(element.name) : '') + '"]');
+    if (marker) { marker.classList.add("unlocked"); marker.animate([{transform:"translate(-50%,-50%) scale(.45)",filter:"brightness(2.2)"},{transform:"translate(-50%,-50%) scale(1.22)"},{transform:"translate(-50%,-50%) scale(1)"}],{duration:850,easing:"cubic-bezier(.2,.8,.2,1)"}); }
+    status.textContent = element ? element.name + " ist jetzt in deinem Zauberwald erschienen!" : "Element freigeschaltet!";
     status.className = "status success magic-world-status";
   } catch (error) {
     status.textContent = "Freischalten fehlgeschlagen: " + (error.message || "Unbekannter Fehler") + ". Bitte prüfe, ob das SQL-Skript bereits ausgeführt wurde.";
     status.className = "status error magic-world-status";
     if (button) button.disabled = false;
+    document.getElementById("magicUnlockConfirm").disabled = false;
   }
 }
+
+document.getElementById("magicUnlockClose").addEventListener("click",closeMagicWorldUnlock);
+document.getElementById("magicWorldUnlock").addEventListener("click",function(event) {
+  if (event.target.id === "magicWorldUnlock") closeMagicWorldUnlock();
+});
+document.addEventListener("keydown",function(event) {
+  if (event.key === "Escape" && !document.getElementById("magicWorldUnlock").classList.contains("hidden")) closeMagicWorldUnlock();
+});
+document.getElementById("magicUnlockConfirm").addEventListener("click",function() {
+  if (!pendingMagicWorldElement) return closeMagicWorldUnlock();
+  if (this.dataset.alreadyUnlocked === "yes") return closeMagicWorldUnlock();
+  this.disabled = true;
+  unlockMagicWorldElement(pendingMagicWorldElement.key,this);
+});
 
 function speakMagicWorldCongratulations() {
   var name = getMagicWorldChildName();
